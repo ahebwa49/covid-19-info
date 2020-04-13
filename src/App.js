@@ -7,7 +7,7 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="app">
         <p style={{ textAlign: "center" }}>Covid 19 data analysis :)</p>
       </div>
     );

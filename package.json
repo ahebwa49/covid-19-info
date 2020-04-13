@@ -12,7 +12,7 @@
   },
   "scripts": {
     "dev": "PORT=3000 react-scripts start",
-    "start": "react-scripts start",
+    "start": "serve -n build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
