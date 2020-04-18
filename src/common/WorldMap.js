@@ -65,6 +65,10 @@ class WorldMap extends React.Component {
       .attr("opacity", 0.7);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
+  }
+
   render() {
     const { data } = this.props;
     const styles = {
