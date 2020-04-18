@@ -1,4 +1,6 @@
 import React from "react";
+import Loader from "./common/Loader.js";
+import AwesomeComponent from "./common/AwesomeComponent";
 import WorldMap from "./common/WorldMap";
 // import WorldMap from "./WorldMap";
 class App extends React.Component {
@@ -75,8 +77,8 @@ class App extends React.Component {
     const { data } = this.state;
     if (!data.geoData) {
       return (
-        <div className="app">
-          <p>loading ...</p>
+        <div className="loader-wrapper">
+          <AwesomeComponent />
         </div>
       );
     }
