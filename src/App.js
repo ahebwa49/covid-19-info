@@ -7,7 +7,7 @@ class App extends React.Component {
     this.state = {
       data: {
         geoData: null,
-        cupData: null
+        covidData: null
       }
     };
   }
@@ -17,15 +17,55 @@ class App extends React.Component {
         "https://raw.githubusercontent.com/ahebwa49/geo_mapping/master/src/world_countries.json"
       ),
       fetch(
-        "https://raw.githubusercontent.com/ahebwa49/geo_mapping/master/src/world_cup_geo.json"
+        "https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/worldcovid.json"
+      ),
+      fetch(
+        "https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/country-capitals.json"
       )
     ])
       .then(responses => Promise.all(responses.map(resp => resp.json())))
-      .then(([geoData, cupData]) => {
+      .then(([geoData, covidData, capitalData]) => {
+        // console.log(capitalData);
+        let capitalCountries = [];
+        for (let i = 0; i < capitalData.length; i++) {
+          capitalCountries.push(capitalData[i].CountryName);
+        }
+        // console.log(capitalCountries);
+
+        let cleanCovidData = [];
+        for (let country in covidData.timeseries) {
+          const lastTimeEntry =
+            covidData.timeseries[country][
+              covidData.timeseries[country].length - 1
+            ];
+          cleanCovidData.push(
+            Object.assign({}, lastTimeEntry, {
+              country: country
+            })
+          );
+        }
+        // console.log(cleanCovidData);
+        let realCovidData = [];
+
+        for (let i = 0; i < cleanCovidData.length; i++) {
+          const index = capitalCountries.indexOf(cleanCovidData[i].country);
+          if (index >= 0) {
+            realCovidData.push(
+              Object.assign({}, cleanCovidData[i], {
+                coords: {
+                  lat: capitalData[index].CapitalLatitude,
+                  long: capitalData[index].CapitalLongitude
+                }
+              })
+            );
+          }
+        }
+        // console.log(realCovidData);
+
         this.setState({
           data: {
             geoData: geoData,
-            cupData: cupData
+            covidData: realCovidData
           }
         });
       })
