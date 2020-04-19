@@ -2,7 +2,7 @@ import React from "react";
 import * as d3 from "d3";
 
 const QuickFacts = props => {
-  console.log(props.data);
+  // console.log(props.data);
   let commaSeparatedTotalConfirmed;
   let commaSeparatedTotalDeaths;
   let commaSeparatedTotalRecovered;
@@ -22,7 +22,7 @@ const QuickFacts = props => {
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-  console.log(totalConfirmed);
+  // console.log(totalConfirmed);
   return (
     <div className="quick-facts">
       <div className="quick-facts-heading">Quick Facts</div>

@@ -1,7 +1,7 @@
 import React from "react";
 import * as d3 from "d3";
 
-const width = window.innerWidth;
+const width = window.innerWidth - 32;
 
 class WorldMap extends React.Component {
   constructor(props) {
@@ -80,10 +80,7 @@ class WorldMap extends React.Component {
         justifyContent: "center"
       },
       chart: {
-        display: "flex",
-
-        // border: "1px solid red",
-        // justifyContent: "flex-start"
+        display: "flex"
       }
     };
     return (
