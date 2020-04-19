@@ -1,6 +1,7 @@
 import React from "react";
 import Loader from "./common/Loader.js";
 import WorldMap from "./common/WorldMap";
+import QuickFacts from "./common/QuickFacts";
 // import WorldMap from "./WorldMap";
 class App extends React.Component {
   constructor(props) {
@@ -83,7 +84,18 @@ class App extends React.Component {
     }
     return (
       <div className="app">
-        <WorldMap data={data} />
+        <div className="general">
+          <div className="sidebar">
+            <QuickFacts data={data.covidData} />
+          </div>
+          <div className="main">
+            <WorldMap data={data} />
+          </div>
+        </div>
+
+        <div className="facts">
+          <QuickFacts data={data.covidData} />
+        </div>
       </div>
     );
   }

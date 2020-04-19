@@ -14,8 +14,37 @@ code {
 
 .app {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   overflow-x: hidden;
+}
+
+.general {
+  display: flex;
+  width: 100%;
+  /* border: 1px solid peru; */
+}
+
+.sidebar {
+  display: flex;
+  justify-content: center;
+  width: 30%;
+  /* border: 1px solid blue; */
+  flex-shrink: 2;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.main {
+  display: flex;
+  flex-shrink: 1;
+  /* border: 1px solid green; */
+  border-radius: 5px;
+  /* width: 65%; */
+}
+
+.facts {
+  display: none;
 }
 
 .loader-wrapper {
@@ -29,7 +58,77 @@ code {
 
 .loader {
   display: flex;
-  /* margin: 1px solid green; */
-  /* width: 200px; */
-  /* height: 200px; */
+}
+
+.quick-facts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: flex-start;
+  margin-top: 50px;
+}
+
+.quick-facts-heading {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.quick-facts-confirmed {
+  font-size: 50px;
+  color: #696969;
+}
+
+.quick-facts-deaths {
+  font-size: 50px;
+  color: red;
+}
+
+.quick-facts-recovered {
+  font-size: 50px;
+  color: rgb(101, 221, 155);
+}
+
+@media only screen and (max-width: 1000px) {
+  .quick-facts {
+    margin-top: 20px;
+  }
+
+  .quick-facts-heading {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .quick-facts-confirmed {
+    font-size: 30px;
+    color: #696969;
+  }
+
+  .quick-facts-deaths {
+    font-size: 30px;
+    color: red;
+  }
+
+  .quick-facts-recovered {
+    font-size: 30px;
+    color: rgb(101, 221, 155);
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .sidebar {
+    display: none;
+  }
+  .facts {
+    display: flex;
+    justify-content: center;
+  }
+  .quick-facts {
+    /* border: 1px solid red; */
+    justify-self: center;
+  }
+  .quick-facts-heading {
+    display: flex;
+    justify-content: center;
+  }
 }

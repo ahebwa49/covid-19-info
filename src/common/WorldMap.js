@@ -7,7 +7,10 @@ class WorldMap extends React.Component {
   constructor(props) {
     super(props);
     this.chart = React.createRef();
-    this.state = { width: width, height: width / 2 };
+    this.state = {
+      width: width > 700 ? width * 0.7 : width,
+      height: width > 700 ? width / 2.5 : width / 2
+    };
   }
 
   updateDimensions = () => {
@@ -20,7 +23,7 @@ class WorldMap extends React.Component {
     // console.log(data.covidData);
     window.addEventListener("resize", this.updateDimensions);
 
-    const scaleValue = width > 700 ? 130 : 50;
+    const scaleValue = width > 490 ? 100 : 50;
     const svg = d3
       .select(this.chart.current)
       .append("svg")
@@ -74,16 +77,17 @@ class WorldMap extends React.Component {
     const styles = {
       container: {
         display: "flex",
-        flexDirection: "column",
         justifyContent: "center"
       },
       chart: {
-        // border: "1px solid red"
+        display: "flex",
+
+        // border: "1px solid red",
+        // justifyContent: "flex-start"
       }
     };
     return (
       <div style={styles.container}>
-        <p style={{ textAlign: "center" }}>COVID-19 CORONAVIRUS PANDEMIC</p>
         <div ref={this.chart} style={styles.chart} />
       </div>
     );
