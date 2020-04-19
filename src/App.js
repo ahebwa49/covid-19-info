@@ -19,7 +19,7 @@ class App extends React.Component {
         "https://raw.githubusercontent.com/ahebwa49/geo_mapping/master/src/world_countries.json"
       ),
       fetch(
-        "https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/worldcovid.json"
+        "https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/data.json"
       ),
       fetch(
         "https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/country-capitals.json"
