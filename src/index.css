@@ -12,6 +12,46 @@ code {
     monospace;
 }
 
+.Header {
+  display: flex;
+  align-items: center;
+  height: 65px;
+  /* border: 1px solid red; */
+}
+
+.Header-Container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-left: 1rem;
+  /* border: 1px solid green; */
+}
+
+.Header-Logo {
+  display: grid;
+  cursor: pointer;
+  height: 50px;
+  align-items: center;
+  /* color: #164c60; */
+  font-size: 24px;
+  font-weight: 500;
+  /* border: 1px solid blue; */
+}
+
+.header-options {
+  display: flex;
+  /* border: 1px solid blue; */
+  margin-left: auto;
+  align-self: center;
+  margin-right: 75px;
+  cursor: pointer;
+}
+
+.header-option {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
 .app {
   display: flex;
   flex-direction: column;
@@ -126,8 +166,33 @@ code {
 }
 
 @media only screen and (max-width: 700px) {
+  .Header {
+    height: 40px;
+    /* border: 1px solid red; */
+    margin-bottom: 20px;
+  }
+
+  .Header-Container {
+    margin-left: 0px;
+    /* border: 1px solid green; */
+  }
+
+  .Header-Logo {
+    height: 30px;
+    font-size: 16px;
+    /* border: 1px solid blue; */
+  }
+
+  .header-options {
+    margin-right: 0px;
+  }
+
+  .header-option {
+    margin-right: 3px;
+    font-size: 14px;
+  }
   .main {
-   margin-left: 0px;
+    margin-left: 0px;
   }
   .sidebar {
     display: none;
