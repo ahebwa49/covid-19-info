@@ -2,6 +2,7 @@ import React from "react";
 import Loader from "./common/Loader.js";
 import WorldMap from "./common/WorldMap";
 import QuickFacts from "./common/QuickFacts";
+import LineChart from "./common/LineChart";
 // import WorldMap from "./WorldMap";
 class App extends React.Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class App extends React.Component {
     this.state = {
       data: {
         geoData: null,
-        covidData: null
+        covidData: null,
+        plainCovidData: null
       }
     };
   }
@@ -27,12 +29,10 @@ class App extends React.Component {
     ])
       .then(responses => Promise.all(responses.map(resp => resp.json())))
       .then(([geoData, covidData, capitalData]) => {
-        // console.log(capitalData);
         let capitalCountries = [];
         for (let i = 0; i < capitalData.length; i++) {
           capitalCountries.push(capitalData[i].CountryName);
         }
-        // console.log(capitalCountries);
 
         let cleanCovidData = [];
         for (let country in covidData.timeseries) {
@@ -67,7 +67,8 @@ class App extends React.Component {
         this.setState({
           data: {
             geoData: geoData,
-            covidData: realCovidData
+            covidData: realCovidData,
+            plainCovidData: covidData
           }
         });
       })
@@ -75,7 +76,7 @@ class App extends React.Component {
   }
   render() {
     const { data } = this.state;
-    if (!data.geoData) {
+    if (data.geoData === null) {
       return (
         <div className="loader-wrapper">
           <Loader />
@@ -95,6 +96,9 @@ class App extends React.Component {
 
         <div className="facts">
           <QuickFacts data={data.covidData} />
+        </div>
+        <div className="line-graph-world">
+          <LineChart data={data.plainCovidData} />
         </div>
       </div>
     );
