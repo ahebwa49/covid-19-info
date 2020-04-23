@@ -1,13 +1,21 @@
 import React from "react";
 import * as d3 from "d3";
 
-const width = 600;
+// const width = 600;
+let width;
+const windowWidth = window.innerWidth - 32;
+if (windowWidth > 700) {
+  width = windowWidth / 2.5;
+} else {
+  width = windowWidth;
+}
 const height = 400;
 const margin = {
   top: 20,
-  right: 5,
-  bottom: 20,
-  left: 75
+  right: 15,
+  bottom: 55,
+  left: 70
+  // left: 0
 };
 
 class LineGraph extends React.Component {
@@ -91,7 +99,7 @@ class LineGraph extends React.Component {
   }
 
   componentDidMount() {
-    this.xAxisConfirmed.scale(this.state.xScaleConfirmed);
+    this.xAxisConfirmed.scale(this.state.xScaleConfirmed).tickArguments([10]);
     this.xAxisDeaths.scale(this.state.xScaleDeaths);
     d3.select(this.x_axis_confirmed.current).call(this.xAxisConfirmed);
     d3.select(this.x_axis_deaths.current).call(this.xAxisDeaths);
@@ -106,42 +114,78 @@ class LineGraph extends React.Component {
       .x(d => this.state.xScaleConfirmed(new Date(d.key)))
       .y(d => this.state.yScaleConfirmed(d.value.totalConfirmed));
 
-      const lineDeaths = d3
+    const lineDeaths = d3
       .line()
       .x(d => this.state.xScaleDeaths(new Date(d.key)))
       .y(d => this.state.yScaleDeaths(d.value.totalDeaths));
     return (
-      <div style={{ textAlign: "center" }} className="world-line-charts">
-        <svg width={width} height={height}>
-          <path
-            d={lineConfirmed(this.state.nested)}
-            stroke="#696969"
-            fill="transparent"
-          />
-          <g
-            ref={this.x_axis_confirmed}
-            transform={`translate(0, ${height - margin.bottom})`}
-          />
-          <g
-            ref={this.y_axis_confirmed}
-            transform={`translate(${margin.left}, 0)`}
-          />
-        </svg>
-        <svg width={width} height={height}>
-          <path
-            d={lineDeaths(this.state.nested)}
-            stroke="red"
-            fill="transparent"
-          />
-          <g
-            ref={this.x_axis_deaths}
-            transform={`translate(0, ${height - margin.bottom})`}
-          />
-          <g
-            ref={this.y_axis_deaths}
-            transform={`translate(${margin.left}, 0)`}
-          />
-        </svg>
+      <div className="world-line-charts">
+        <div className="world-line-chart-confirmed">
+          <p style={{ textAlign: "center" }}>Total Cases</p>
+          <svg width={width} height={height}>
+            <path
+              d={lineConfirmed(this.state.nested)}
+              stroke="#696969"
+              fill="transparent"
+            />
+            <text
+              className="yAxisLabel"
+              transform={`translate(10, ${(height - margin.bottom) /
+                1.25}) rotate(270)`}
+            >
+              Total Coronavirus Cases
+            </text>
+            <text
+              className="xAxisLabel"
+              transform={`translate(${(width - margin.left - margin.right) /
+                2}, ${height - 5})`}
+            >
+              Dates for the last 90 days
+            </text>
+            <g
+              className="axis-bottom"
+              ref={this.x_axis_confirmed}
+              transform={`translate(0, ${height - margin.bottom})`}
+            />
+            <g
+              ref={this.y_axis_confirmed}
+              transform={`translate(${margin.left}, 0)`}
+            />
+          </svg>
+        </div>
+        <div className="world-line-chart-deaths">
+          <p style={{ textAlign: "center" }}>Total Deaths</p>
+          <svg width={width} height={height}>
+            <path
+              d={lineDeaths(this.state.nested)}
+              stroke="red"
+              fill="transparent"
+            />
+            <text
+              className="yAxisLabel"
+              transform={`translate(15, ${(height - margin.bottom) /
+                1.25}) rotate(270)`}
+            >
+              Total Coronavirus Deaths
+            </text>
+            <text
+              className="xAxisLabel"
+              transform={`translate(${(width - margin.left - margin.right) /
+                2}, ${height - 5})`}
+            >
+              Dates for the last 90 days
+            </text>
+            <g
+              className="axis-bottom"
+              ref={this.x_axis_deaths}
+              transform={`translate(0, ${height - margin.bottom})`}
+            />
+            <g
+              ref={this.y_axis_deaths}
+              transform={`translate(${margin.left}, 0)`}
+            />
+          </svg>
+        </div>
       </div>
     );
   }

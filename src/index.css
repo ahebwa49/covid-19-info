@@ -136,7 +136,31 @@ code {
 
 .quick-facts-recovered {
   font-size: 50px;
-  color: rgb(101, 221, 155);
+  color: rgb(132, 202, 164);
+}
+
+.world-line-charts {
+  display: flex;
+  justify-content: center;
+}
+
+.world-line-chart-confirmed {
+  /* border: 1px solid green; */
+  margin-right: 50px;
+}
+
+.axis-bottom text {
+  border: 1px solid red;
+  transform: rotate(-45deg);
+  text-anchor: end;
+}
+
+.yAxisLabel {
+  font-size: 14px;
+}
+
+.xAxisLabel {
+  font-size: 14px;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -208,5 +232,14 @@ code {
   .quick-facts-heading {
     display: flex;
     justify-content: center;
+  }
+  .world-line-charts {
+    flex-direction: column;
+    /* border: 1px solid palevioletred; */
+  }
+
+  .world-line-chart-confirmed {
+    /* border: 1px solid green; */
+    margin-right: 0px;
   }
 }
