@@ -2,7 +2,6 @@ import React from "react";
 import * as d3 from "d3";
 
 const QuickFacts = props => {
-  // console.log(props.data);
   let commaSeparatedTotalConfirmed;
   let commaSeparatedTotalDeaths;
   let commaSeparatedTotalRecovered;
@@ -25,25 +24,35 @@ const QuickFacts = props => {
   // console.log(totalConfirmed);
   return (
     <div className="quick-facts">
+      <div className="coming-soon">
+        <p>Coming soon:</p>
+        <p style={{ textAlign: "start" }}>
+          I'm working on line graph visualizations showing the trend of each
+          continent for the last 90 days.
+        </p>
+      </div>
       <div className="quick-facts-heading">Quick Facts</div>
-      <div>
+      <div className="quick-facts-stats">
         <div className="quick-facts-confirmed">
           {commaSeparatedTotalConfirmed}
         </div>
         <p style={{ marginTop: "0px", textAlign: "center" }}>
           total confirmed cases
         </p>
-      </div>
-      <div>
-        <div className="quick-facts-deaths">{commaSeparatedTotalDeaths}</div>
-        <p style={{ marginTop: "0px", textAlign: "center" }}>total deaths</p>
-      </div>
 
-      <div>
-        <div className="quick-facts-recovered">
-          {commaSeparatedTotalRecovered}
+        <div>
+          <div className="quick-facts-deaths">{commaSeparatedTotalDeaths}</div>
+          <p style={{ marginTop: "0px", textAlign: "center" }}>total deaths</p>
         </div>
-        <p style={{ marginTop: "0px", textAlign: "center" }}>total recovered</p>
+
+        <div>
+          <div className="quick-facts-recovered">
+            {commaSeparatedTotalRecovered}
+          </div>
+          <p style={{ marginTop: "0px", textAlign: "center" }}>
+            total recovered
+          </p>
+        </div>
       </div>
     </div>
   );

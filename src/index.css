@@ -1,5 +1,7 @@
 body {
   margin: 1rem;
+  margin-top: 0px;
+  background-color: white;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -14,42 +16,82 @@ code {
 
 .Header {
   display: flex;
+  position: relative;
+  width: 100%;
+  color: #110a57;
   align-items: center;
   height: 65px;
   /* border: 1px solid red; */
+  border-bottom: 1px solid #dbdbdb;
+  margin-bottom: 1rem;
+  /* margin-left: -1rem; */
 }
 
 .Header-Container {
   display: flex;
-  justify-content: center;
   align-content: center;
-  margin-left: 1rem;
+  width: 100%;
   /* border: 1px solid green; */
 }
 
 .Header-Logo {
-  display: grid;
+  display: flex;
   cursor: pointer;
   height: 50px;
   align-items: center;
-  /* color: #164c60; */
   font-size: 24px;
   font-weight: 500;
   /* border: 1px solid blue; */
+  width: 30%;
+}
+
+.logo-word {
+  margin-left: 1rem;
 }
 
 .header-options {
   display: flex;
+  justify-content: space-evenly;
   /* border: 1px solid blue; */
   margin-left: auto;
   align-self: center;
-  margin-right: 75px;
   cursor: pointer;
+  width: 40%;
 }
 
+.follow-button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  /* border: 1px solid magenta; */
+  width: 30%;
+  /* margin */
+}
+
+.follow-button button {
+  width: 128px;
+  background: #ffffff;
+  border: 2px solid #e1e4eb;
+  border-radius: 24px;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 40px;
+  outline: none;
+}
+
+.follow-button button:hover {
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #5bcdd5;
+  border: 2px solid #5bcdd5;
+}
 .header-option {
-  margin-right: 10px;
-  font-size: 20px;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.header-option:hover {
+  color: #5bcdd5;
 }
 
 .app {
@@ -57,6 +99,7 @@ code {
   flex-direction: column;
   justify-content: center;
   overflow-x: hidden;
+  /* background-color: palevioletred; */
 }
 
 .general {
@@ -69,7 +112,8 @@ code {
   display: flex;
   justify-content: center;
   width: 30%;
-  /* border: 1px solid blue; */
+  border: 1px solid #dbdbdb;
+  /* background-color: #5BCDD5; */
   flex-shrink: 2;
   border-radius: 5px;
 }
@@ -78,6 +122,7 @@ code {
   display: flex;
   flex-shrink: 1;
   /* border: 1px solid green; */
+  background-color: #5bcdd5;
   border-radius: 5px;
   margin-left: 20px;
 }
@@ -99,26 +144,37 @@ code {
 }
 
 .quick-facts {
+  color: #110a57;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   align-self: flex-start;
-  margin-top: 50px;
   width: 100%;
+  border-radius: 5px;
   /* border: 1px solid red; */
 }
 
-.quick-facts div {
+.coming-soon {
+  margin-left: 1rem;
+}
+
+.quick-facts-heading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  margin-bottom: 30px;
+  /* border: 1px solid red; */
+}
+
+.quick-facts-stats {
   display: flex;
   flex-direction: column;
   width: 100%;
   justify-content: center;
   text-align: center;
-}
-.quick-facts-heading {
-  font-size: 30px;
-  margin-bottom: 30px;
+  /* border: 1px solid red; */
 }
 
 .quick-facts-confirmed {
@@ -141,7 +197,9 @@ code {
 
 .world-line-charts {
   display: flex;
+  margin-top: 2rem;
   justify-content: center;
+  /* border: 1px solid red; */
 }
 
 .world-line-chart-confirmed {
@@ -164,10 +222,6 @@ code {
 }
 
 @media only screen and (max-width: 1000px) {
-  .quick-facts {
-    margin-top: 20px;
-  }
-
   .quick-facts-heading {
     font-size: 20px;
     margin-bottom: 20px;
@@ -194,26 +248,34 @@ code {
     height: 40px;
     /* border: 1px solid red; */
     margin-bottom: 20px;
-  }
-
-  .Header-Container {
-    margin-left: 0px;
-    /* border: 1px solid green; */
+    border: none;
   }
 
   .Header-Logo {
+    width: 20%;
     height: 30px;
     font-size: 16px;
     /* border: 1px solid blue; */
   }
+  .logo-word {
+    display: none;
+  }
+  .logo {
+    width: 30px;
+  }
 
   .header-options {
+    width: 70%;
     margin-right: 0px;
   }
 
   .header-option {
     margin-right: 3px;
     font-size: 14px;
+  }
+
+  .follow-button {
+    display: none;
   }
   .main {
     margin-left: 0px;

@@ -41,7 +41,7 @@ class WorldMap extends React.Component {
       .enter()
       .append("path")
       .attr("d", path)
-      .style("fill", "rgb(9, 157, 217)")
+      .style("fill", "white")
       .style("stroke", "black")
       .style("stroke-width", 0.5);
 
@@ -50,7 +50,7 @@ class WorldMap extends React.Component {
     const rScale = d3
       .scaleSqrt()
       .domain(confirmed_extent)
-      .range([2, 25]);
+      .range([1, 20]);
 
     svg
       .append("g")
