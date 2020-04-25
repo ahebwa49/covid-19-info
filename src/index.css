@@ -223,6 +223,27 @@ code {
   font-size: 14px;
 }
 
+.tab-list {
+  display: flex;
+  padding: 0 1rem;
+}
+
+.tab-list-item {
+  list-style: none;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  /* border: 1px solid green; */
+}
+
+.tab-list-item:hover {
+  background-color: #25a0fb;
+  color: white;
+}
+
+.tab-list-active-item {
+  background-color: #b9e1fb;
+}
+
 @media only screen and (max-width: 1000px) {
   .quick-facts-heading {
     font-size: 20px;

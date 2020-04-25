@@ -3,6 +3,7 @@ import Loader from "./common/Loader.js";
 import WorldMap from "./common/WorldMap";
 import QuickFacts from "./common/QuickFacts";
 import LineChart from "./common/LineChart";
+import Continents from "./common/Continents";
 // import WorldMap from "./WorldMap";
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +12,9 @@ class App extends React.Component {
       data: {
         geoData: null,
         covidData: null,
-        plainCovidData: null
+        plainCovidData: null,
+        capitalData: null,
+        newTimeSeries: null
       }
     };
   }
@@ -29,10 +32,13 @@ class App extends React.Component {
     ])
       .then(responses => Promise.all(responses.map(resp => resp.json())))
       .then(([geoData, covidData, capitalData]) => {
+        // Countries with locaation data
         let capitalCountries = [];
         for (let i = 0; i < capitalData.length; i++) {
           capitalCountries.push(capitalData[i].CountryName);
         }
+
+        // Country data with last time entry
 
         let cleanCovidData = [];
         for (let country in covidData.timeseries) {
@@ -46,7 +52,8 @@ class App extends React.Component {
             })
           );
         }
-        // console.log(cleanCovidData);
+
+        // Country data with last time entry and location
         let realCovidData = [];
 
         for (let i = 0; i < cleanCovidData.length; i++) {
@@ -62,13 +69,32 @@ class App extends React.Component {
             );
           }
         }
-        // console.log(realCovidData);
 
+        let newTimeSeries = [];
+
+        for (let country in covidData.timeseries) {
+          const index = capitalCountries.indexOf(country);
+          if (index >= 0) {
+            newTimeSeries.push(
+              Object.assign(
+                {},
+                {
+                  timeseries: covidData.timeseries[country],
+                  country: country,
+                  continent: capitalData[index].ContinentName
+                }
+              )
+            );
+          }
+        }
+        // console.log(newTimeSeries);
         this.setState({
           data: {
             geoData: geoData,
             covidData: realCovidData,
-            plainCovidData: covidData
+            plainCovidData: covidData,
+            capitalData: capitalData,
+            newTimeSeries: newTimeSeries
           }
         });
       })
@@ -99,6 +125,9 @@ class App extends React.Component {
         </div>
         <div className="line-graph-world">
           <LineChart data={data.plainCovidData} />
+        </div>
+        <div>
+          <Continents data={data.newTimeSeries} />
         </div>
       </div>
     );
