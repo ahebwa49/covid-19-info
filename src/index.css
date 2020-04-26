@@ -58,6 +58,12 @@ code {
   align-self: center;
   cursor: pointer;
   width: 40%;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
 .follow-button {
@@ -65,6 +71,7 @@ code {
   justify-content: flex-end;
   align-items: center;
   width: 30%;
+  /* border: 1px solid red; */
 }
 
 .follow-button button {
@@ -88,6 +95,12 @@ code {
 .header-option {
   font-size: 16px;
   line-height: 16px;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
 .header-option:hover {
@@ -374,8 +387,7 @@ code {
   }
 
   .header-options {
-    width: 70%;
-    margin-right: 0px;
+    display: none;
   }
 
   .header-option {
@@ -384,7 +396,23 @@ code {
   }
 
   .follow-button {
-    display: none;
+    display: flex;
+    /* justify-content: center; */
+    height: 30px;
+    width: 80%;
+  }
+  .follow-button button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    background: #ffffff;
+    border: 2px solid #e1e4eb;
+    /* border-radius: 24px; */
+    line-height: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #110a57;
   }
 
   .heading {
@@ -437,53 +465,3 @@ code {
     width: 100%;
   }
 }
-
-/* device orientation */
-/* @media (orientation: landscape) {
-  .follow-button {
-    display: none;
-  }
-  .logo-word {
-    display: none;
-  }
-  .sidebar {
-    display: none;
-  }
-
-  .main {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    margin-left: 0px;
-  }
-
-  .facts {
-    display: flex;
-    border: 1px solid #dbdbdb;
-    margin: 1rem 0rem;
-    border-radius: 4px;
-  }
-
-  .line-container {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .line-container-tabs {
-    display: flex;
-    width: 100%;
-  }
-  .line-container-children {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .world-line-charts {
-    flex-direction: column;
-  }
-
-  .world-line-chart-confirmed {
-    margin-right: 0px;
-  }
-} */
