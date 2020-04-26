@@ -8,8 +8,8 @@ class WorldMap extends React.Component {
     super(props);
     this.chart = React.createRef();
     this.state = {
-      width: width > 700 ? width * 0.7 : width,
-      height: width > 700 ? width / 2.5 : width / 2
+      width: width > 900 ? width * 0.7 : width,
+      height: width > 900 ? width / 2.5 : width / 2
     };
   }
 
@@ -23,7 +23,7 @@ class WorldMap extends React.Component {
     // console.log(data.covidData);
     window.addEventListener("resize", this.updateDimensions);
 
-    const scaleValue = width > 490 ? 100 : 50;
+    const scaleValue = width > 630 ? 90 : 50;
     const svg = d3
       .select(this.chart.current)
       .append("svg")

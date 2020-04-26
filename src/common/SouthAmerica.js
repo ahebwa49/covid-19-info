@@ -4,7 +4,7 @@ import * as d3 from "d3";
 // const width = 450;
 let width;
 const windowWidth = window.innerWidth - 32;
-if (windowWidth > 700) {
+if (windowWidth > 900) {
   width = windowWidth / 3;
 } else {
   width = windowWidth;
