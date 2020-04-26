@@ -4,7 +4,6 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import Header from "./common/Header";
-import Footer from "./common/Footer";
 import * as serviceWorker from "./serviceWorker";
 
 const Routing = () => {
@@ -14,7 +13,6 @@ const Routing = () => {
       <Switch>
         <Route exact path="/" component={App} />
       </Switch>
-      <Footer />
     </Router>
   );
 };

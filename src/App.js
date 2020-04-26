@@ -3,6 +3,7 @@ import Loader from "./common/Loader.js";
 import WorldMap from "./common/WorldMap";
 import QuickFacts from "./common/QuickFacts";
 import LineChart from "./common/LineChart";
+import Footer from "./common/Footer";
 import Continents from "./common/Continents";
 // import WorldMap from "./WorldMap";
 class App extends React.Component {
@@ -126,15 +127,14 @@ class App extends React.Component {
         <div className="facts">
           <QuickFacts data={data.covidData} />
         </div>
-        {/* <div className="line-graph-world">
-          <LineChart data={data.plainCovidData} />
-        </div> */}
+
         <div>
           <Continents
             data={data.newTimeSeries}
             worldData={data.plainCovidData}
           />
         </div>
+        <Footer />
       </div>
     );
   }
