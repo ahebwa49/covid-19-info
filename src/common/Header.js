@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 class Header extends React.Component {
   constructor(props) {
@@ -9,6 +8,10 @@ class Header extends React.Component {
 
   handleLogoClick = () => {
     window.location.assign("/");
+  };
+
+  handleFollowCLick = () => {
+    window.location.href = "https://twitter.com/ahebwa49";
   };
 
   render() {
@@ -32,7 +35,7 @@ class Header extends React.Component {
             <div className="header-option">Newsletter</div>
             <div className="header-option">About</div>
           </div>
-          <div className="follow-button">
+          <div className="follow-button" onClick={this.handleFollowCLick}>
             <button>Follow Me</button>
           </div>
         </div>

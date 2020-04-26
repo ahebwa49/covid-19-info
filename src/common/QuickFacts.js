@@ -27,11 +27,11 @@ const QuickFacts = props => {
       <div className="coming-soon">
         <p>Coming soon:</p>
         <p style={{ textAlign: "start" }}>
-          I'm working on line graph visualizations showing the trend of each
-          continent for the last 90 days.
+          I'm working on line graph visualizations showing each country's trend
+          for the last 90 days.
         </p>
       </div>
-      <div className="quick-facts-heading">Quick Facts</div>
+      <div className="quick-facts-heading">Highlights</div>
       <div className="quick-facts-stats">
         <div className="quick-facts-confirmed">
           {commaSeparatedTotalConfirmed}

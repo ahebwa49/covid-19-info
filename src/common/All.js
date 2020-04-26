@@ -35,14 +35,12 @@ class Africa extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     const { data } = nextProps;
     if (!data) return {};
-    // console.log(data)
 
-    const africaTimeSeries = [];
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].continent === "Africa")
-        africaTimeSeries.push(data[i].timeseries);
+    const allTimeSeries = [];
+    for (let country in data.timeseries) {
+      allTimeSeries.push(data.timeseries[country]);
     }
-    const fAfricaTimeSeries = africaTimeSeries.flat();
+    const fAllTimeSeries = allTimeSeries.flat();
 
     const nested = d3
       .nest()
@@ -58,7 +56,7 @@ class Africa extends React.Component {
           totalRecovered: totalRecovered
         };
       })
-      .entries(fAfricaTimeSeries);
+      .entries(fAllTimeSeries);
 
     // Confirmed --------------------------------------
     const xExtentConfirmed = d3.extent(nested, d => new Date(d.key));
@@ -121,7 +119,7 @@ class Africa extends React.Component {
     return (
       <div className="world-line-charts">
         <div className="world-line-chart-confirmed">
-          <p style={{ textAlign: "center" }}>Africa Cases</p>
+          <p style={{ textAlign: "center" }}>Total Cases</p>
           <svg width={width} height={height}>
             <path
               d={lineConfirmed(this.state.nested)}
@@ -131,9 +129,9 @@ class Africa extends React.Component {
             <text
               className="yAxisLabel"
               transform={`translate(10, ${(height - margin.bottom) /
-                1.5}) rotate(270)`}
+                1.35}) rotate(270)`}
             >
-              Coronavirus Cases
+              Total Coronavirus Cases
             </text>
             <text
               className="xAxisLabel"
@@ -154,7 +152,7 @@ class Africa extends React.Component {
           </svg>
         </div>
         <div className="world-line-chart-confirmed">
-          <p style={{ textAlign: "center" }}>Africa Deaths</p>
+          <p style={{ textAlign: "center" }}>Total Deaths</p>
           <svg width={width} height={height}>
             <path
               d={lineDeaths(this.state.nested)}
@@ -164,9 +162,9 @@ class Africa extends React.Component {
             <text
               className="yAxisLabel"
               transform={`translate(15, ${(height - margin.bottom) /
-                1.5}) rotate(270)`}
+                1.35}) rotate(270)`}
             >
-              Coronavirus Deaths
+              Total Coronavirus Deaths
             </text>
             <text
               className="xAxisLabel"

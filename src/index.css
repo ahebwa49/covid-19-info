@@ -64,9 +64,7 @@ code {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  /* border: 1px solid magenta; */
   width: 30%;
-  /* margin */
 }
 
 .follow-button button {
@@ -78,6 +76,7 @@ code {
   font-size: 14px;
   line-height: 40px;
   outline: none;
+  color: #110a57;
 }
 
 .follow-button button:hover {
@@ -101,7 +100,17 @@ code {
   justify-content: center;
   overflow-x: hidden;
   margin: 1rem;
+  color: #110a57;
   /* background-color: palevioletred; */
+}
+
+.heading {
+  text-align: center;
+}
+
+.heading p {
+  font-size: 20px;
+  /* margin: 0px; */
 }
 
 .general {
@@ -114,7 +123,8 @@ code {
   display: flex;
   justify-content: center;
   width: 30%;
-  border: 1px solid #dbdbdb;
+  box-shadow: 3px 5px 3px #888888;
+  /* border: 1px solid #dbdbdb; */
   /* background-color: #5BCDD5; */
   flex-shrink: 2;
   border-radius: 5px;
@@ -210,17 +220,41 @@ code {
 }
 
 .axis-bottom text {
-  border: 1px solid red;
   transform: rotate(-45deg);
   text-anchor: end;
 }
 
 .yAxisLabel {
   font-size: 14px;
+  color: #110a57;
 }
 
 .xAxisLabel {
   font-size: 14px;
+  color: #110a57;
+}
+
+.line-container {
+  display: flex;
+}
+
+.line-container-tabs {
+  display: flex;
+  flex-shrink: 1;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  /* border: 1px solid red; */
+}
+
+.line-container-tabs-list {
+  padding: 0 1rem;
+}
+
+.line-container-children {
+  width: 80%;
+  flex-shrink: 3;
+  /* border: 1px solid green; */
 }
 
 .tab-list {
@@ -270,10 +304,13 @@ code {
   .Header {
     height: 40px;
     /* border: 1px solid red; */
-    margin-bottom: 20px;
     border: none;
   }
 
+  .Header-Container {
+    /* border: 1px solid green; */
+    margin-top: 1rem;
+  }
   .Header-Logo {
     width: 20%;
     height: 30px;
@@ -300,6 +337,10 @@ code {
   .follow-button {
     display: none;
   }
+
+  .heading {
+    font-size: 18px;
+  }
   .main {
     margin-left: 0px;
   }
@@ -308,7 +349,11 @@ code {
   }
   .facts {
     display: flex;
+    margin-top: 1rem;
     justify-content: center;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+   
   }
   .quick-facts {
     /* border: 1px solid red; */
@@ -326,5 +371,21 @@ code {
   .world-line-chart-confirmed {
     /* border: 1px solid green; */
     margin-right: 0px;
+  }
+
+  .line-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .line-container-tabs {
+    display: flex;
+    width: 100%;
+  }
+
+  .line-container-children {
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 }

@@ -23,32 +23,10 @@ class Tabs extends React.Component {
   render() {
     const { activeTab } = this.state;
 
-    const styles = {
-      container: {
-        display: "flex",
-        marginTop: "1rem"
-        // border: "1px solid cyan"
-      },
-      tabs: {
-        display: "flex",
-        JustifyContent: "center",
-        width: "20%",
-        // border: "1px solid red"
-      },
-      children: {
-        // border: "1px solid green",
-        width: "100%"
-      },
-      tabsList: {
-        padding: "0 1rem"
-      },
-      logout: {}
-    };
-
     return (
-      <div className="container" style={styles.container}>
-        <div style={styles.tabs}>
-          <ol style={styles.tabsList}>
+      <div className="line-container">
+        <div className="line-container-tabs">
+          <ol className="line-container-tabs-list">
             {this.props.children.map(child => {
               const { label } = child.props;
               return (
@@ -62,7 +40,7 @@ class Tabs extends React.Component {
             })}
           </ol>
         </div>
-        <div style={styles.children}>
+        <div className="line-container-children">
           {this.props.children.map(child => {
             if (child.props.label !== activeTab) return undefined;
             return child.props.children;

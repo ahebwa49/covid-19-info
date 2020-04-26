@@ -1,7 +1,14 @@
 import React from "react";
 import * as d3 from "d3";
 
-const width = 450;
+// const width = 450;
+let width;
+const windowWidth = window.innerWidth - 32;
+if (windowWidth > 700) {
+  width = windowWidth / 3;
+} else {
+  width = windowWidth;
+}
 const height = 400;
 const margin = {
   top: 20,
@@ -114,6 +121,7 @@ class Australia extends React.Component {
     return (
       <div className="world-line-charts">
         <div className="world-line-chart-confirmed">
+          <p style={{ textAlign: "center" }}>Australia Cases</p>
           <svg width={width} height={height}>
             <path
               d={lineConfirmed(this.state.nested)}
@@ -123,9 +131,9 @@ class Australia extends React.Component {
             <text
               className="yAxisLabel"
               transform={`translate(10, ${(height - margin.bottom) /
-                1.25}) rotate(270)`}
+                1.5}) rotate(270)`}
             >
-              Total Coronavirus Cases
+              Coronavirus Cases
             </text>
             <text
               className="xAxisLabel"
@@ -146,6 +154,7 @@ class Australia extends React.Component {
           </svg>
         </div>
         <div className="world-line-chart-confirmed">
+          <p style={{ textAlign: "center" }}>Australia Deaths</p>
           <svg width={width} height={height}>
             <path
               d={lineDeaths(this.state.nested)}
@@ -155,9 +164,9 @@ class Australia extends React.Component {
             <text
               className="yAxisLabel"
               transform={`translate(15, ${(height - margin.bottom) /
-                1.25}) rotate(270)`}
+                1.5}) rotate(270)`}
             >
-              Total Coronavirus Deaths
+              Coronavirus Deaths
             </text>
             <text
               className="xAxisLabel"

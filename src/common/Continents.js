@@ -1,5 +1,6 @@
 import React from "react";
 import Africa from "./Africa";
+import All from "./All";
 import Asia from "./Asia";
 import Australia from "./Australia";
 import Europe from "./Europe";
@@ -11,6 +12,9 @@ const Continents = props => {
   return (
     <div className="App">
       <Tabs>
+        <div label="All">
+          <All data={props.worldData} />
+        </div>
         <div label="Africa">
           <Africa data={props.data} />
         </div>

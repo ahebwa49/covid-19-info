@@ -111,6 +111,9 @@ class App extends React.Component {
     }
     return (
       <div className="app">
+        <div className="heading">
+          <p>COVID-19 CORONAVIRUS PANDEMIC</p>
+        </div>
         <div className="general">
           <div className="sidebar">
             <QuickFacts data={data.covidData} />
@@ -123,11 +126,14 @@ class App extends React.Component {
         <div className="facts">
           <QuickFacts data={data.covidData} />
         </div>
-        <div className="line-graph-world">
+        {/* <div className="line-graph-world">
           <LineChart data={data.plainCovidData} />
-        </div>
+        </div> */}
         <div>
-          <Continents data={data.newTimeSeries} />
+          <Continents
+            data={data.newTimeSeries}
+            worldData={data.plainCovidData}
+          />
         </div>
       </div>
     );
