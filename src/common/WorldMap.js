@@ -77,7 +77,7 @@ class WorldMap extends React.Component {
     const styles = {
       container: {
         display: "flex",
-        justifyContent: "center"
+        marginBottom: "2rem"
       },
       chart: {
         display: "flex"

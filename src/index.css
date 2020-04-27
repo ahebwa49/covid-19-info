@@ -129,6 +129,7 @@ code {
 .general {
   display: flex;
   width: 100%;
+  margin-bottom: 2rem;
   /* border: 1px solid peru; */
 }
 
@@ -137,8 +138,6 @@ code {
   justify-content: center;
   width: 30%;
   box-shadow: 3px 5px 3px #888888;
-  /* border: 1px solid #dbdbdb; */
-  /* background-color: #5BCDD5; */
   flex-shrink: 2;
   border-radius: 5px;
 }
@@ -222,13 +221,53 @@ code {
 
 .world-line-charts {
   display: flex;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
   justify-content: center;
   /* border: 1px solid red; */
 }
 
 .world-line-chart-confirmed {
   /* border: 1px solid green; */
+  margin-right: 50px;
+}
+
+.country-visuals {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: center;
+  /* border: 1px solid red; */
+}
+
+.country-line-charts {
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid green; */
+  width: 80%;
+  flex-shrink: 2;
+}
+
+.select-country {
+  display: flex;
+  justify-content: center;
+  flex-shrink: 1;
+  height: 100%;
+  align-self: center;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+  /* border: 1px solid blue; */
+}
+
+.select-country div select {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100px;
+  justify-self: center;
+  /* border: 1px solid green; */
+}
+
+.country-line-chart {
   margin-right: 50px;
 }
 
@@ -249,6 +288,8 @@ code {
 
 .line-container {
   display: flex;
+  /* border: 1px solid red; */
+  margin-bottom: 2rem;
 }
 
 .line-container-tabs {
@@ -262,6 +303,7 @@ code {
 
 .line-container-tabs-list {
   padding: 0 1rem;
+  /* border: 1px solid greenyellow; */
 }
 
 .line-container-children {
@@ -273,6 +315,7 @@ code {
 .tab-list {
   display: flex;
   padding: 0 1rem;
+  /* border: 1px solid gray; */
 }
 
 .tab-list-item {
@@ -314,9 +357,6 @@ code {
 }
 
 @media only screen and (max-width: 900px) {
-  .follow-button {
-    /* display: none; */
-  }
   .logo-word {
     display: none;
   }
@@ -355,6 +395,22 @@ code {
 
   .world-line-charts {
     flex-direction: column;
+  }
+
+  .country-visuals {
+    flex-direction: column;
+    /* border: 1px solid red; */
+  }
+
+  .country-line-charts {
+    flex-direction: column;
+    width: 100%;
+    /* border: 1px solid red; */
+  }
+
+  .select-country {
+    width: 100%;
+    /* border: 1px solid blue; */
   }
 
   .world-line-chart-confirmed {

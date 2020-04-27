@@ -27,8 +27,9 @@ const QuickFacts = props => {
       <div className="coming-soon">
         <p>Coming soon:</p>
         <p style={{ textAlign: "start" }}>
-          I'm working on line graph visualizations showing each country's trend
-          for the last 90 days.
+          I'm working on making line graphs more interactive in such a way that
+          hovering over the line will show more data related to a specific area
+          on the line.
         </p>
       </div>
       <div className="quick-facts-heading">Highlights</div>

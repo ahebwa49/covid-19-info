@@ -2,7 +2,7 @@ import React from "react";
 import Loader from "./common/Loader.js";
 import WorldMap from "./common/WorldMap";
 import QuickFacts from "./common/QuickFacts";
-import LineChart from "./common/LineChart";
+import Countries from "./common/Countries";
 import Footer from "./common/Footer";
 import Continents from "./common/Continents";
 // import WorldMap from "./WorldMap";
@@ -113,7 +113,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <div className="heading">
-          <p>COVID-19 CORONAVIRUS PANDEMIC</p>
+          <p>COVID-19 CORONAVIRUS PANDEMIC VISUALIZATIONS</p>
         </div>
         <div className="general">
           <div className="sidebar">
@@ -127,12 +127,20 @@ class App extends React.Component {
         <div className="facts">
           <QuickFacts data={data.covidData} />
         </div>
-
+        <div className="heading">
+          <p>COVID-19 VISUALIZATIONS BY CONTINENT</p>
+        </div>
         <div>
           <Continents
             data={data.newTimeSeries}
             worldData={data.plainCovidData}
           />
+        </div>
+        <div className="heading">
+          <p>COVID-19 VISUALIZATIONS BY COUNTRY</p>
+        </div>
+        <div>
+          <Countries data={data.newTimeSeries} />
         </div>
         <Footer />
       </div>
