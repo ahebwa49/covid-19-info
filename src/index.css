@@ -1,6 +1,7 @@
 body {
   margin: 0rem;
   margin-top: 0px;
+  /* font-weight: 300; */
   background-color: white;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -56,6 +57,7 @@ code {
   /* border: 1px solid blue; */
   margin-left: auto;
   align-self: center;
+  font-weight: 300;
   cursor: pointer;
   width: 40%;
   -webkit-touch-callout: none; /* iOS Safari */
@@ -181,6 +183,10 @@ code {
 
 .coming-soon {
   margin-left: 1rem;
+}
+
+.coming-soon-wording {
+  font-weight: 300;
 }
 
 .quick-facts-heading {

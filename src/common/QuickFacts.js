@@ -26,7 +26,7 @@ const QuickFacts = props => {
     <div className="quick-facts">
       <div className="coming-soon">
         <p>Coming soon:</p>
-        <p style={{ textAlign: "start" }}>
+        <p style={{ textAlign: "start" }} className="coming-soon-wording">
           I'm working on making line graphs more interactive in such a way that
           hovering over the line will show more data related to a specific area
           on the line.
