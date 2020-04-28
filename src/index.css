@@ -241,7 +241,7 @@ code {
 .country-line-charts {
   display: flex;
   justify-content: center;
-  /* border: 1px solid green; */
+  /* border: 1px solid red; */
   width: 80%;
   flex-shrink: 2;
 }
@@ -264,11 +264,13 @@ code {
   text-align: center;
   width: 100px;
   justify-self: center;
+  margin-top: 1rem;
   /* border: 1px solid green; */
 }
 
 .country-line-chart {
   margin-right: 50px;
+  /* border: 1px solid green; */
 }
 
 .axis-bottom text {
@@ -387,6 +389,9 @@ code {
     display: flex;
     width: 100%;
   }
+  .tab-list-item {
+    text-align: center;
+  }
   .line-container-children {
     display: flex;
     justify-content: center;
@@ -408,9 +413,17 @@ code {
     /* border: 1px solid red; */
   }
 
+  .country-line-chart {
+    margin-right: 0px;
+  }
+
   .select-country {
     width: 100%;
     /* border: 1px solid blue; */
+  }
+
+  .select-country div select {
+    margin-top: 1rem;
   }
 
   .world-line-chart-confirmed {
