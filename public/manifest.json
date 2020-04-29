@@ -1,6 +1,6 @@
 {
-  "short_name": "covid-19 live updates",
-  "name": "free covid-19 data visualization application",
+  "short_name": "free 2019nCoV pandemic visualization",
+  "name": "free 2019nCov data visualization application",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,13 +8,13 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
+      "src": "coronavirus.svg",
+      "type": "image/svg",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
-      "type": "image/png",
+      "src": "coronavirus.svg",
+      "type": "image/svg",
       "sizes": "512x512"
     }
   ],
