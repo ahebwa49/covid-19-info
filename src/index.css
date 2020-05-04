@@ -342,6 +342,57 @@ code {
   background-color: #b9e1fb;
 }
 
+/* canvas styles */
+#canvas-world,
+#canvas-plane {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#canvas-globe {
+}
+#canvas-container {
+  /* border: 1px solid red; */
+  display: flex;
+  position: relative;
+}
+
+#canvas-hidden {
+  display: none;
+}
+
+#tooltip {
+  /* border: 1px solid red; */
+  width: 150px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  color: #555;
+  font-size: 11px;
+  text-align: left;
+  background: #fafafa;
+  box-shadow: 2px 2px 5px rgba(0, 0, 20, 0.25);
+  pointer-events: none;
+  line-height: 200%;
+  max-width: 250px;
+  padding: 0px 8px;
+  border-radius: 4px;
+}
+
+#tooltip-heading {
+  border-bottom: 1px solid #ccc;
+  font-size: 18px;
+  font-weight: 600;
+}
+#tooltip-heading p {
+  margin: 8px 0px;
+}
+
+#tooltip-body {
+  font-size: 14px;
+}
+
 @media only screen and (max-width: 1000px) {
   .quick-facts-heading {
     font-size: 20px;
@@ -435,6 +486,40 @@ code {
   .world-line-chart-confirmed {
     margin-right: 0px;
   }
+
+  /* tooltip styles */
+  #tooltip {
+    width: 100px;
+    padding: 0rem 5px;
+  }
+
+  #tooltip-heading {
+    border-bottom: 1px solid #ccc;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  #tooltip-body {
+    margin: 5px 0px;
+  }
+
+  #tooltip-heading p {
+    margin: 0px;
+  }
+
+  #confirmed {
+    margin: 0px;
+  }
+  #deaths {
+    margin: 0px;
+  }
+  #recovered {
+    margin: 0px;
+  }
+
+  #tooltip-body {
+    font-size: 11px;
+  }
 }
 
 @media only screen and (max-width: 700px) {
@@ -495,6 +580,7 @@ code {
   }
   .main {
     margin-left: 0px;
+    height: 100%;
   }
   .sidebar {
     display: none;

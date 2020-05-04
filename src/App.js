@@ -12,6 +12,7 @@ class App extends React.Component {
     this.state = {
       data: {
         geoData: null,
+        covid: null,
         covidData: null,
         plainCovidData: null,
         capitalData: null,
@@ -22,7 +23,7 @@ class App extends React.Component {
   componentDidMount() {
     Promise.all([
       fetch(
-        "https://raw.githubusercontent.com/ahebwa49/geo_mapping/master/src/world_countries.json"
+        "https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/world_countries.json"
       ),
       fetch(
         "https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/data.json"
@@ -92,6 +93,7 @@ class App extends React.Component {
         this.setState({
           data: {
             geoData: geoData,
+            covid: cleanCovidData,
             covidData: realCovidData,
             plainCovidData: covidData,
             capitalData: capitalData,
@@ -120,7 +122,7 @@ class App extends React.Component {
             <QuickFacts data={data.covidData} />
           </div>
           <div className="main">
-            <WorldMap data={data} />
+            <WorldMap data={data.geoData} covid={data.covid}/>
           </div>
         </div>
 
