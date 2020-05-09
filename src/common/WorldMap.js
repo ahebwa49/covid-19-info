@@ -1,12 +1,10 @@
 import React from "react";
 import * as d3 from "d3";
+import geoZoom from "d3-geo-zoom";
 
 const width = window.innerWidth - 32;
 
-var origProjectionScale,
-  projectionScaleChange,
-  prevTransformScale = 1,
-  rotation;
+const MARGIN = 5;
 
 class WorldMap extends React.Component {
   constructor(props) {
@@ -19,8 +17,8 @@ class WorldMap extends React.Component {
 
   componentDidMount() {
     const { width, height } = this.state;
-    var projectionScale = (origProjectionScale = height / 2.1);
-    var translation = [width / 2, height / 2];
+    // var projectionScale = (origProjectionScale = height / 2.1);
+    // var translation = [width / 2, height / 2];
 
     const { data, covid } = this.props;
     // console.log(data);
@@ -50,8 +48,8 @@ class WorldMap extends React.Component {
 
     var projection = d3
       .geoOrthographic()
-      .scale(projectionScale)
-      .translate(translation)
+      .scale(Math.min(width, height) / 2 - MARGIN)
+      .translate([width / 2, height / 2])
       .clipAngle(90);
 
     var bufferPath = d3
@@ -102,92 +100,18 @@ class WorldMap extends React.Component {
         renderScene(data);
         drawHiddenCanvas(data);
       });
+    }
 
-      /* Interactivity goes here */
-
-      // The deltaMove module offers a fallback for calculating delta x and y as Safari and IE
-      // don't expose d3.event.sourceEvent.movementX and .y which we need for the globe rotation
-      var deltaMove = (function() {
-        var prevX = 0,
-          prevY = 0;
-
-        function getDeltas(event) {
-          var movementX = prevX ? event.screenX - prevX : 0;
-          var movementY = prevY ? event.screenY - prevY : 0;
-
-          prevX = event.screenX;
-          prevY = event.screenY;
-
-          return {
-            x: movementX,
-            y: movementY
-          };
-        }
-
-        function resetDeltas() {
-          prevX = 0;
-          prevY = 0;
-        }
-
-        return {
-          coords: getDeltas,
-          reset: resetDeltas
-        };
-      })();
-
-      var zoom = d3
-        .zoom()
-        .scaleExtent([0.5, 4])
-        .on("zoom", zoomed)
-        .on("end", deltaMove.reset);
-
-      canvas.call(zoom);
-
-      function zoomed() {
-        var event = d3.event.sourceEvent.type;
-        // console.log(d3.event.transform);
-
-        // Get the shift in x and y coordinates
-
-        // Cross-browser solution:
-        var delta = deltaMove.coords(d3.event.sourceEvent);
-
-        // get the deltas
-        var dx = delta.x;
-        var dy = delta.y;
-
-        // Fine for chrome, firefox
-        // var dx = d3.event.sourceEvent.movementX;
-        // var dy = d3.event.sourceEvent.movementY;
-
-        if (event === "wheel") {
-          var transformScale = d3.event.transform.k;
-
-          projectionScaleChange =
-            (transformScale - prevTransformScale) * origProjectionScale;
-          projectionScale = projectionScale + projectionScaleChange;
-          projection.scale(projectionScale);
-          prevTransformScale = transformScale;
-        } else if (event === "mousemove") {
-          // Here goes the rotation logic as this will be triggered upon dragging
-          var r = projection.rotate();
-          rotation = [r[0] + dx * 0.4, r[1] - dy * 0.5, r[2]];
-          projection.rotate(rotation);
-          // } else if (event === "touchmove") {
-          //   var r = projection.rotate();
-          //   rotation = [r[0] + dx * 0.4, r[1] - dy * 0.5, r[2]];
-          //   projection.rotate(rotation);
-        } else {
-          console.warn("unknown mouse event in zoomed()"); // alerting issues
-        }
-
+    /* all the interactivity goes here */
+    geoZoom()
+      .projection(projection)
+      .scaleExtent([0.5, 4])
+      .northUp(true)
+      .onMove(() => {
         requestAnimationFrame(function() {
           renderScene(data);
         });
-      }
-
-      buildTooltip(data);
-    }
+      })(canvas.node());
 
     function renderScene(countries, countryIndex) {
       drawScene(countries, countryIndex);
