@@ -98,8 +98,6 @@ class WorldMap extends React.Component {
         }); // loop through covid array of country objects
       } // insertForestDataLinear()
 
-      // console.log(data);
-
       requestAnimationFrame(function() {
         renderScene(data);
         drawHiddenCanvas(data);
@@ -107,20 +105,64 @@ class WorldMap extends React.Component {
 
       /* Interactivity goes here */
 
+      // The deltaMove module offers a fallback for calculating delta x and y as Safari and IE
+      // don't expose d3.event.sourceEvent.movementX and .y which we need for the globe rotation
+      var deltaMove = (function() {
+        var prevX = 0,
+          prevY = 0;
+
+        function getDeltas(event) {
+          var movementX = prevX ? event.screenX - prevX : 0;
+          var movementY = prevY ? event.screenY - prevY : 0;
+
+          prevX = event.screenX;
+          prevY = event.screenY;
+
+          return {
+            x: movementX,
+            y: movementY
+          };
+        }
+
+        function resetDeltas() {
+          prevX = 0;
+          prevY = 0;
+        }
+
+        return {
+          coords: getDeltas,
+          reset: resetDeltas
+        };
+      })();
+
       var zoom = d3
         .zoom()
         .scaleExtent([0.5, 4])
-        .on("zoom", zoomed);
+        .on("zoom", zoomed)
+        .on("end", deltaMove.reset);
 
       canvas.call(zoom);
 
       function zoomed() {
         var event = d3.event.sourceEvent.type;
-        var dx = d3.event.sourceEvent.movementX;
-        var dy = d3.event.sourceEvent.movementY;
+        // console.log(d3.event.transform);
+
+        // Get the shift in x and y coordinates
+
+        // Cross-browser solution:
+        var delta = deltaMove.coords(d3.event.sourceEvent);
+
+        // get the deltas
+        var dx = delta.x;
+        var dy = delta.y;
+
+        // Fine for chrome, firefox
+        // var dx = d3.event.sourceEvent.movementX;
+        // var dy = d3.event.sourceEvent.movementY;
 
         if (event === "wheel") {
           var transformScale = d3.event.transform.k;
+
           projectionScaleChange =
             (transformScale - prevTransformScale) * origProjectionScale;
           projectionScale = projectionScale + projectionScaleChange;
@@ -131,6 +173,10 @@ class WorldMap extends React.Component {
           var r = projection.rotate();
           rotation = [r[0] + dx * 0.4, r[1] - dy * 0.5, r[2]];
           projection.rotate(rotation);
+          // } else if (event === "touchmove") {
+          //   var r = projection.rotate();
+          //   rotation = [r[0] + dx * 0.4, r[1] - dy * 0.5, r[2]];
+          //   projection.rotate(rotation);
         } else {
           console.warn("unknown mouse event in zoomed()"); // alerting issues
         }
