@@ -364,7 +364,7 @@ code {
 
 #tooltip {
   /* border: 1px solid red; */
-  width: 150px;
+  width: 160px;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -391,6 +391,10 @@ code {
 
 #tooltip-body {
   font-size: 14px;
+}
+
+#tooltip-body-entry {
+  margin: 0.5rem 0rem;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -489,8 +493,9 @@ code {
 
   /* tooltip styles */
   #tooltip {
-    width: 100px;
+    width: 125px;
     padding: 0rem 5px;
+    /* border: 1px solid red; */
   }
 
   #tooltip-heading {
@@ -500,6 +505,7 @@ code {
   }
 
   #tooltip-body {
+    font-size: 11px;
     margin: 5px 0px;
   }
 
@@ -507,18 +513,8 @@ code {
     margin: 0px;
   }
 
-  #confirmed {
-    margin: 0px;
-  }
-  #deaths {
-    margin: 0px;
-  }
-  #recovered {
-    margin: 0px;
-  }
-
-  #tooltip-body {
-    font-size: 11px;
+  #tooltip-body-entry {
+    margin: 0rem;
   }
 }
 

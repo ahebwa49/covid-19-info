@@ -337,10 +337,30 @@ class WorldMap extends React.Component {
       countryQueue.pop();
 
       if (countryQueue[0] !== countryQueue[1]) {
+        let commaSeparatedConfirmedCases;
+        let commaSeparatedDeathCases;
+        let commaSeparatedRecoveredCases;
         d3.select("#tooltip div p").html(countryProps.name);
-        d3.select("#confirmed").html(`Confirmed: ${countryProps.confirmed}`);
-        d3.select("#deaths").html(`Deaths: ${countryProps.deaths}`);
-        d3.select("#recovered").html(`Recovered: ${countryProps.recovered}`);
+        if (countryProps.confirmed) {
+          commaSeparatedConfirmedCases = countryProps.confirmed
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+          commaSeparatedDeathCases = countryProps.deaths
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+          commaSeparatedRecoveredCases = countryProps.recovered
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          d3.select("#confirmed").html(` ${commaSeparatedConfirmedCases}`);
+          d3.select("#deaths").html(` ${commaSeparatedDeathCases}`);
+          d3.select("#recovered").html(` ${commaSeparatedRecoveredCases}`);
+        } else {
+          d3.select("#confirmed").html(` Not recorded`);
+          d3.select("#deaths").html(` Not recorded`);
+          d3.select("#recovered").html(` Not recorded`);
+        }
 
         // svg.selectAll(".bar").attr("fill", function(d) {
         //   return d.color;
@@ -378,9 +398,18 @@ class WorldMap extends React.Component {
             <p />
           </div>
           <div id="tooltip-body">
-            <p id="confirmed" />
-            <p id="deaths" />
-            <p id="recovered" />
+            <div id="tooltip-body-entry">
+              <span id="confirmed-label">Confirmed:</span>
+              <span id="confirmed" />
+            </div>
+            <div id="tooltip-body-entry">
+              <span id="deaths-label">Deaths:</span>
+              <span id="deaths" />
+            </div>
+            <div id="tooltip-body-entry">
+              <span id="recovered-label">Recovered:</span>
+              <span id="recovered" />
+            </div>
           </div>
         </div>
       </div>
