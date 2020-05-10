@@ -279,7 +279,7 @@ class WorldMap extends React.Component {
       bufferContext.beginPath();
       bufferPath(countries);
       bufferContext.lineWidth = 0.5;
-      bufferContext.strokeStyle = "#D2D3CE";
+      bufferContext.strokeStyle = "#FFFFFF";
       bufferContext.stroke();
 
       // Country stroke - hovered country
