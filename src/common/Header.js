@@ -36,7 +36,7 @@ class Header extends React.Component {
             <div className="header-option">About</div>
           </div>
           <div className="follow-button">
-            <button onClick={this.handleFollowCLick}>Follow</button>
+            <button onClick={this.handleFollowCLick}>follow</button>
           </div>
         </div>
       </div>

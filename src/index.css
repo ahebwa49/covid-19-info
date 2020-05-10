@@ -271,6 +271,11 @@ code {
   width: 100px;
   justify-self: center;
   margin-top: 1rem;
+  /* background-color: #208FFB; */
+  /* color: white; */
+  border-radius: 3px;
+  padding: 5px;
+  /* height: 15px; */
   /* border: 1px solid green; */
 }
 
@@ -330,6 +335,7 @@ code {
   list-style: none;
   padding: 0.5rem 0.75rem;
   cursor: pointer;
+  border-radius: 4px;
   /* border: 1px solid green; */
 }
 
@@ -557,6 +563,7 @@ code {
 
   .follow-button {
     display: flex;
+
     justify-content: flex-end;
     justify-self: flex-end;
     height: 30px;
@@ -568,12 +575,13 @@ code {
     align-items: center;
     width: auto;
     height: 30px;
-    background: #ffffff;
-    border: 2px solid #e1e4eb;
+    color: #ffffff;
+    background-color: #5bcdd5;
+    border: 2px solid #5bcdd5;
     line-height: 20px;
     font-weight: bold;
     font-size: 14px;
-    color: #110a57;
+    /* color: #110a57; */
   }
 
   .heading {
