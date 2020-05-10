@@ -1,6 +1,5 @@
 import React from "react";
 import * as d3 from "d3";
-import geoZoom from "d3-geo-zoom";
 
 const width = window.innerWidth - 32;
 
@@ -250,7 +249,7 @@ class WorldMap extends React.Component {
       const colorScale = d3
         .scaleSequential()
         .domain(colorExtent)
-        .interpolator(d3.interpolateRdYlGn);
+        .interpolator(d3.interpolateRgb("red", "#FDF3F2"));
 
       bufferContext.clearRect(0, 0, bufferCanvas.width, bufferCanvas.height);
       // Sphere fill
