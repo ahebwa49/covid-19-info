@@ -4,7 +4,12 @@ import geoZoom from "d3-geo-zoom";
 
 const width = window.innerWidth - 32;
 
-const MARGIN = 5;
+// const MARGIN = 5;
+let projectionScaleChange;
+let origProjectionScale;
+let prevTransformScale = 1;
+let rotation;
+let selected = false;
 
 class WorldMap extends React.Component {
   constructor(props) {
@@ -17,8 +22,8 @@ class WorldMap extends React.Component {
 
   componentDidMount() {
     const { width, height } = this.state;
-    // var projectionScale = (origProjectionScale = height / 2.1);
-    // var translation = [width / 2, height / 2];
+    var projectionScale = (origProjectionScale = height / 2.1);
+    var translation = [width / 2, height / 2];
 
     const { data, covid } = this.props;
     // console.log(data);
@@ -48,8 +53,8 @@ class WorldMap extends React.Component {
 
     var projection = d3
       .geoOrthographic()
-      .scale(Math.min(width, height) / 2 - MARGIN)
-      .translate([width / 2, height / 2])
+      .scale(projectionScale)
+      .translate(translation)
       .clipAngle(90);
 
     var bufferPath = d3
@@ -96,22 +101,130 @@ class WorldMap extends React.Component {
         }); // loop through covid array of country objects
       } // insertForestDataLinear()
 
+      /* Initial Draw */
+      /* ------------ */
+
+      // Draw the world
+
       requestAnimationFrame(function() {
         renderScene(data);
         drawHiddenCanvas(data);
       });
     }
 
-    /* all the interactivity goes here */
-    geoZoom()
-      .projection(projection)
+    /* Interactivity */
+    /* ============= */
+
+    // The deltaMove module offers a fallback for calculating delta x and y as Safari and IE
+    // don't expose d3.event.sourceEvent.movementX and .y which we need for the globe rotation
+    let deltaMove = (function() {
+      let prevX = 0;
+      let prevY = 0;
+
+      function getDeltas(position) {
+        const [x, y] = position;
+
+        let movementX = prevX ? x - prevX : 0;
+        let movementY = prevY ? y - prevY : 0;
+
+        prevX = x;
+        prevY = y;
+
+        return {
+          x: movementX,
+          y: movementY
+        };
+      }
+
+      function resetDeltas() {
+        prevX = 0;
+        prevY = 0;
+      }
+
+      return {
+        coords: getDeltas,
+        reset: resetDeltas
+      };
+    })();
+
+    /* Zoom and pan */
+    /* ------------ */
+
+    let zoom = d3
+      .zoom()
       .scaleExtent([0.5, 4])
-      .northUp(true)
-      .onMove(() => {
-        requestAnimationFrame(function() {
-          renderScene(data);
-        });
-      })(canvas.node());
+      .on("zoom", zoomed)
+      .on("end", deltaMove.reset);
+
+    canvas.call(zoom);
+
+    function getPostions(e) {
+      let x;
+      let y;
+
+      // Ringfencing, in case type is not defined.
+      if (!e) return [0, 0];
+
+      // Distinguish between desktop and touch.
+      if (e.type === "mousemove") {
+        x = e.screenX;
+        y = e.screenY;
+      } else if (e.type === "touchmove") {
+        x = e.changedTouches[0].screenX;
+        y = e.changedTouches[0].screenY;
+      }
+
+      return [x, y];
+    }
+
+    function zoomed() {
+      // Get the shift in x and y coordinates
+
+      // Get the current positions.
+      const positions = getPostions(d3.event.sourceEvent);
+
+      // Cross-browser solution:
+      let delta = deltaMove.coords(positions);
+
+      // get the deltas
+      let dx = delta.x;
+      let dy = delta.y;
+
+      // // Fine for Chrome, Firefox:
+      // var dx = d3.event.sourceEvent.movementX;
+      // var dy = d3.event.sourceEvent.movementY;
+
+      // This will return either 'mousemove' or 'wheel'
+      let event = d3.event.sourceEvent ? d3.event.sourceEvent.type : null;
+
+      // if the user zooms in using the mousewheel (or equivalent):
+      if (event === "wheel") {
+        // Change the scale according to the user interaction
+        let transformScale = d3.event.transform.k;
+        projectionScaleChange =
+          (transformScale - prevTransformScale) * origProjectionScale;
+        projectionScale += projectionScaleChange;
+        projection.scale(projectionScale);
+        prevTransformScale = transformScale;
+        // if the user pans:
+      } else if (event === "mousemove" || event === "touchmove") {
+        // Change the rotation according to the user interaction
+        let r = projection.rotate();
+        rotation = [r[0] + dx * 0.4, r[1] - dy * 0.5, r[2]];
+        projection.rotate(rotation);
+      } else {
+        // fallback
+
+        console.warn("invalid mouse event in zoomed()");
+      }
+
+      // Rerender the globe
+      requestAnimationFrame(function() {
+        renderScene(data, selected);
+      });
+
+      hideTooltip();
+    } // zoomed()
 
     function renderScene(countries, countryIndex) {
       drawScene(countries, countryIndex);
