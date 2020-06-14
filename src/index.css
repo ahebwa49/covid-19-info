@@ -291,7 +291,7 @@ code {
 
 .yAxisLabel {
   font-size: 14px;
-  color: #110a57;
+  /* color: #110a57; */
 }
 
 .xAxisLabel {
@@ -486,6 +486,8 @@ code {
 
   .country-line-chart {
     margin-right: 0px;
+    /* border: 1px solid red !important; */
+
   }
 
   .select-country {

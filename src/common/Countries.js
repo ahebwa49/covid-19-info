@@ -14,8 +14,8 @@ const height = 400;
 const margin = {
   top: 20,
   right: 15,
-  bottom: 55,
-  left: 70
+  bottom: 40,
+  left: 50
   // left: 0
 };
 
@@ -31,10 +31,10 @@ class Countries extends React.Component {
     };
   }
 
-  xAxisConfirmed = d3.axisBottom();
-  xAxisDeaths = d3.axisBottom();
-  yAxisConfirmed = d3.axisLeft();
-  yAxisDeaths = d3.axisLeft();
+  xAxisConfirmed = d3.axisBottom().ticks(5);
+  xAxisDeaths = d3.axisBottom().ticks(5);
+  yAxisConfirmed = d3.axisLeft().tickFormat(d3.format(".2s"));
+  yAxisDeaths = d3.axisLeft().tickFormat(d3.format(".2s"));
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { country } = prevState;
@@ -110,7 +110,7 @@ class Countries extends React.Component {
   }
 
   componentDidUpdate() {
-    this.xAxisConfirmed.scale(this.state.xScaleConfirmed).tickArguments([10]);
+    this.xAxisConfirmed.scale(this.state.xScaleConfirmed);
     this.xAxisDeaths.scale(this.state.xScaleDeaths);
     d3.select(this.x_axis_confirmed.current).call(this.xAxisConfirmed);
     d3.select(this.x_axis_deaths.current).call(this.xAxisDeaths);
@@ -121,7 +121,7 @@ class Countries extends React.Component {
   }
 
   componentDidMount() {
-    this.xAxisConfirmed.scale(this.state.xScaleConfirmed).tickArguments([10]);
+    this.xAxisConfirmed.scale(this.state.xScaleConfirmed);
     this.xAxisDeaths.scale(this.state.xScaleDeaths);
     d3.select(this.x_axis_confirmed.current).call(this.xAxisConfirmed);
     d3.select(this.x_axis_deaths.current).call(this.xAxisDeaths);
@@ -184,13 +184,6 @@ class Countries extends React.Component {
               >
                 Coronavirus Cases
               </text>
-              <text
-                className="xAxisLabel"
-                transform={`translate(${(width - margin.left - margin.right) /
-                  2}, ${height - 5})`}
-              >
-                Dates for the last 90 days
-              </text>
               <g
                 className="axis-bottom"
                 ref={this.x_axis_confirmed}
@@ -201,6 +194,16 @@ class Countries extends React.Component {
                 transform={`translate(${margin.left}, 0)`}
               />
             </svg>
+            <p
+              style={{
+                textAlign: "center",
+                marginTop: "0px",
+                fontSize: "14px",
+                color: "black"
+              }}
+            >
+              Date
+            </p>
           </div>
           <div className="country-line-chart">
             <p style={{ textAlign: "center" }}>{`${country} Deaths`}</p>
@@ -217,13 +220,6 @@ class Countries extends React.Component {
               >
                 Coronavirus Deaths
               </text>
-              <text
-                className="xAxisLabel"
-                transform={`translate(${(width - margin.left - margin.right) /
-                  2}, ${height - 5})`}
-              >
-                Dates for the last 90 days
-              </text>
 
               <g
                 className="axis-bottom"
@@ -235,6 +231,16 @@ class Countries extends React.Component {
                 transform={`translate(${margin.left}, 0)`}
               />
             </svg>
+            <p
+              style={{
+                textAlign: "center",
+                marginTop: "0px",
+                fontSize: "14px",
+                color: "black"
+              }}
+            >
+              Date
+            </p>
           </div>
         </div>
       </div>
