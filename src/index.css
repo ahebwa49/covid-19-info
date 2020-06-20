@@ -284,10 +284,10 @@ code {
   /* border: 1px solid green; */
 }
 
-.axis-bottom text {
+/* .axis-bottom text {
   transform: rotate(-45deg);
   text-anchor: end;
-}
+} */
 
 .yAxisLabel {
   font-size: 14px;
