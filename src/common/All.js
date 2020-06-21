@@ -13,8 +13,8 @@ const height = 400;
 const margin = {
   top: 20,
   right: 15,
-  bottom: 55,
-  left: 70
+  bottom: 30,
+  left: 55
   // left: 0
 };
 
@@ -29,8 +29,8 @@ class Africa extends React.Component {
   }
   xAxisConfirmed = d3.axisBottom();
   xAxisDeaths = d3.axisBottom();
-  yAxisConfirmed = d3.axisLeft();
-  yAxisDeaths = d3.axisLeft();
+  yAxisConfirmed = d3.axisLeft().tickFormat(d3.format(".2s"));
+  yAxisDeaths = d3.axisLeft().tickFormat(d3.format(".2s"));
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { data } = nextProps;
@@ -129,17 +129,11 @@ class Africa extends React.Component {
             <text
               className="yAxisLabel"
               transform={`translate(10, ${(height - margin.bottom) /
-                1.35}) rotate(270)`}
+                1.5}) rotate(270)`}
             >
-              Total Coronavirus Cases
+              Coronavirus Cases
             </text>
-            <text
-              className="xAxisLabel"
-              transform={`translate(${(width - margin.left - margin.right) /
-                2}, ${height - 5})`}
-            >
-              Dates for the last 90 days
-            </text>
+
             <g
               className="axis-bottom"
               ref={this.x_axis_confirmed}
@@ -150,6 +144,16 @@ class Africa extends React.Component {
               transform={`translate(${margin.left}, 0)`}
             />
           </svg>
+          <p
+            style={{
+              textAlign: "center",
+              marginTop: "0px",
+              fontSize: "14px",
+              color: "black"
+            }}
+          >
+            Date
+          </p>
         </div>
         <div className="world-line-chart-confirmed">
           <p style={{ textAlign: "center" }}>Total Deaths</p>
@@ -162,16 +166,9 @@ class Africa extends React.Component {
             <text
               className="yAxisLabel"
               transform={`translate(15, ${(height - margin.bottom) /
-                1.35}) rotate(270)`}
+                1.5}) rotate(270)`}
             >
-              Total Coronavirus Deaths
-            </text>
-            <text
-              className="xAxisLabel"
-              transform={`translate(${(width - margin.left - margin.right) /
-                2}, ${height - 5})`}
-            >
-              Dates for the last 90 days
+              Coronavirus Deaths
             </text>
 
             <g
@@ -184,6 +181,16 @@ class Africa extends React.Component {
               transform={`translate(${margin.left}, 0)`}
             />
           </svg>
+          <p
+            style={{
+              textAlign: "center",
+              marginTop: "0px",
+              fontSize: "14px",
+              color: "black"
+            }}
+          >
+            Date
+          </p>
         </div>
       </div>
     );

@@ -487,7 +487,6 @@ code {
   .country-line-chart {
     margin-right: 0px;
     /* border: 1px solid red !important; */
-
   }
 
   .select-country {
@@ -501,6 +500,7 @@ code {
 
   .world-line-chart-confirmed {
     margin-right: 0px;
+    border: 1px solid red;
   }
 
   /* tooltip styles */

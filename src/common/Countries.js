@@ -1,7 +1,6 @@
 import React from "react";
 import * as d3 from "d3";
 
-// const width = 450;
 let id = 0;
 let width;
 const windowWidth = window.innerWidth - 32;
@@ -14,7 +13,7 @@ const height = 400;
 const margin = {
   top: 20,
   right: 15,
-  bottom: 40,
+  bottom: 30,
   left: 50
   // left: 0
 };
