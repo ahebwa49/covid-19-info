@@ -500,7 +500,7 @@ code {
 
   .world-line-chart-confirmed {
     margin-right: 0px;
-    border: 1px solid red;
+    /* border: 1px solid red; */
   }
 
   /* tooltip styles */
