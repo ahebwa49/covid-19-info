@@ -68,7 +68,19 @@ code {
   user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
-.follow-button {
+.coffee-cup {
+  position: absolute;
+  right: 0px;
+  top: 7px;
+}
+
+.twitter-badge {
+  position: absolute;
+  right: 0px;
+  top: 7px;
+}
+
+.header-buttons {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -76,19 +88,26 @@ code {
   /* border: 1px solid red; */
 }
 
-.follow-button button {
-  width: 128px;
+.header-buttons :nth-child(1) {
+  margin-right: 20px;
+}
+
+.header-buttons button {
+  display: flex;
+  position: relative;
+  width: 120px;
   background: #ffffff;
   border: 2px solid #e1e4eb;
   border-radius: 24px;
   font-weight: bold;
   font-size: 14px;
   line-height: 40px;
+  padding-left: 20px;
   outline: none;
   color: #110a57;
 }
 
-.follow-button button:hover {
+.header-buttons button:hover {
   cursor: pointer;
   color: #ffffff;
   background-color: #5bcdd5;
@@ -433,6 +452,34 @@ code {
   .header-options {
     width: 65%;
   }
+
+  .header-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 30%;
+    /* border: 1px solid red; */
+  }
+
+  .header-buttons :nth-child(1) {
+    margin-right: 10px;
+  }
+
+  .header-buttons button {
+    padding-left: 15px;
+  }
+
+  .coffee-cup {
+    width: 20px;
+    right: 5px;
+    top: 10px;
+  }
+
+  .twitter-badge {
+    width: 20px;
+    right: 5px;
+    top: 10px;
+  }
   .sidebar {
     display: none;
   }
@@ -563,27 +610,45 @@ code {
     font-size: 14px;
   }
 
-  .follow-button {
+  .header-buttons {
     display: flex;
-
     justify-content: flex-end;
     justify-self: flex-end;
     height: 30px;
     width: 100%;
+    /* border: 1px solid red; */
   }
-  .follow-button button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: auto;
+
+  .header-buttons :nth-child(1) {
+    margin-right: 5px;
+  }
+
+  .header-buttons button {
+    position: relative;
+    border-radius: 12px;
+    padding-left: 10px;
+    padding-right: 0px;
+    line-height: normal;
+    width: 100px !important;
+    /* border: 1px solid red; */
+    color: white;
     height: 30px;
-    color: #ffffff;
     background-color: #5bcdd5;
     border: 2px solid #5bcdd5;
-    line-height: 20px;
-    font-weight: bold;
-    font-size: 14px;
-    /* color: #110a57; */
+  }
+
+  .coffee-cup {
+    position: absolute;
+    width: 20px;
+    right: 5px;
+    top: 3px;
+  }
+
+  .twitter-badge {
+    position: absolute;
+    width: 20px;
+    right: 10px;
+    top: 3px;
   }
 
   .heading {
