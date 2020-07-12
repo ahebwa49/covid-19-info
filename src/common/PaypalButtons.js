@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import scriptLoader from "react-async-script-loader";
-import Spinner from "./Spinner";
 import Loader from "./Loader"
 
 const CLIENT = {
