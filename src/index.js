@@ -4,18 +4,36 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import Header from "./common/Header";
+import PaypalButtons from "./common/PaypalButtons";
+
 import * as serviceWorker from "./serviceWorker";
 
-const Routing = () => {
-  return (
-    <Router>
-      <Header />
-      <Switch>
-        <Route exact path="/" component={App} />
-      </Switch>
-    </Router>
-  );
-};
+class Routing extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showPayPal: false
+    };
+  }
+
+  showPayPalButtons = () => {
+    console.log("trying to buy you coffee :)");
+    this.setState({ showPayPal: true });
+  };
+
+  render() {
+    return (
+      <Router>
+        <Header showPayPalButtons={this.showPayPalButtons} />
+
+        <Switch>
+          <Route exact path="/" component={App} />
+          <Route exact path="/coffee" component={PaypalButtons} />
+        </Switch>
+      </Router>
+    );
+  }
+}
 
 ReactDOM.render(
   <React.StrictMode>

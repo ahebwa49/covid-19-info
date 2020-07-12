@@ -20,6 +20,7 @@ class App extends React.Component {
       }
     };
   }
+
   componentDidMount() {
     Promise.all([
       fetch(
@@ -122,7 +123,7 @@ class App extends React.Component {
             <QuickFacts data={data.covidData} />
           </div>
           <div className="main">
-            <WorldMap data={data.geoData} covid={data.covid}/>
+            <WorldMap data={data.geoData} covid={data.covid} />
           </div>
         </div>
 

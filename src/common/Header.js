@@ -1,9 +1,10 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { className: "coffee-button" };
   }
 
   handleLogoClick = () => {
@@ -37,17 +38,33 @@ class Header extends React.Component {
           </div>
 
           <div className="header-buttons">
-            <button onClick={this.handleFollowCLick} className="coffee-button">
-              buy me
-              <img
-                src="/static/img/coffee-cup.svg"
-                alt="coffee"
-                width="25"
-                className="coffee-cup"
-              />
-            </button>
-            <button onClick={this.handleFollowCLick} className="twitter-button">
-              me on
+            <NavLink
+              to="/coffee"
+              className="coffee-link"
+              activeClassName="coffee-link-active"
+              style={{ textDecoration: "none" }}
+            >
+              <button
+                className="coffee-button"
+                onClick={this.handleCoffeeClick}
+              >
+                <nav>
+                  buy me
+                  <img
+                    src="/static/img/coffee-cup.svg"
+                    alt="coffee"
+                    width="25"
+                    className="coffee-cup"
+                  />
+                </nav>
+              </button>
+            </NavLink>
+            <button
+              onClick={this.handleFollowCLick}
+              className="twitter-button"
+              // style={{ color: "#110a57" }}
+            >
+              twitter
               <img
                 src="/static/img/twitter.svg"
                 alt="twitter"

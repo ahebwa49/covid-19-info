@@ -89,7 +89,7 @@ code {
 }
 
 .header-buttons :nth-child(1) {
-  margin-right: 20px;
+  margin-right: 15px;
 }
 
 .header-buttons button {
@@ -105,6 +105,7 @@ code {
   padding-left: 20px;
   outline: none;
   color: #110a57;
+  /* border: 1px solid blue; */
 }
 
 .header-buttons button:hover {
@@ -113,6 +114,7 @@ code {
   background-color: #5bcdd5;
   border: 2px solid #5bcdd5;
 }
+
 .header-option {
   font-size: 16px;
   line-height: 16px;
@@ -367,6 +369,23 @@ code {
   background-color: #b9e1fb;
 }
 
+/* coffee payment page */
+
+.coffee-payment-page {
+  color: #110a57;
+  margin-top: 8rem;
+  width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.successful-purchase {
+  color: #110a57;
+  text-align: center;
+  font-size: medium;
+  /* border: 1px solid red; */
+}
+
 /* canvas styles */
 #canvas-world,
 #canvas-plane {
@@ -467,17 +486,18 @@ code {
 
   .header-buttons button {
     padding-left: 15px;
+    width: 100px;
   }
 
   .coffee-cup {
     width: 20px;
-    right: 5px;
+    right: 3px;
     top: 10px;
   }
 
   .twitter-badge {
     width: 20px;
-    right: 5px;
+    right: 3px;
     top: 10px;
   }
   .sidebar {
@@ -616,6 +636,8 @@ code {
     justify-self: flex-end;
     height: 30px;
     width: 100%;
+    color: #110a57;
+
     /* border: 1px solid red; */
   }
 
@@ -631,10 +653,11 @@ code {
     line-height: normal;
     width: 100px !important;
     /* border: 1px solid red; */
-    color: white;
+    color: #110a57;
     height: 30px;
-    background-color: #5bcdd5;
-    border: 2px solid #5bcdd5;
+    /* background-color: #5bcdd5; */
+    background-color: #b9e1fb;
+    border: 2px solid #b9e1fb;
   }
 
   .coffee-cup {
@@ -700,5 +723,10 @@ code {
     display: flex;
     justify-content: center;
     width: 100%;
+  }
+
+  .coffee-payment-page {
+    margin-top: 6rem;
+    width: 16rem;
   }
 }
