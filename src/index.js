@@ -4,7 +4,6 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import Header from "./common/Header";
-import PaypalButtons from "./common/PaypalButtons";
 
 import * as serviceWorker from "./serviceWorker";
 
@@ -28,7 +27,6 @@ class Routing extends React.Component {
 
         <Switch>
           <Route exact path="/" component={App} />
-          <Route exact path="/coffee" component={PaypalButtons} />
         </Switch>
       </Router>
     );

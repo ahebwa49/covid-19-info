@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 class Header extends React.Component {
   constructor(props) {
@@ -13,6 +12,10 @@ class Header extends React.Component {
 
   handleFollowCLick = () => {
     window.location.href = "https://twitter.com/ahebwa49";
+  };
+
+  handleCoffeeClick = () => {
+    window.location.href = "https://ko-fi.com/asabahebwa";
   };
 
   render() {
@@ -38,32 +41,19 @@ class Header extends React.Component {
           </div>
 
           <div className="header-buttons">
-            <NavLink
-              to="/coffee"
-              className="coffee-link"
-              activeClassName="coffee-link-active"
-              style={{ textDecoration: "none" }}
-            >
-              <button
-                className="coffee-button"
-                onClick={this.handleCoffeeClick}
-              >
-                <nav>
-                  buy me
-                  <img
-                    src="/static/img/coffee-cup.svg"
-                    alt="coffee"
-                    width="25"
-                    className="coffee-cup"
-                  />
-                </nav>
-              </button>
-            </NavLink>
-            <button
-              onClick={this.handleFollowCLick}
-              className="twitter-button"
-              // style={{ color: "#110a57" }}
-            >
+            <button className="coffee-button" onClick={this.handleCoffeeClick}>
+              <nav>
+                buy me
+                <img
+                  src="/static/img/coffee-cup.svg"
+                  alt="coffee"
+                  width="25"
+                  className="coffee-cup"
+                />
+              </nav>
+            </button>
+
+            <button onClick={this.handleFollowCLick} className="twitter-button">
               twitter
               <img
                 src="/static/img/twitter.svg"
