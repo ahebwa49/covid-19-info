@@ -41,27 +41,18 @@ class Header extends React.Component {
           </div>
 
           <div className="header-buttons">
-            <button className="coffee-button" onClick={this.handleCoffeeClick}>
-              <nav>
-                buy me
-                <img
-                  src="/static/img/coffee-cup.svg"
-                  alt="coffee"
-                  width="25"
-                  className="coffee-cup"
-                />
-              </nav>
-            </button>
-
-            <button onClick={this.handleFollowCLick} className="twitter-button">
-              twitter
+            <a href="https://ko-fi.com/G2G01YZJE" target="_blank">
               <img
-                src="/static/img/twitter.svg"
-                alt="twitter"
-                width="25"
-                className="twitter-badge"
+                height="36"
+                style={{ height: "36px" }}
+                src="https://cdn.ko-fi.com/cdn/kofi1.png?v=2"
+                alt="Buy Me a Coffee at ko-fi.com"
               />
-            </button>
+            </a>
+
+            <a href="https://twitter.com/ahebwa49" target="_blank">
+              <img src="/static/img/twitter.svg" alt="twitter" width="36" />
+            </a>
           </div>
         </div>
       </div>

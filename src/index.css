@@ -82,6 +82,7 @@ code {
 
 .header-buttons {
   display: flex;
+  /* height: 10px; */
   justify-content: flex-end;
   align-items: center;
   width: 30%;
@@ -369,23 +370,6 @@ code {
   background-color: #b9e1fb;
 }
 
-/* coffee payment page */
-
-.coffee-payment-page {
-  color: #110a57;
-  margin-top: 8rem;
-  width: 32rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.successful-purchase {
-  color: #110a57;
-  text-align: center;
-  font-size: medium;
-  /* border: 1px solid red; */
-}
-
 /* canvas styles */
 #canvas-world,
 #canvas-plane {
@@ -485,14 +469,9 @@ code {
   }
 
   .header-buttons button {
+    height: 25px;
     padding-left: 15px;
     width: 100px;
-  }
-
-  .coffee-cup {
-    width: 20px;
-    right: 3px;
-    top: 10px;
   }
 
   .twitter-badge {
