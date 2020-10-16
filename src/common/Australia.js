@@ -26,8 +26,8 @@ class Australia extends React.Component {
     this.y_axis_deaths = React.createRef();
     this.state = {};
   }
-  xAxisConfirmed = d3.axisBottom();
-  xAxisDeaths = d3.axisBottom();
+  xAxisConfirmed = d3.axisBottom().ticks(5);
+  xAxisDeaths = d3.axisBottom().ticks(5);
   yAxisConfirmed = d3.axisLeft().tickFormat(d3.format(".2s"));
   yAxisDeaths = d3.axisLeft().tickFormat(d3.format(".2s"));
 
@@ -98,7 +98,7 @@ class Australia extends React.Component {
   }
 
   componentDidMount() {
-    this.xAxisConfirmed.scale(this.state.xScaleConfirmed).tickArguments([10]);
+    this.xAxisConfirmed.scale(this.state.xScaleConfirmed);
     this.xAxisDeaths.scale(this.state.xScaleDeaths);
     d3.select(this.x_axis_confirmed.current).call(this.xAxisConfirmed);
     d3.select(this.x_axis_deaths.current).call(this.xAxisDeaths);

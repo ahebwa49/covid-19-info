@@ -1,4 +1,5 @@
 import React from "react";
+import TwitterIcon from "@material-ui/icons/Twitter";
 
 class Header extends React.Component {
   constructor(props) {
@@ -11,12 +12,12 @@ class Header extends React.Component {
   };
 
   handleFollowCLick = () => {
-    window.location.href = "https://twitter.com/ahebwa49";
+    window.location.href = "https://twitter.com/lasabahebwa";
   };
 
-  handleCoffeeClick = () => {
-    window.location.href = "https://ko-fi.com/asabahebwa";
-  };
+  // handleCoffeeClick = () => {
+  //   window.location.href = "https://ko-fi.com/asabahebwa";
+  // };
 
   render() {
     return (
@@ -41,17 +42,13 @@ class Header extends React.Component {
           </div>
 
           <div className="header-buttons">
-            <a href="https://ko-fi.com/G2G01YZJE" target="_blank">
-              <img
-                height="36"
-                style={{ height: "36px" }}
-                src="https://cdn.ko-fi.com/cdn/kofi1.png?v=2"
-                alt="Buy Me a Coffee at ko-fi.com"
-              />
-            </a>
-
-            <a href="https://twitter.com/ahebwa49" target="_blank">
-              <img src="/static/img/twitter.svg" alt="twitter" width="36" />
+            <a
+              href="https://twitter.com/lasabahebwa"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <TwitterIcon className="twitter-icon" />
+              {/* <img src="/static/img/twitter.svg" alt="twitter" width="36" /> */}
             </a>
           </div>
         </div>
