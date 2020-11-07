@@ -82,6 +82,12 @@ code {
   height: 32px !important;
 }
 
+.toggle-off-icon {
+  color: black;
+  width: 48px !important;
+  height: 48px !important;
+}
+
 .header-option {
   font-size: 16px;
   line-height: 16px;
@@ -498,7 +504,7 @@ code {
     justify-content: flex-end;
     align-items: center;
     /* width: 30%; */
-    /* border: 1px solid red; */
+    border: 1px solid red;
   }
 
   .header-buttons button {
