@@ -6,7 +6,6 @@ import App from "./App";
 import Transmission from "./common/Transmission";
 import About from "./common/About";
 import Symptoms from "./common/Symptoms";
-import Newsletter from "./common/Newletter";
 import Header from "./common/Header";
 
 import * as serviceWorker from "./serviceWorker";
@@ -32,7 +31,6 @@ class Routing extends React.Component {
         <Switch>
           <Route exact path="/" component={App} />
           <Route exact path="/symptoms" component={Symptoms} />
-          <Route exact path="/newsletter" component={Newsletter} />
           <Route exact path="/about" component={About} />
           <Route exact path="/transmission" component={Transmission} />
         </Switch>

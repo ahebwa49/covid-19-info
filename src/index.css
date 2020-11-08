@@ -76,10 +76,46 @@ code {
   /* border: 1px solid red; */
 }
 
+.footer-note {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  color: #110a57;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .twitter-icon {
-  color: #2aa1f2;
-  width: 32px !important;
-  height: 32px !important;
+  color: #333333;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  margin-left: 2rem;
+}
+
+.github-icon {
+  color: #333333;
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+  margin-left: 1rem;
+}
+
+.mail-icon {
+  color: #333333;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  margin-left: 1rem;
+}
+
+.linkedin-icon {
+  color: #333333;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  margin-left: 1rem;
 }
 
 .toggle-off-icon {
@@ -91,6 +127,10 @@ code {
 .header-option {
   font-size: 16px;
   line-height: 16px;
+  display: inline-block;
+  position: relative;
+  /* border: 1px solid red; */
+  padding: 0.5rem 0rem;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -99,9 +139,27 @@ code {
   user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
-.header-option:hover {
-  color: #5bcdd5;
+.header-option:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 3px;
+  left: 50%;
+  position: absolute;
+  background: #5BCDD5;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
 }
+
+.header-option:hover:after {
+  width: 100%;
+  left: 0;
+}
+
+/* .header-option:hover {
+  color: #5bcdd5;
+} */
 
 .app {
   display: flex;
@@ -667,6 +725,22 @@ code {
     /* background-color: #5bcdd5; */
     background-color: #b9e1fb;
     border: 2px solid #b9e1fb;
+  }
+
+  .footer-note {
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .footer-icons {
+    display: flex;
+    /* border: 1px solid red; */
+    justify-content: start;
+    margin-top: 1rem;
+  }
+
+  .twitter-icon {
+    margin-left: 0rem;
   }
 
   .heading {

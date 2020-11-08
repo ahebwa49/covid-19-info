@@ -43,22 +43,13 @@ class Header extends React.Component {
             <Link style={{ textDecoration: "none" }} to="/transmission">
               <div className="header-option">Transmission</div>
             </Link>
-            <Link style={{ textDecoration: "none" }} to="/newsletter">
-              <div className="header-option">Newsletter</div>
-            </Link>
             <Link style={{ textDecoration: "none" }} to="/about">
               <div className="header-option">About</div>
             </Link>
           </div>
 
           <div className="header-buttons">
-            <a
-              href="https://twitter.com/lasabahebwa"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <ToggleOffIcon className="toggle-off-icon" />
-            </a>
+            <ToggleOffIcon className="toggle-off-icon" />
           </div>
         </div>
       </div>
