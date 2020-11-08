@@ -59,8 +59,7 @@ code {
   align-self: center;
   font-weight: 300;
   cursor: pointer;
-  width: 40%;
-  margin-right: auto;
+  width: auto;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -122,6 +121,9 @@ code {
   color: black;
   width: 48px !important;
   height: 48px !important;
+  /* border: 1px solid red; */
+  margin-left: 1rem;
+  cursor: pointer;
 }
 
 .header-option {
@@ -129,6 +131,7 @@ code {
   line-height: 16px;
   display: inline-block;
   position: relative;
+  margin-right: 1.5rem;
   /* border: 1px solid red; */
   padding: 0.5rem 0rem;
   -webkit-touch-callout: none; /* iOS Safari */
@@ -147,7 +150,7 @@ code {
   height: 3px;
   left: 50%;
   position: absolute;
-  background: #5BCDD5;
+  background: #5bcdd5;
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
   width: 0;
 }

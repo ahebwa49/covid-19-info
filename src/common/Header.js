@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ToggleOffIcon from "@material-ui/icons/ToggleOff";
-import TwitterIcon from "@material-ui/icons/Twitter";
 
 class Header extends React.Component {
   constructor(props) {

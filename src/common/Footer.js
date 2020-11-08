@@ -5,15 +5,6 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import MailIcon from "@material-ui/icons/Mail";
 
 const FooterNote = () => {
-  const styles = {
-    footernote: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      margin: "1rem",
-      color: "#110a57"
-    }
-  };
   return (
     <div className="footer-note">
       <div>&#169;2020 Livingstone Asabahebwa</div>
