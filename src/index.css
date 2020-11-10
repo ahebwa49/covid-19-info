@@ -468,7 +468,57 @@ code {
 #tooltip-body-entry {
   margin: 0.5rem 0rem;
 }
+.symptoms {
+  color: #110a57;
+  line-height: 1.5;
+  font-weight: 300;
+  border: 1px solid #dfe1e5;
+  border-radius: 8px;
+  margin: 2rem 3rem;
+  padding: 2rem;
+}
 
+.symptoms-link {
+  display: flex;
+  margin-top: 2rem;
+  width: 15rem;
+  align-items: center;
+  border-radius: 14px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #dfe1e5;
+}
+
+.symptoms-note {
+  font-size: 12px;
+}
+
+.transmission {
+  color: #110a57;
+  font-weight: 300;
+  line-height: 1.5;
+  border: 1px solid #dfe1e5;
+  border-radius: 8px;
+  margin: 2rem 3rem;
+  padding: 1rem 2rem;
+}
+
+.symptoms-heading {
+  font-weight: 400;
+}
+
+.transmission-heading {
+  font-weight: 400;
+}
+
+.about {
+  color: #110a57;
+  font-weight: 300;
+  line-height: 1.5;
+  border: 1px solid #dfe1e5;
+  border-radius: 8px;
+  margin: 2rem 3rem;
+  padding: 1rem 2rem;
+}
 @media only screen and (max-width: 1100px) {
   .quick-facts {
     color: #110a57;
@@ -565,14 +615,14 @@ code {
     justify-content: flex-end;
     align-items: center;
     /* width: 30%; */
-    border: 1px solid red;
+    /* border: 1px solid red; */
   }
 
-  .header-buttons button {
+  /* .header-buttons button {
     height: 25px;
     padding-left: 15px;
     width: 100px;
-  }
+  } */
 
   .sidebar {
     display: none;
@@ -673,14 +723,15 @@ code {
 
 @media only screen and (max-width: 700px) {
   .Header {
-    height: 40px;
+    margin-top: 0.3rem;
+    height: 48px;
     /* border: 1px solid red; */
-    border: none;
+    /* border: none; */
   }
 
   .Header-Container {
     /* border: 1px solid green; */
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
   }
   .Header-Logo {
     width: auto;
@@ -693,6 +744,36 @@ code {
   }
   .logo {
     width: 30px;
+  }
+
+  .toggle-off-icon {
+    margin-left: 0rem;
+    margin-right: 1rem;
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  #bar-1 {
+    width: 20px;
+    height: 3px;
+    background-color: #333;
+    margin: 3px 0px;
+    margin-bottom: 3px;
+  }
+
+  #bar-2 {
+    width: 20px;
+    height: 3px;
+    background-color: #333;
+    margin: 3px 0px;
+  }
+
+  #bar-3 {
+    width: 20px;
+    height: 3px;
+    background-color: #333;
+    margin: 3px 0px;
+    margin-top: 3px;
   }
 
   .header-options {
@@ -708,26 +789,10 @@ code {
     display: flex;
     justify-content: flex-end;
     justify-self: flex-end;
-    /* height: 30px; */
     color: #110a57;
     margin-left: auto;
 
     /* border: 1px solid red; */
-  }
-
-  .header-buttons button {
-    position: relative;
-    border-radius: 12px;
-    padding-left: 10px;
-    padding-right: 0px;
-    line-height: normal;
-    width: 100px !important;
-    /* border: 1px solid red; */
-    color: #110a57;
-    height: 30px;
-    /* background-color: #5bcdd5; */
-    background-color: #b9e1fb;
-    border: 2px solid #b9e1fb;
   }
 
   .footer-note {

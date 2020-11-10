@@ -38,7 +38,7 @@ const FooterNote = () => {
         </span>
         <span>
           <a
-            href="https://www.linkedin.com/in/livingstone-asabahebwa-290594108/"
+            href="mailto:ahebwa49@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
           >
