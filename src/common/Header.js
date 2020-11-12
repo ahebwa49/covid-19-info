@@ -2,11 +2,37 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ToggleOffIcon from "@material-ui/icons/ToggleOff";
 import MenuButton from "./MenuButton";
+import MobileMenu from "./mobileMenu";
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { className: "coffee-button" };
+    this.state = { showMobileMenu: false };
+  }
+
+  showMobileMenu = () => {
+    this.setState(
+      {
+        showMobileMenu: true
+      },
+      () => {
+        document
+          .querySelector(".listItems")
+          .addEventListener("click", this.closeMobileMenu);
+      }
+    );
+  };
+
+  closeMobileMenu = () => {
+    this.setState({
+      showMobileMenu: false
+    });
+  };
+
+  componentWillUnmount() {
+    document
+      .querySelector(".listItems")
+      .removeEventListener("click", this.closeMobileMenu);
   }
 
   render() {
@@ -28,20 +54,20 @@ class Header extends React.Component {
 
           <div className="header-options">
             <Link
-              style={{ textDecoration: "none", color: "#110a57" }}
               to="/symptoms"
+              style={{ textDecoration: "none", color: "#110a57" }}
             >
               <div className="header-option">Symptoms</div>
             </Link>
             <Link
-              style={{ textDecoration: "none", color: "#110a57" }}
               to="/transmission"
+              style={{ textDecoration: "none", color: "#110a57" }}
             >
               <div className="header-option">Transmission</div>
             </Link>
             <Link
-              style={{ textDecoration: "none", color: "#110a57" }}
               to="/about"
+              style={{ textDecoration: "none", color: "#110a57" }}
             >
               <div className="header-option">About</div>
             </Link>
@@ -49,9 +75,16 @@ class Header extends React.Component {
 
           <div className="header-buttons">
             <ToggleOffIcon className="toggle-off-icon" />
-            <MenuButton />
+            <div onClick={this.showMobileMenu}>
+              <MenuButton />
+            </div>
           </div>
         </div>
+        {this.state.showMobileMenu ? (
+          <div id="mobile-menu">
+            <MobileMenu closeMobileMenu={this.closeMobileMenu} />
+          </div>
+        ) : null}
       </div>
     );
   }
