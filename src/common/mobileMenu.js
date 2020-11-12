@@ -6,7 +6,7 @@ class MobileMenu extends Component {
   render() {
     return (
       <div className="mobileMenu">
-        <div className="listItems">
+        <div className="listItems" onClick={this.props.handleListItemsClick}>
           <Link
             to="/symptoms"
             style={{ textDecoration: "none", color: "white" }}

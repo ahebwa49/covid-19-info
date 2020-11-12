@@ -2,7 +2,7 @@ import React from "react";
 import PublicIcon from "@material-ui/icons/Public";
 import Footer from "./Footer";
 
-const Transmission = () => {
+export const Transmission = () => {
   return (
     <>
       <div className="transmission">
@@ -89,5 +89,3 @@ const Transmission = () => {
     </>
   );
 };
-
-export default Transmission;

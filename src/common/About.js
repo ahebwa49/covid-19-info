@@ -15,7 +15,7 @@ const About = () => {
           human brain to understand, and visualization also makes it easier to
           detect patterns, trends, and outliers in groups of data.
         </p>
-        <p>Abstract</p>
+        <p className="about-heading">Abstract</p>
         <p>
           The COVID-19 pandemic is considered as the most crucial global health
           calamity of the century and the greatest challenge that the humankind

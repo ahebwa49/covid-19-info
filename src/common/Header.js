@@ -10,17 +10,16 @@ class Header extends React.Component {
     this.state = { showMobileMenu: false };
   }
 
+  handleListItemsClick = () => {
+    this.setState({
+      showMobileMenu: false
+    });
+  };
+
   showMobileMenu = () => {
-    this.setState(
-      {
-        showMobileMenu: true
-      },
-      () => {
-        document
-          .querySelector(".listItems")
-          .addEventListener("click", this.closeMobileMenu);
-      }
-    );
+    this.setState({
+      showMobileMenu: true
+    });
   };
 
   closeMobileMenu = () => {
@@ -28,12 +27,6 @@ class Header extends React.Component {
       showMobileMenu: false
     });
   };
-
-  componentWillUnmount() {
-    document
-      .querySelector(".listItems")
-      .removeEventListener("click", this.closeMobileMenu);
-  }
 
   render() {
     return (
@@ -82,7 +75,10 @@ class Header extends React.Component {
         </div>
         {this.state.showMobileMenu ? (
           <div id="mobile-menu">
-            <MobileMenu closeMobileMenu={this.closeMobileMenu} />
+            <MobileMenu
+              closeMobileMenu={this.closeMobileMenu}
+              handleListItemsClick={this.handleListItemsClick}
+            />
           </div>
         ) : null}
       </div>
