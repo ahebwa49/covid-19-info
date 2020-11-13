@@ -1,14 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ToggleOffIcon from "@material-ui/icons/ToggleOff";
+import ToggleOnIcon from "@material-ui/icons/ToggleOn";
 import MenuButton from "./MenuButton";
 import MobileMenu from "./mobileMenu";
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showMobileMenu: false };
+    this.state = { showMobileMenu: false, theme: "light" };
   }
+
+  handleToggleOffClick = () => {
+    this.setState({
+      theme: "dark"
+    });
+  };
+
+  handleToggleOnClick = () => {
+    this.setState({
+      theme: "light"
+    });
+  };
 
   handleListItemsClick = () => {
     this.setState({
@@ -67,7 +80,18 @@ class Header extends React.Component {
           </div>
 
           <div className="header-buttons">
-            <ToggleOffIcon className="toggle-off-icon" />
+            {this.state.theme === "light" ? (
+              <ToggleOffIcon
+                className="toggle-off-icon"
+                onClick={this.handleToggleOffClick}
+              />
+            ) : (
+              <ToggleOnIcon
+                className="toggle-on-icon"
+                onClick={this.handleToggleOnClick}
+              />
+            )}
+
             <div onClick={this.showMobileMenu}>
               <MenuButton />
             </div>
