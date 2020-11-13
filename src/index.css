@@ -556,7 +556,7 @@ code {
   font-weight: normal;
   flex-direction: column;
   /* border: 1px solid green; */
-  width: 85%;
+  width: 75%;
   height: fit-content;
 }
 
@@ -570,8 +570,8 @@ code {
 
 .close {
   display: flex;
+  margin-left: auto;
   /* border: 1px solid blue; */
-  width: 15%;
   height: fit-content;
   justify-content: flex-end;
 }
