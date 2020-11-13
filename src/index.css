@@ -848,6 +848,7 @@ code {
     z-index: 20;
     width: 100%;
     top: 0;
+    touch-action: none;
     right: 0;
     left: 0;
     height: 100vh;
