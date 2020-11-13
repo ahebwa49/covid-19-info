@@ -132,7 +132,7 @@ code {
   width: 48px !important;
   height: 48px !important;
   /* border: 1px solid red; */
-  color: #5BCDD5;
+  color: #5bcdd5;
 }
 
 .header-option {
@@ -572,6 +572,7 @@ code {
   display: flex;
   /* border: 1px solid blue; */
   width: 15%;
+  height: fit-content;
   justify-content: flex-end;
 }
 
@@ -816,7 +817,7 @@ code {
     width: 36px !important;
     height: 36px !important;
     /* border: 1px solid red; */
-    color: #5BCDD5;
+    color: #5bcdd5;
   }
 
   #bar-1 {
