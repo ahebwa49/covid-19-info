@@ -19,14 +19,12 @@ class WorldMap extends React.Component {
     };
   }
 
-  componentDidMount() {
+  drawWorldMap = () => {
     const { width, height } = this.state;
     var projectionScale = (origProjectionScale = height / 2.1);
     var translation = [width / 2, height / 2];
 
     const { data, covid } = this.props;
-    // console.log(data);
-    // console.log(covid);
     var canvas = d3
       .select("#canvas-container")
       .append("canvas")
@@ -388,6 +386,31 @@ class WorldMap extends React.Component {
         .duration(100)
         .style("opacity", 0);
     }
+  };
+
+  componentDidMount() {
+    this.drawWorldMap();
+    window.addEventListener("resize", this.handleResize);
+  }
+
+  handleResize = () => {
+    let newWindowWidth = window.innerWidth - 32;
+    this.setState({
+      width: newWindowWidth > 900 ? newWindowWidth * 0.7 : newWindowWidth,
+      height: newWindowWidth > 900 ? newWindowWidth / 2 : newWindowWidth
+    });
+  };
+
+  componentWillUnmount() {
+    document.removeEventListener("resize", this.handleResize);
+  }
+
+  componentDidUpdate() {
+    d3.select("#canvas-globe").remove();
+
+    d3.select("#canvas-hidden").remove();
+
+    this.drawWorldMap();
   }
 
   render() {
