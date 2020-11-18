@@ -303,25 +303,25 @@ code {
 .world-line-charts {
   display: flex;
   /* margin-top: 2rem; */
-  justify-content: center;
+  justify-content: space-evenly;
   /* border: 1px solid red; */
 }
 
 .world-line-chart-confirmed {
   /* border: 1px solid green; */
-  margin-right: 50px;
+  /* margin-right: 50px; */
 }
 
 .country-visuals {
   display: flex;
   margin-top: 1rem;
   justify-content: center;
-  /* border: 1px solid red; */
+  /* border: 1px solid blue; */
 }
 
 .country-line-charts {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   /* border: 1px solid red; */
   width: 80%;
   flex-shrink: 2;
@@ -336,7 +336,7 @@ code {
   flex-direction: column;
   align-items: center;
   width: 20%;
-  /* border: 1px solid blue; */
+  /* border: 1px solid purple; */
 }
 
 .select-country div select {
@@ -355,7 +355,6 @@ code {
 }
 
 .country-line-chart {
-  margin-right: 50px;
   /* border: 1px solid green; */
 }
 
@@ -386,7 +385,7 @@ code {
   justify-content: center;
   align-items: center;
   width: 20%;
-  /* border: 1px solid red; */
+  /* border: 1px solid blue; */
 }
 
 .line-container-tabs-list {
@@ -655,6 +654,28 @@ code {
   .quick-facts-recovered {
     font-size: 30px;
     color: rgb(101, 221, 155);
+
+  }
+
+  .line-container-tabs{
+    width: 15%;
+  }
+
+  .line-container-children {
+    width: 85%;
+    flex-shrink: 3;
+    /* border: 1px solid green; */
+  }
+
+  .line-container-tabs-list {
+    padding: 0;
+    /* border: 1px solid greenyellow; */
+  }
+
+  .select-country {
+    width: 15%;
+    margin-right: auto;
+    /* margin-left: auto; */
   }
 }
 
@@ -674,12 +695,6 @@ code {
     /* width: 30%; */
     /* border: 1px solid red; */
   }
-
-  /* .header-buttons button {
-    height: 25px;
-    padding-left: 15px;
-    width: 100px;
-  } */
 
   .sidebar {
     display: none;
@@ -728,12 +743,13 @@ code {
 
   .country-line-charts {
     flex-direction: column;
+    align-items: center;
     width: 100%;
     /* border: 1px solid red; */
   }
 
   .country-line-chart {
-    margin-right: 0px;
+    margin-right: 0rem;
     /* border: 1px solid red !important; */
   }
 
