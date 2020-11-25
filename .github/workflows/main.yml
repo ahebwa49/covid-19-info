@@ -17,5 +17,5 @@ jobs:
         with:
           host: ${{ secrets.HOST_IP }}
           username: ${{ secrets.HOST_USERNAME }}
-          password: ${{ secrets.HOST_PASSWORD }}
+          key: ${{ secrets.KEY }}
           script: cd covid-19-info/ && git pull && yarn build
