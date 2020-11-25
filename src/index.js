@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import "./index.css";
+import "./styles/index.css";
 import App from "./App";
 import { Transmission } from "./common/Transmission";
 import About from "./common/About";

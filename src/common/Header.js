@@ -8,7 +8,7 @@ import MobileMenu from "./mobileMenu";
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showMobileMenu: false, theme: "light" };
+    this.state = { showMobileMenu: false, theme: "dark" };
   }
 
   handleToggleOffClick = () => {
