@@ -6,17 +6,6 @@ on:
       - master
 
 jobs:
-  test:
-    name: Run Tests
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout master
-    - uses: actions/checkout@master
-    - name: Run Tests
-      uses: skx/github-action-tester@master
-      with:
-        script: yarn test
-  
   deploy-to-digital-ocean-droplet:
     runs-on: ubuntu-latest
     name: Deploy 2019nCoV visualizer
