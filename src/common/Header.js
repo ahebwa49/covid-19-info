@@ -54,7 +54,9 @@ class Header extends React.Component {
                 color="#110a57"
                 className="logo"
               />
-              <span className="logo-word">2019nCoV</span>
+              <span className="logo-word" data-testid="logo-word">
+                2019nCoV
+              </span>
             </div>
           </Link>
 
