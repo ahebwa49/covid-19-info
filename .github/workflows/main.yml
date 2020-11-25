@@ -1,13 +1,21 @@
-name: ci
+name: 2019nCoV CI
 
-on: push
+on:
+  push:
+    branches:
+      - master
 
 jobs:
-  build:
+  deploy-to-digital-ocean-droplet:
     runs-on: ubuntu-latest
-
+    name: Deploy 2019nCoV visualizer
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Run a one-line script
-        run: echo "Hello, world!"
+      - name: Checkout master
+        uses: actions/checkout@master
+      - name: Pull from GitHub
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_IP }}
+          username: ${{ secrets.HOST_USERNAME }}
+          password: ${{ secrets.HOST_PASSWORD }}
+          script: cd covid-19-info/ && git pull && yarn build
