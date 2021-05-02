@@ -46,6 +46,13 @@ code {
   /* border: 1px solid blue; */
   width: auto;
 }
+.bar {
+  color: #333;
+  font-weight: 400;
+  font-size: 16;
+  margin-top: 5;
+  padding: 0px 24px;
+}
 
 .logo-word {
   margin-left: 1rem;
@@ -53,13 +60,14 @@ code {
 
 .header-options {
   display: flex;
+  align-items: center;
   justify-content: space-evenly;
   /* border: 1px solid blue; */
   margin-left: auto;
   align-self: center;
   font-weight: 300;
+  /* width: 40%; */
   cursor: pointer;
-  width: auto;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -654,10 +662,9 @@ code {
   .quick-facts-recovered {
     font-size: 30px;
     color: rgb(101, 221, 155);
-
   }
 
-  .line-container-tabs{
+  .line-container-tabs {
     width: 15%;
   }
 

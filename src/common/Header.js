@@ -1,115 +1,97 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ToggleOffIcon from "@material-ui/icons/ToggleOff";
 import ToggleOnIcon from "@material-ui/icons/ToggleOn";
+import { makeStyles } from "@material-ui/styles";
 import MenuButton from "./MenuButton";
 import MobileMenu from "./mobileMenu";
+import ContinentMenu from "./ContinentMenu";
+import CountryMenu from "./CountryMenu";
+import DateRange from "./DateRange";
+import { DropdownIcon, VerticalLineIcon } from "../constants/svgicons";
 
-class Header extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { showMobileMenu: false, theme: "dark" };
-  }
+const useStyles = makeStyles({});
 
-  handleToggleOffClick = () => {
-    this.setState({
-      theme: "dark"
-    });
+const Header = () => {
+  const [mobileMenu, setShowMobileMenu] = useState(false);
+  const [theme, setTheme] = useState("dark");
+
+  const classes = useStyles();
+
+  const handleToggleOffClick = () => {
+    setTheme("dark");
   };
 
-  handleToggleOnClick = () => {
-    this.setState({
-      theme: "light"
-    });
+  const handleToggleOnClick = () => {
+    setTheme("light");
   };
 
-  handleListItemsClick = () => {
-    this.setState({
-      showMobileMenu: false
-    });
+  const handleListItemsClick = () => {
+    setShowMobileMenu(false);
   };
 
-  showMobileMenu = () => {
-    this.setState({
-      showMobileMenu: true
-    });
+  const showMobileMenu = () => {
+    setShowMobileMenu(true);
   };
 
-  closeMobileMenu = () => {
-    this.setState({
-      showMobileMenu: false
-    });
+  const closeMobileMenu = () => {
+    setShowMobileMenu(false);
   };
 
-  render() {
-    return (
-      <div className="Header">
-        <div className="Header-Container">
-          <Link to="/" style={{ textDecoration: "none", color: "#110a57" }}>
-            <div className="Header-Logo">
-              <img
-                src="/static/img/coronavirus.svg"
-                alt="world"
-                width="50"
-                color="#110a57"
-                className="logo"
-              />
-              <span className="logo-word" data-testid="logo-word">
-                2019nCoV
-              </span>
-            </div>
-          </Link>
-
-          <div className="header-options">
-            <Link
-              to="/symptoms"
-              style={{ textDecoration: "none", color: "#110a57" }}
-            >
-              <div className="header-option">Symptoms</div>
-            </Link>
-            <Link
-              to="/transmission"
-              style={{ textDecoration: "none", color: "#110a57" }}
-            >
-              <div className="header-option">Transmission</div>
-            </Link>
-            <Link
-              to="/about"
-              style={{ textDecoration: "none", color: "#110a57" }}
-            >
-              <div className="header-option">About</div>
-            </Link>
+  return (
+    <div className="Header">
+      <div className="Header-Container">
+        <Link to="/" style={{ textDecoration: "none", color: "#110a57" }}>
+          <div className="Header-Logo">
+            <img
+              src="/static/img/coronavirus.svg"
+              alt="world"
+              width="50"
+              color="#110a57"
+              className="logo"
+            />
+            <span className="logo-word" data-testid="logo-word">
+              2019nCoV
+            </span>
           </div>
+        </Link>
 
-          <div className="header-buttons">
-            {this.state.theme === "light" ? (
-              <ToggleOffIcon
-                className="toggle-off-icon"
-                onClick={this.handleToggleOffClick}
-              />
-            ) : (
-              <ToggleOnIcon
-                className="toggle-on-icon"
-                onClick={this.handleToggleOnClick}
-              />
-            )}
+        <div className="header-options">
+          <ContinentMenu />
+          <VerticalLineIcon className="bar" />
+          <CountryMenu />
+          <VerticalLineIcon className="bar" />
+          <DateRange />
+        </div>
 
-            <div onClick={this.showMobileMenu}>
-              <MenuButton />
-            </div>
+        <div className="header-buttons">
+          {theme === "light" ? (
+            <ToggleOffIcon
+              className="toggle-off-icon"
+              onClick={handleToggleOffClick}
+            />
+          ) : (
+            <ToggleOnIcon
+              className="toggle-on-icon"
+              onClick={handleToggleOnClick}
+            />
+          )}
+
+          <div onClick={showMobileMenu}>
+            <MenuButton />
           </div>
         </div>
-        {this.state.showMobileMenu ? (
-          <div id="mobile-menu">
-            <MobileMenu
-              closeMobileMenu={this.closeMobileMenu}
-              handleListItemsClick={this.handleListItemsClick}
-            />
-          </div>
-        ) : null}
       </div>
-    );
-  }
-}
+      {mobileMenu ? (
+        <div id="mobile-menu">
+          <MobileMenu
+            closeMobileMenu={closeMobileMenu}
+            handleListItemsClick={handleListItemsClick}
+          />
+        </div>
+      ) : null}
+    </div>
+  );
+};
 
 export default Header;
