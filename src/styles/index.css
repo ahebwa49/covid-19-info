@@ -238,14 +238,17 @@ code {
 
 .loader-wrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
-  align-self: center;
-  height: 50vh;
+  width: 100vw;
+  height: 100vh;
 }
 
 .loader {
   display: flex;
+  align-self: center;
+  align-items: center;
+  width: fit-content;
+  margin: auto;
 }
 
 .quick-facts {
@@ -363,6 +366,7 @@ code {
 }
 
 .country-line-chart {
+  /* width: 100%; */
   /* border: 1px solid green; */
 }
 
@@ -752,7 +756,7 @@ code {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    /* border: 1px solid red; */
+    border: 1px solid red;
   }
 
   .country-line-chart {

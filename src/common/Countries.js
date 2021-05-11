@@ -1,5 +1,7 @@
 import React from "react";
 import * as d3 from "d3";
+import Grid from "@material-ui/core/Grid";
+import LineCards from "./linecards";
 
 let id = 0;
 let width;
@@ -14,7 +16,7 @@ const margin = {
   top: 20,
   right: 15,
   bottom: 30,
-  left: 50
+  left: 50,
   // left: 0
 };
 
@@ -26,7 +28,7 @@ class Countries extends React.Component {
     this.x_axis_deaths = React.createRef();
     this.y_axis_deaths = React.createRef();
     this.state = {
-      country: "Afghanistan"
+      country: "Afghanistan",
     };
   }
 
@@ -37,8 +39,11 @@ class Countries extends React.Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { country } = prevState;
+    console.log(country);
     const { data } = nextProps;
     if (!data) return {};
+
+    // console.log(data)
 
     let countries = [];
 
@@ -51,18 +56,20 @@ class Countries extends React.Component {
 
     const fTimeSeries = timeSeries.flat();
 
+    console.log(fTimeSeries);
+
     const nested = d3
       .nest()
-      .key(d => d.date)
-      .rollup(leaves => {
-        const totalConfirmed = d3.sum(leaves, d => d.confirmed);
-        const totalDeaths = d3.sum(leaves, d => d.deaths);
-        const totalRecovered = d3.sum(leaves, d => d.recovered);
+      .key((d) => d.date)
+      .rollup((leaves) => {
+        const totalConfirmed = d3.sum(leaves, (d) => d.confirmed);
+        const totalDeaths = d3.sum(leaves, (d) => d.deaths);
+        const totalRecovered = d3.sum(leaves, (d) => d.recovered);
 
         return {
           totalConfirmed: totalConfirmed,
           totalDeaths: totalDeaths,
-          totalRecovered: totalRecovered
+          totalRecovered: totalRecovered,
         };
       })
       .entries(fTimeSeries);
@@ -70,13 +77,13 @@ class Countries extends React.Component {
     // console.log(nested);
 
     // Confirmed --------------------------------------
-    const xExtentConfirmed = d3.extent(nested, d => new Date(d.key));
+    const xExtentConfirmed = d3.extent(nested, (d) => new Date(d.key));
     const xScaleConfirmed = d3
       .scaleTime()
       .domain(xExtentConfirmed)
       .range([margin.left, width - margin.right]);
 
-    const maxConfirmed = d3.max(nested, d => d.value.totalConfirmed);
+    const maxConfirmed = d3.max(nested, (d) => d.value.totalConfirmed);
     // console.log(maxConfirmed);
 
     const yScaleConfirmed = d3
@@ -85,13 +92,13 @@ class Countries extends React.Component {
       .range([height - margin.bottom, margin.top]);
 
     // Deaths --------------------------------------
-    const xExtentDeaths = d3.extent(nested, d => new Date(d.key));
+    const xExtentDeaths = d3.extent(nested, (d) => new Date(d.key));
     const xScaleDeaths = d3
       .scaleTime()
       .domain(xExtentDeaths)
       .range([margin.left, width - margin.right]);
 
-    const maxDeaths = d3.max(nested, d => d.value.totalDeaths);
+    const maxDeaths = d3.max(nested, (d) => d.value.totalDeaths);
 
     const yScaleDeaths = d3
       .scaleLinear()
@@ -104,7 +111,8 @@ class Countries extends React.Component {
       yScaleConfirmed,
       xScaleConfirmed,
       xScaleDeaths,
-      yScaleDeaths
+      yScaleDeaths,
+      fTimeSeries,
     };
   }
 
@@ -130,7 +138,7 @@ class Countries extends React.Component {
     d3.select(this.y_axis_deaths.current).call(this.yAxisDeaths);
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ country: e.target.value });
   };
 
@@ -138,13 +146,13 @@ class Countries extends React.Component {
     const { country, countries } = this.state;
     const lineConfirmed = d3
       .line()
-      .x(d => this.state.xScaleConfirmed(new Date(d.key)))
-      .y(d => this.state.yScaleConfirmed(d.value.totalConfirmed));
+      .x((d) => this.state.xScaleConfirmed(new Date(d.key)))
+      .y((d) => this.state.yScaleConfirmed(d.value.totalConfirmed));
 
     const lineDeaths = d3
       .line()
-      .x(d => this.state.xScaleDeaths(new Date(d.key)))
-      .y(d => this.state.yScaleDeaths(d.value.totalDeaths));
+      .x((d) => this.state.xScaleDeaths(new Date(d.key)))
+      .y((d) => this.state.yScaleDeaths(d.value.totalDeaths));
     return (
       <div className="country-visuals">
         <div className="select-country">
@@ -157,7 +165,7 @@ class Countries extends React.Component {
               value={this.state.country}
               onChange={this.handleChange}
             >
-              {countries.map(country => {
+              {countries.map((country) => {
                 return (
                   <option key={country.id} value={country.name}>
                     {country.name}
@@ -170,7 +178,22 @@ class Countries extends React.Component {
         <div className="country-line-charts">
           <div className="country-line-chart">
             <p style={{ textAlign: "center" }}>{`${country} Cases`}</p>
-            <svg width={width} height={height}>
+            {/* <Grid item xs={12} md={12} lg={12}> */}
+              <LineCards
+                data={this.state.fTimeSeries}
+                // handleClickOpenDialog={this.handleClickOpen}
+                title="Confirmed"
+                x="date"
+                y="confirmed"
+                duration="Last Week"
+                color="green"
+                onclickroute={``}
+                rangeindex="2"
+                axisLeftType="number"
+                noDecimalLeft
+              />
+            {/* </Grid> */}
+            {/* <svg width={width} height={height}>
               <path
                 d={lineConfirmed(this.state.nested)}
                 stroke="#696969"
@@ -202,9 +225,9 @@ class Countries extends React.Component {
               }}
             >
               Date
-            </p>
+            </p> */}
           </div>
-          <div className="country-line-chart">
+          {/* <div className="country-line-chart">
             <p style={{ textAlign: "center" }}>{`${country} Deaths`}</p>
             <svg width={width} height={height}>
               <path
@@ -214,8 +237,9 @@ class Countries extends React.Component {
               />
               <text
                 className="yAxisLabel"
-                transform={`translate(15, ${(height - margin.bottom) /
-                  1.5}) rotate(270)`}
+                transform={`translate(15, ${
+                  (height - margin.bottom) / 1.5
+                }) rotate(270)`}
               >
                 Coronavirus Deaths
               </text>
@@ -235,12 +259,12 @@ class Countries extends React.Component {
                 textAlign: "center",
                 marginTop: "0px",
                 fontSize: "14px",
-                color: "black"
+                color: "black",
               }}
             >
               Date
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     );

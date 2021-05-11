@@ -6,27 +6,14 @@ import App from "./App";
 import { Transmission } from "./common/Transmission";
 import About from "./common/About";
 import Symptoms from "./common/Symptoms";
-import Header from "./common/Header";
 
 import * as serviceWorker from "./serviceWorker";
 
 class Routing extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showPayPal: false
-    };
-  }
-
-  showPayPalButtons = () => {
-    console.log("trying to buy you coffee :)");
-    this.setState({ showPayPal: true });
-  };
-
   render() {
     return (
       <Router>
-        <Header showPayPalButtons={this.showPayPalButtons} />
+        {/* <Header /> */}
 
         <Switch>
           <Route exact path="/" component={App} />

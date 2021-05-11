@@ -5,6 +5,7 @@ import QuickFacts from "./common/QuickFacts";
 import Countries from "./common/Countries";
 import Footer from "./common/Footer";
 import Continents from "./common/Continents";
+import Header from "./common/Header";
 // import WorldMap from "./WorldMap";
 class App extends React.Component {
   constructor(props) {
@@ -16,8 +17,8 @@ class App extends React.Component {
         covidData: null,
         plainCovidData: null,
         capitalData: null,
-        newTimeSeries: null
-      }
+        newTimeSeries: null,
+      },
     };
   }
 
@@ -31,9 +32,9 @@ class App extends React.Component {
       ),
       fetch(
         "https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/country-capitals.json"
-      )
+      ),
     ])
-      .then(responses => Promise.all(responses.map(resp => resp.json())))
+      .then((responses) => Promise.all(responses.map((resp) => resp.json())))
       .then(([geoData, covidData, capitalData]) => {
         // Countries with locaation data
         let capitalCountries = [];
@@ -51,7 +52,7 @@ class App extends React.Component {
             ];
           cleanCovidData.push(
             Object.assign({}, lastTimeEntry, {
-              country: country
+              country: country,
             })
           );
         }
@@ -66,8 +67,8 @@ class App extends React.Component {
               Object.assign({}, cleanCovidData[i], {
                 coords: {
                   lat: capitalData[index].CapitalLatitude,
-                  long: capitalData[index].CapitalLongitude
-                }
+                  long: capitalData[index].CapitalLongitude,
+                },
               })
             );
           }
@@ -84,7 +85,7 @@ class App extends React.Component {
                 {
                   timeseries: covidData.timeseries[country],
                   country: country,
-                  continent: capitalData[index].ContinentName
+                  continent: capitalData[index].ContinentName,
                 }
               )
             );
@@ -98,11 +99,11 @@ class App extends React.Component {
             covidData: realCovidData,
             plainCovidData: covidData,
             capitalData: capitalData,
-            newTimeSeries: newTimeSeries
-          }
+            newTimeSeries: newTimeSeries,
+          },
         });
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
   render() {
     const { data } = this.state;
@@ -114,39 +115,42 @@ class App extends React.Component {
       );
     }
     return (
-      <div className="app">
-        <div className="heading">
-          <p>COVID-19 CORONAVIRUS PANDEMIC VISUALIZATIONS</p>
-        </div>
-        <div className="general">
-          <div className="sidebar">
+      <>
+        <Header />
+        <div className="app">
+          <div className="heading">
+            <p>COVID-19 CORONAVIRUS PANDEMIC VISUALIZATIONS</p>
+          </div>
+          <div className="general">
+            <div className="sidebar">
+              <QuickFacts data={data.covidData} />
+            </div>
+            <div className="main">
+              <WorldMap data={data.geoData} covid={data.covid} />
+            </div>
+          </div>
+
+          <div className="facts">
             <QuickFacts data={data.covidData} />
           </div>
-          <div className="main">
-            <WorldMap data={data.geoData} covid={data.covid} />
+          <div className="heading">
+            <p>COVID-19 VISUALIZATIONS BY CONTINENT</p>
           </div>
+          <div>
+            <Continents
+              data={data.newTimeSeries}
+              worldData={data.plainCovidData}
+            />
+          </div>
+          <div className="heading">
+            <p>COVID-19 VISUALIZATIONS BY COUNTRY</p>
+          </div>
+          <div>
+            <Countries data={data.newTimeSeries} />
+          </div>
+          <Footer />
         </div>
-
-        <div className="facts">
-          <QuickFacts data={data.covidData} />
-        </div>
-        <div className="heading">
-          <p>COVID-19 VISUALIZATIONS BY CONTINENT</p>
-        </div>
-        <div>
-          <Continents
-            data={data.newTimeSeries}
-            worldData={data.plainCovidData}
-          />
-        </div>
-        <div className="heading">
-          <p>COVID-19 VISUALIZATIONS BY COUNTRY</p>
-        </div>
-        <div>
-          <Countries data={data.newTimeSeries} />
-        </div>
-        <Footer />
-      </div>
+      </>
     );
   }
 }
