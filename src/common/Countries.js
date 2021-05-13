@@ -2,6 +2,7 @@ import React from "react";
 import * as d3 from "d3";
 import Grid from "@material-ui/core/Grid";
 import LineCards from "./linecards";
+import FullScreenDialog from "./fullscreenpopup";
 
 let id = 0;
 let width;
@@ -29,6 +30,9 @@ class Countries extends React.Component {
     this.y_axis_deaths = React.createRef();
     this.state = {
       country: "Afghanistan",
+      openDialog: false,
+      popupdata: [],
+      reportname: "",
     };
   }
 
@@ -142,6 +146,17 @@ class Countries extends React.Component {
     this.setState({ country: e.target.value });
   };
 
+  handleClickOpen = (e) => {
+    e.stopPropagation();
+    this.setState({
+      openDialog: true,
+    });
+  };
+
+  handleClose = (e) => {
+    this.setState({ openDialog: false });
+  };
+
   render() {
     const { country, countries } = this.state;
     const lineConfirmed = d3
@@ -155,6 +170,14 @@ class Countries extends React.Component {
       .y((d) => this.state.yScaleDeaths(d.value.totalDeaths));
     return (
       <div className="country-visuals">
+        <FullScreenDialog
+          open={this.state.openDialog}
+          handleClickOpen={this.handleClickOpen}
+          handleClose={this.handleClose}
+          data={this.state.fTimeSeries}
+          title="Confirmed"
+          line
+        />
         <div className="select-country">
           <div>
             <label htmlFor="countries">Choose a country:</label>
@@ -178,93 +201,36 @@ class Countries extends React.Component {
         <div className="country-line-charts">
           <div className="country-line-chart">
             <p style={{ textAlign: "center" }}>{`${country} Cases`}</p>
-            {/* <Grid item xs={12} md={12} lg={12}> */}
-              <LineCards
-                data={this.state.fTimeSeries}
-                // handleClickOpenDialog={this.handleClickOpen}
-                title="Confirmed"
-                x="date"
-                y="confirmed"
-                duration="Last Week"
-                color="green"
-                onclickroute={``}
-                rangeindex="2"
-                axisLeftType="number"
-                noDecimalLeft
-              />
-            {/* </Grid> */}
-            {/* <svg width={width} height={height}>
-              <path
-                d={lineConfirmed(this.state.nested)}
-                stroke="#696969"
-                fill="transparent"
-              />
-              <text
-                className="yAxisLabel"
-                transform={`translate(10, ${(height - margin.bottom) /
-                  1.5}) rotate(270)`}
-              >
-                Coronavirus Cases
-              </text>
-              <g
-                className="axis-bottom"
-                ref={this.x_axis_confirmed}
-                transform={`translate(0, ${height - margin.bottom})`}
-              />
-              <g
-                ref={this.y_axis_confirmed}
-                transform={`translate(${margin.left}, 0)`}
-              />
-            </svg>
-            <p
-              style={{
-                textAlign: "center",
-                marginTop: "0px",
-                fontSize: "14px",
-                color: "black"
-              }}
-            >
-              Date
-            </p> */}
+            <LineCards
+              data={this.state.fTimeSeries}
+              handleClickOpenDialog={this.handleClickOpen}
+              title="Confirmed"
+              x="date"
+              y="confirmed"
+              duration="Last Year"
+              color="green"
+              onclickroute={``}
+              rangeindex="2"
+              axisLeftType="number"
+              noDecimalLeft
+            />
           </div>
-          {/* <div className="country-line-chart">
+          <div className="country-line-chart">
             <p style={{ textAlign: "center" }}>{`${country} Deaths`}</p>
-            <svg width={width} height={height}>
-              <path
-                d={lineDeaths(this.state.nested)}
-                stroke="red"
-                fill="transparent"
-              />
-              <text
-                className="yAxisLabel"
-                transform={`translate(15, ${
-                  (height - margin.bottom) / 1.5
-                }) rotate(270)`}
-              >
-                Coronavirus Deaths
-              </text>
-
-              <g
-                className="axis-bottom"
-                ref={this.x_axis_deaths}
-                transform={`translate(0, ${height - margin.bottom})`}
-              />
-              <g
-                ref={this.y_axis_deaths}
-                transform={`translate(${margin.left}, 0)`}
-              />
-            </svg>
-            <p
-              style={{
-                textAlign: "center",
-                marginTop: "0px",
-                fontSize: "14px",
-                color: "black",
-              }}
-            >
-              Date
-            </p>
-          </div> */}
+            <LineCards
+              data={this.state.fTimeSeries}
+              handleClickOpenDialog={this.handleClickOpen}
+              title="Deaths"
+              x="date"
+              y="deaths"
+              duration="Last Year"
+              color="red"
+              onclickroute={``}
+              rangeindex="2"
+              axisLeftType="number"
+              noDecimalLeft
+            />
+          </div>
         </div>
       </div>
     );

@@ -8,7 +8,7 @@ const FooterNote = () => {
   return (
     <div className="footer-note">
       <div>&#169;2020 Livingstone Asabahebwa</div>
-      <div className="footer-icons">
+      {/* <div className="footer-icons">
         <span>
           <a
             href="https://twitter.com/lasabahebwa"
@@ -45,7 +45,7 @@ const FooterNote = () => {
             <MailIcon className="mail-icon" />
           </a>
         </span>
-      </div>
+      </div> */}
     </div>
   );
 };

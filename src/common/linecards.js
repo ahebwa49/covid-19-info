@@ -29,12 +29,12 @@ const theme = {
   background: "#ffffff",
   textColor: "#333333",
   fontFamily: "Open Sans",
-  fontSize: 11,
+  fontSize: 13,
   axis: {
     domain: {
       line: {
-        stroke: "#777",
-        strokeWidth: 1,
+        stroke: "#333",
+        strokeWidth: 2,
       },
     },
     ticks: {
@@ -297,7 +297,6 @@ const LineCards = (props) => {
   };
 
   function formatAxis(value, type) {
-    console.log(typeof value);
     switch (type) {
       case "number":
         return formatNumbers(value);
@@ -425,7 +424,7 @@ const LineCards = (props) => {
             )}
 
             <span className={classes.total}>
-              {numberWithCommas(props.data[props.data.length - 1]["confirmed"])}
+              {numberWithCommas(props.data[props.data.length - 1][props.y])}
             </span>
           </Typography>
 
@@ -496,7 +495,12 @@ const LineCards = (props) => {
           data={lineData}
           width={400}
           margin={{ top: 50, right: 40, bottom: 50, left: 50 }}
-          xScale={{ type: "point", min: 0 }}
+          xScale={{
+            type: "time",
+            format: "%Y-%m-%d",
+            useUTC: false,
+          }}
+          xFormat="time:%Y-%m-%d"
           yScale={{
             type: "linear",
             min: "auto",
@@ -523,46 +527,8 @@ const LineCards = (props) => {
             format: (value) => formatAxis(value, props.axisLeftType),
           }}
           axisBottom={{
-            renderTick: ({
-              textAnchor,
-              textBaseline,
-              textX,
-              textY,
-              value,
-              x,
-              y,
-              animatedProps,
-              tickIndex,
-            }) => {
-              // determine the width of the labels
-              let sampleItem = props.data[0] || {};
-              sampleItem = sampleItem[props.x] || "";
-
-              let labelwidth = props.data.length * sampleItem.length * 10;
-
-              // now get the labels to skip
-              let skipp = Math.ceil(labelwidth / width);
-
-              // get the length of all items in data
-
-              if (!props.noBottomFormat && tickIndex % skipp > 0) return null;
-
-              return (
-                <g
-                  transform={`translate(${x},${y})`}
-                  style={{ opacity: animatedProps.opacity }}
-                >
-                  <text
-                    alignmentBaseline={textBaseline}
-                    textAnchor={textAnchor}
-                    transform={`translate(${textX},${textY})`}
-                    style={{ fontSize: 13 }}
-                  >
-                    {value}
-                  </text>
-                </g>
-              );
-            },
+            format: "%b %d",
+            tickValues: 5,
           }}
           animate={props.animate || false}
           enablePointLabel={props.enablePointLabel || false}
