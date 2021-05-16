@@ -13,8 +13,6 @@ class Routing extends React.Component {
   render() {
     return (
       <Router>
-        {/* <Header /> */}
-
         <Switch>
           <Route exact path="/" component={App} />
           <Route exact path="/symptoms" component={Symptoms} />

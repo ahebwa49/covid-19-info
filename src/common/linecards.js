@@ -88,12 +88,15 @@ const useStyles = makeStyles({
     backgroundColor: "rgba(51, 51, 51, 0.2)",
     zIndex: 0,
   },
-
-  duration: {
+  durationContainer: {
+    display: "flex",
     color: "#333",
     opacity: 0.8,
     fontSize: 14,
     lineHeight: "20px",
+  },
+  duration: {
+    marginLeft: "0.5rem",
   },
   nexticon: {
     // transform: "rotate(-90deg)",
@@ -429,8 +432,9 @@ const LineCards = (props) => {
           </Typography>
 
           <div style={{ display: "flex", alignItems: "center", paddingTop: 8 }}>
-            <Typography className={classes.duration}>
-              {props.duration}
+            <Typography className={classes.durationContainer}>
+              <Calender />
+              <span className={classes.duration}>{props.duration}</span>
             </Typography>
           </div>
         </div>
@@ -441,10 +445,10 @@ const LineCards = (props) => {
             alignItems: "flex-start",
           }}
         >
-          <DrillDown
+          {/* <DrillDown
             style={{ display: "inline", marginTop: 2, marginRight: 24 }}
             stroke={drilldownColor}
-          />
+          /> */}
           <div
             onClick={(e) =>
               props.handleClickOpenDialog(

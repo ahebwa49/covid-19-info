@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     marginLeft: theme.spacing(2),
     flex: 1,
+    fontSize: 21,
     color: "#333",
   },
   closeicon: {
@@ -37,13 +38,12 @@ const useStyles = makeStyles((theme) => ({
 
 const FullScreenItem = (props) => {
   if (props.line) {
-    console.log(props.data);
     return (
       <FullScreenLine
         data={props.data}
         x="date"
-        y="confirmed"
-        color="green"
+        y={props.title === "Confirmed" ? "confirmed" : "deaths"}
+        color={props.title === "Confirmed" ? "green" : "red"}
         noDecimalLeft
       />
     );
@@ -72,9 +72,7 @@ const FullScreenDialog = (props) => {
             >
               <CloseIcon />
             </IconButton>
-            <Typography variant="h2" className={classes.title}>
-              {props.title}
-            </Typography>
+            <Typography className={classes.title}>{props.title}</Typography>
           </Toolbar>
         </AppBar>
         <Grid

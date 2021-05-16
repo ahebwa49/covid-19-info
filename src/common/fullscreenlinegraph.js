@@ -1,14 +1,15 @@
 /* eslint-disable no-useless-computed-key */
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 // import { useDispatch } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import { ResponsiveLine, Line } from "@nivo/line";
+import { ResponsiveLine } from "@nivo/line";
 import Paper from "@material-ui/core/Paper";
 import { withRouter } from "react-router-dom";
+// import { action_selectDateRange } from "../General/store//daterange";
 import PlayForWorkIcon from "@material-ui/icons/PlayForWork";
 import FullscreenIcon from "@material-ui/icons/Fullscreen";
-import { getDimensions, useContainerDimensions } from "./linecards";
+import { transformLinedata, getLineTotal } from "../transforms/line";
 
 const useStyles = makeStyles({
   root: {
@@ -67,13 +68,7 @@ const useStyles = makeStyles({
 
 const FullScreenLine = (props) => {
   const classes = useStyles();
-//   const dispatch = useDispatch();
-  const componentRef = useRef();
-  const { width: deviceWidth, height } = useContainerDimensions(componentRef);
-
-  let [width, setWidth] = useState(props.defaultDeviceWidth || deviceWidth);
-  let [timer, setTimer] = useState(null);
-  let [timer2, setTimer2] = useState(null);
+  // const dispatch = useDispatch();
 
   const oncardClicked = () => {
     //dispatch actions here and after action dispatched callback change route
@@ -89,27 +84,6 @@ const FullScreenLine = (props) => {
     props.history.push(props.onclickroute);
   };
 
-  const transformdata = (
-    data,
-    id = "Leads",
-    x = "createdDate",
-    y = "leads"
-  ) => {
-    if (typeof data === "undefined") return [];
-
-    return [
-      {
-        id,
-        data: data.map((d) => {
-          return {
-            x: d[x],
-            y: d[y],
-          };
-        }),
-      },
-    ];
-  };
-
   const getTotal = (data, y) => {
     if (typeof data === "undefined") return 0;
     return data.reduce((total, obj) => {
@@ -122,34 +96,49 @@ const FullScreenLine = (props) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  transformdata(props.data);
+  function formatNumbers(value) {
+    if (value >= 1000 && value < 1000000) {
+      value = value / 1000;
+      let fixed = 1;
 
-  useEffect(() => {
-    if (width == deviceWidth) return;
+      if (value.toFixed(0) == value) fixed = 0;
 
-    clearTimeout(timer);
-    clearTimeout(timer2);
-    setTimer(
-      setTimeout(() => {
-        setWidth(deviceWidth - 10);
-      }, 1500)
-    );
+      value = numberWithCommas(value.toFixed(fixed));
+      return value + "k";
+    } else if (value >= 1000000 && value < 10000000000) {
+      value = value / 1000000;
+      let fixed = 1;
 
-    setTimer2(
-      setTimeout(() => {
-        setWidth(deviceWidth);
-      }, 1500)
-    );
-  }, [props.data, props.title, props.x, props.y, deviceWidth, height]);
+      if (value.toFixed(1) == value) fixed = 0;
+      value = numberWithCommas(value.toFixed(fixed));
+      return value + "M";
+    } else if (value >= 10000000000) {
+      value = value / 10000000000;
+      let fixed = 1;
 
-  window.addEventListener("Drawer_open_close", (e) => {
-    if (!componentRef.current) return;
-    let { width: deviceWidth, height } = getDimensions(componentRef);
+      if (value.toFixed(1) == value) fixed = 0;
+      value = numberWithCommas(value.toFixed(fixed));
+      return value + "B";
+    }
 
-    // if (width == deviceWidth) return;
+    return value + "";
+  }
 
-    setWidth(deviceWidth);
-  });
+  function formatAxis(value, type) {
+    switch (type) {
+      case "number":
+        return formatNumbers(value);
+      default:
+        return value;
+    }
+  }
+
+  let fullLineData = transformLinedata(
+    props.data,
+    props.title,
+    props.x,
+    props.y
+  );
 
   const renderTick = ({
     opacity,
@@ -212,51 +201,80 @@ const FullScreenLine = (props) => {
   }
 
   return (
-    <div className={classes.lineblock} ref={componentRef}>
-      <ResponsiveLine
-        // onClick={oncardClicked}
-        data={props.data}
-        margin={{ top: 50, right: 40, bottom: 50, left: 55 }}
-        xScale={{ type: "point", min: 0 }}
-        yScale={{
-          type: "linear",
-          min: "auto",
-          max: "auto",
-          stacked: false,
-          reverse: false,
-          min: 0,
-        }}
-        // width={width}
-        // height={height}
-        curve={props.curve === undefined ? "natural" : props.curve}
-        axisTop={null}
-        axisRight={null}
-        enableGridX={true}
-        enableGridY={false}
-        axisBottom={{
-          orient: "bottom",
-          tickSize: 2,
-          tickPadding: 5,
-          tickRotation: props.rotation && -30,
-        }}
-        axisLeft={{
-          orient: "left",
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-        }}
-        colors={props.color}
-        pointSize={10}
-        pointColor={{ theme: "background" }}
-        pointBorderWidth={2}
-        pointBorderColor={{ from: "serieColor" }}
-        pointLabel="y"
-        pointLabelYOffset={-12}
-        useMesh={true}
-        {...defaultExtraProps}
-        enablePointLabel={props.enablePointLabel || true}
-      />
-    </div>
+    <ResponsiveLine
+      // onClick={oncardClicked}
+      data={fullLineData}
+      tooltip={(point) => {
+        return (
+          <div className={classes.toolTipContainer}>
+            <div
+              style={{
+                width: "12px",
+                height: "12px",
+                backgroundColor: `${props.color}`,
+                marginRight: "0.8rem",
+              }}
+            ></div>
+            <div>
+              <strong>
+                {point.point.data.xFormatted}:{" "}
+                {numberWithCommas(point.point.data.yFormatted)}
+              </strong>
+            </div>
+          </div>
+        );
+      }}
+      margin={{ top: 50, right: 40, bottom: 50, left: 55 }}
+      xScale={{
+        type: "time",
+        format: "%Y-%m-%d",
+        useUTC: false,
+      }}
+      xFormat="time:%Y-%m-%d"
+      yScale={{
+        type: "linear",
+        min: "auto",
+        max: "auto",
+        stacked: false,
+        reverse: false,
+      }}
+      curve={props.curve === undefined ? "natural" : props.curve}
+      axisTop={null}
+      axisRight={null}
+      enableGridX={true}
+      enableGridY={false}
+      axisBottom={{
+        orient: "bottom",
+        tickSize: 2,
+        tickPadding: 5,
+        tickRotation: props.rotation && -30,
+      }}
+      axisLeft={{
+        orient: "left",
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 0,
+      }}
+      colors={props.color}
+      pointSize={10}
+      pointColor={{ theme: "background" }}
+      pointBorderWidth={2}
+      pointBorderColor={{ from: "serieColor" }}
+      pointLabel="y"
+      pointLabelYOffset={-12}
+      useMesh={true}
+      {...defaultExtraProps}
+      axisLeft={{
+        format: (value) => formatAxis(value, props.axisLeftType),
+      }}
+      axisBottom={{
+        format: "%b %d",
+        tickValues: 16,
+      }}
+      animate={props.animate || false}
+      enablePointLabel={props.enablePointLabel || false}
+      enablePoints={false}
+    />
   );
 };
 export default withRouter(FullScreenLine);

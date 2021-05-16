@@ -146,15 +146,23 @@ class Countries extends React.Component {
     this.setState({ country: e.target.value });
   };
 
-  handleClickOpen = (e) => {
+  handleConfirmedClickOpen = (e) => {
     e.stopPropagation();
     this.setState({
       openDialog: true,
+      title: "Confirmed",
+    });
+  };
+  handleDeathsClickOpen = (e) => {
+    e.stopPropagation();
+    this.setState({
+      openDialog: true,
+      title: "Deaths",
     });
   };
 
   handleClose = (e) => {
-    this.setState({ openDialog: false });
+    this.setState({ openDialog: false, title: "" });
   };
 
   render() {
@@ -175,7 +183,7 @@ class Countries extends React.Component {
           handleClickOpen={this.handleClickOpen}
           handleClose={this.handleClose}
           data={this.state.fTimeSeries}
-          title="Confirmed"
+          title={this.state.title}
           line
         />
         <div className="select-country">
@@ -203,7 +211,7 @@ class Countries extends React.Component {
             <p style={{ textAlign: "center" }}>{`${country} Cases`}</p>
             <LineCards
               data={this.state.fTimeSeries}
-              handleClickOpenDialog={this.handleClickOpen}
+              handleClickOpenDialog={this.handleConfirmedClickOpen}
               title="Confirmed"
               x="date"
               y="confirmed"
@@ -219,7 +227,7 @@ class Countries extends React.Component {
             <p style={{ textAlign: "center" }}>{`${country} Deaths`}</p>
             <LineCards
               data={this.state.fTimeSeries}
-              handleClickOpenDialog={this.handleClickOpen}
+              handleClickOpenDialog={this.handleDeathsClickOpen}
               title="Deaths"
               x="date"
               y="deaths"
