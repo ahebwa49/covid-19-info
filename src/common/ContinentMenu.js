@@ -11,7 +11,7 @@ import ListItem from "@material-ui/core/ListItem";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { action_apiRunQery } from "../store/generalactions";
 // import allorgs from "../bigQuery/getAllOrgs";
 import SvgIcon from "@material-ui/core/SvgIcon";
@@ -145,20 +145,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ContinentMenu = () => {
+  const dispatch = useDispatch();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [iconstroke, setIconStroke] = useState("#333");
 
-  // const dispatch = useDispatch();
+  const continentData = useSelector((state) => state.continents);
 
-  const continentData = [
-    { continentName: "Africa", continentId: "1" },
-    { continentName: "Asia", continentId: "2" },
-    { continentName: "Australia", continentId: "3" },
-    { continentName: "Europe", continentId: "4" },
-    { continentName: "North America", continentId: "5" },
-    { continentName: "South America", continentId: "6" },
-  ];
+  console.log(continentData)
+
   // const loadingState = useSelector((state) => state.UI.orgLoading);
   useEffect(() => {
     //call orgs here
@@ -235,24 +231,28 @@ const ContinentMenu = () => {
             </div>
           ) : ( */}
           <List className={classes.listroot}>
-            {continentData
+            {continentData.continents
               .sort((a, b) =>
-                a.continentName === b.continentName ? 0 : a.continentName > b.continentName ? 1 : -1
+                a.continent === b.continent
+                  ? 0
+                  : a.continent > b.continent
+                  ? 1
+                  : -1
               )
               .map((continent) => (
                 <ListItem
-                  key={continent.continentName}
+                  key={continent.continent}
                   className={classes.menuItem}
-                //   onClick={(event) => orgselected(event, continent.continentId)}
-                //   className={
-                //     continentData.selected.includes(continent.continentId)
-                //       ? classes.menuItemSelected
-                //       : classes.menuItem
-                //   }
+                  //   onClick={(event) => orgselected(event, continent.continentId)}
+                  //   className={
+                  //     continentData.selected.includes(continent.continentId)
+                  //       ? classes.menuItemSelected
+                  //       : classes.menuItem
+                  //   }
                   dense
                   button
                 >
-                  {continent.continentName}
+                  {continent.continent}
                 </ListItem>
               ))}
           </List>
