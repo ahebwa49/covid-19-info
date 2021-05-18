@@ -153,7 +153,7 @@ const ContinentMenu = () => {
 
   const continentData = useSelector((state) => state.continents);
 
-  console.log(continentData)
+  // console.log(continentData)
 
   // const loadingState = useSelector((state) => state.UI.orgLoading);
   useEffect(() => {

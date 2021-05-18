@@ -14,7 +14,7 @@ const margin = {
   top: 20,
   right: 15,
   bottom: 30,
-  left: 55
+  left: 55,
   // left: 0
 };
 
@@ -44,28 +44,28 @@ class Africa extends React.Component {
 
     const nested = d3
       .nest()
-      .key(d => d.date)
-      .rollup(leaves => {
-        const totalConfirmed = d3.sum(leaves, d => d.confirmed);
-        const totalDeaths = d3.sum(leaves, d => d.deaths);
-        const totalRecovered = d3.sum(leaves, d => d.recovered);
+      .key((d) => d.date)
+      .rollup((leaves) => {
+        const totalConfirmed = d3.sum(leaves, (d) => d.confirmed);
+        const totalDeaths = d3.sum(leaves, (d) => d.deaths);
+        const totalRecovered = d3.sum(leaves, (d) => d.recovered);
 
         return {
           totalConfirmed: totalConfirmed,
           totalDeaths: totalDeaths,
-          totalRecovered: totalRecovered
+          totalRecovered: totalRecovered,
         };
       })
       .entries(fAllTimeSeries);
 
     // Confirmed --------------------------------------
-    const xExtentConfirmed = d3.extent(nested, d => new Date(d.key));
+    const xExtentConfirmed = d3.extent(nested, (d) => new Date(d.key));
     const xScaleConfirmed = d3
       .scaleTime()
       .domain(xExtentConfirmed)
       .range([margin.left, width - margin.right]);
 
-    const maxConfirmed = d3.max(nested, d => d.value.totalConfirmed);
+    const maxConfirmed = d3.max(nested, (d) => d.value.totalConfirmed);
 
     const yScaleConfirmed = d3
       .scaleLinear()
@@ -74,13 +74,13 @@ class Africa extends React.Component {
 
     // Deaths --------------------------------------
 
-    const xExtentDeaths = d3.extent(nested, d => new Date(d.key));
+    const xExtentDeaths = d3.extent(nested, (d) => new Date(d.key));
     const xScaleDeaths = d3
       .scaleTime()
       .domain(xExtentDeaths)
       .range([margin.left, width - margin.right]);
 
-    const maxDeaths = d3.max(nested, d => d.value.totalDeaths);
+    const maxDeaths = d3.max(nested, (d) => d.value.totalDeaths);
 
     const yScaleDeaths = d3
       .scaleLinear()
@@ -92,7 +92,7 @@ class Africa extends React.Component {
       yScaleConfirmed,
       xScaleConfirmed,
       xScaleDeaths,
-      yScaleDeaths
+      yScaleDeaths,
     };
   }
 
@@ -109,13 +109,13 @@ class Africa extends React.Component {
   render() {
     const lineConfirmed = d3
       .line()
-      .x(d => this.state.xScaleConfirmed(new Date(d.key)))
-      .y(d => this.state.yScaleConfirmed(d.value.totalConfirmed));
+      .x((d) => this.state.xScaleConfirmed(new Date(d.key)))
+      .y((d) => this.state.yScaleConfirmed(d.value.totalConfirmed));
 
     const lineDeaths = d3
       .line()
-      .x(d => this.state.xScaleDeaths(new Date(d.key)))
-      .y(d => this.state.yScaleDeaths(d.value.totalDeaths));
+      .x((d) => this.state.xScaleDeaths(new Date(d.key)))
+      .y((d) => this.state.yScaleDeaths(d.value.totalDeaths));
     return (
       <div className="world-line-charts">
         <div className="world-line-chart-confirmed">
@@ -128,8 +128,9 @@ class Africa extends React.Component {
             />
             <text
               className="yAxisLabel"
-              transform={`translate(10, ${(height - margin.bottom) /
-                1.5}) rotate(270)`}
+              transform={`translate(10, ${
+                (height - margin.bottom) / 1.5
+              }) rotate(270)`}
             >
               Coronavirus Cases
             </text>
@@ -149,7 +150,7 @@ class Africa extends React.Component {
               textAlign: "center",
               marginTop: "0px",
               fontSize: "14px",
-              color: "black"
+              color: "black",
             }}
           >
             Date
@@ -165,8 +166,9 @@ class Africa extends React.Component {
             />
             <text
               className="yAxisLabel"
-              transform={`translate(15, ${(height - margin.bottom) /
-                1.5}) rotate(270)`}
+              transform={`translate(15, ${
+                (height - margin.bottom) / 1.5
+              }) rotate(270)`}
             >
               Coronavirus Deaths
             </text>
@@ -186,7 +188,7 @@ class Africa extends React.Component {
               textAlign: "center",
               marginTop: "0px",
               fontSize: "14px",
-              color: "black"
+              color: "black",
             }}
           >
             Date

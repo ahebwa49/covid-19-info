@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { setAfricaCountries } from "./redux/actions/continents";
 import Loader from "./common/Loader.js";
 import WorldMap from "./common/WorldMap";
 import QuickFacts from "./common/QuickFacts";
@@ -92,6 +94,34 @@ class App extends React.Component {
           }
         }
         // console.log(newTimeSeries);
+
+        let africaCountries = [];
+        let asiaCountries = [];
+        let australiaCountries = [];
+        let europeCountries = [];
+        let northAmericaCountries = [];
+        let southAmericaCountries = [];
+
+        let data = newTimeSeries;
+
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].continent === "Africa") {
+            africaCountries.push(data[i].country);
+          } else if (data[i].continent === "Asia") {
+            asiaCountries.push(data[i].country);
+          } else if (data[i].continent === "Australia") {
+            australiaCountries.push(data[i].country);
+          } else if (data[i].continent === "Europe") {
+            europeCountries.push(data[i].country);
+          } else if (data[i].continent === "North America") {
+            northAmericaCountries.push(data[i].country);
+          } else if (data[i].continent === "South America") {
+            southAmericaCountries.push(data[i].country);
+          } else {
+          }
+        }
+        console.log(africaCountries);
+        this.props.setAfricaCountries(africaCountries);
         this.setState({
           data: {
             geoData: geoData,
@@ -107,6 +137,8 @@ class App extends React.Component {
   }
   render() {
     const { data } = this.state;
+    const { newTimeSeries: allContinentData } = data;
+
     if (data.geoData === null) {
       return (
         <div className="loader-wrapper">
@@ -154,4 +186,12 @@ class App extends React.Component {
     );
   }
 }
-export default App;
+
+const mapStateToProps = (state) => {
+  
+};
+
+const mapDispatchToProps = {
+  setAfricaCountries,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

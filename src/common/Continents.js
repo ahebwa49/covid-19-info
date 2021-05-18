@@ -8,7 +8,8 @@ import NorthAmerica from "./NorthAmerica";
 import SouthAmerica from "./SouthAmerica";
 import Tabs from "./Tabs";
 
-const Continents = props => {
+const Continents = (props) => {
+  const { data } = props;
   return (
     <div className="App">
       <Tabs>

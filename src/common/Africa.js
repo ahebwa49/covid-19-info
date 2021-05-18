@@ -34,7 +34,6 @@ class Africa extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     const { data } = nextProps;
     if (!data) return {};
-    // console.log(data)
 
     const africaTimeSeries = [];
     for (let i = 0; i < data.length; i++) {

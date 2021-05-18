@@ -1,12 +1,12 @@
-import { selectContinent } from "../actions/types";
+import { selectContinent, SET_AFRICA_COUNTRIES } from "../actions/types";
 
 const continents = [
-  { id: "1", continent: "Africa" },
-  { id: "2", continent: "Asia" },
-  { id: "3", continent: "Australia" },
-  { id: "4", continent: "Europe" },
-  { id: "5", continent: "North America" },
-  { id: "6", continent: "South America" },
+  { id: "1", continent: "Africa", countries: [] },
+  { id: "2", continent: "Asia", countries: [] },
+  { id: "3", continent: "Australia", countries: [] },
+  { id: "4", continent: "Europe", countries: [] },
+  { id: "5", continent: "North America", countries: [] },
+  { id: "6", continent: "South America", countries: [] },
 ];
 
 const initialState = {
@@ -17,13 +17,11 @@ const initialState = {
 const continentReducer = (state = initialState, action) => {
   switch (action.type) {
     case selectContinent:
-      //   const newState = Object.assign({}, initialState, action.user, {
-      //     loggedIn: true,
-      //   });
       return state;
 
-    // case LOGOUT:
-    //   return initialState;
+    case SET_AFRICA_COUNTRIES:
+      return state;
+      break;
 
     default:
       return state;

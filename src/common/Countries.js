@@ -43,7 +43,7 @@ class Countries extends React.Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { country } = prevState;
-    console.log(country);
+    // console.log(country);
     const { data } = nextProps;
     if (!data) return {};
 
@@ -60,7 +60,7 @@ class Countries extends React.Component {
 
     const fTimeSeries = timeSeries.flat();
 
-    console.log(fTimeSeries);
+    // console.log(fTimeSeries);
 
     const nested = d3
       .nest()
