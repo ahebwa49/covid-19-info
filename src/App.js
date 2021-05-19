@@ -1,6 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setAfricaCountries } from "./redux/actions/continents";
+import {
+  setAfricaCountries,
+  setAsiaCountries,
+  setAustraliaCountries,
+  setEuropeCountries,
+  setNorthAmericaCountries,
+  setSouthAmericaCountries,
+} from "./redux/actions/continents";
 import Loader from "./common/Loader.js";
 import WorldMap from "./common/WorldMap";
 import QuickFacts from "./common/QuickFacts";
@@ -8,7 +15,6 @@ import Countries from "./common/Countries";
 import Footer from "./common/Footer";
 import Continents from "./common/Continents";
 import Header from "./common/Header";
-// import WorldMap from "./WorldMap";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -122,6 +128,11 @@ class App extends React.Component {
         }
         console.log(africaCountries);
         this.props.setAfricaCountries(africaCountries);
+        this.props.setAsiaCountries(asiaCountries);
+        this.props.setAustraliaCountries(australiaCountries);
+        this.props.setEuropeCountries(europeCountries);
+        this.props.setNorthAmericaCountries(northAmericaCountries);
+        this.props.setSouthAmericaCountries(southAmericaCountries);
         this.setState({
           data: {
             geoData: geoData,
@@ -137,7 +148,7 @@ class App extends React.Component {
   }
   render() {
     const { data } = this.state;
-    const { newTimeSeries: allContinentData } = data;
+    console.log(this.props.continents);
 
     if (data.geoData === null) {
       return (
@@ -187,11 +198,16 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  
-};
+const mapStateToProps = (state) => ({
+  continents: state.continents,
+});
 
 const mapDispatchToProps = {
   setAfricaCountries,
+  setAsiaCountries,
+  setAustraliaCountries,
+  setEuropeCountries,
+  setNorthAmericaCountries,
+  setSouthAmericaCountries,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
