@@ -1,5 +1,4 @@
-export const LOGIN = "LOGIN";
-export const LOGOUT = "LOGOUT";
+export const SELECT_CONTINENT = "selectContinent";
 export const SET_AFRICA_COUNTRIES = "setAfricaCountries";
 export const SET_ASIA_COUNTRIES = "setAsiaCounties";
 export const SET_AUSTRALIA_COUNTRIES = "setAustraliaCountries";

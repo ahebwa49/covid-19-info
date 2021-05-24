@@ -11,19 +11,9 @@ import ListItem from "@material-ui/core/ListItem";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-// import { useDispatch, useSelector } from "react-redux";
-// import { action_apiRunQery } from "../store/generalactions";
-// import allorgs from "../bigQuery/getAllOrgs";
+import { useDispatch, useSelector } from "react-redux";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import { DropdownIcon } from "../constants/svgicons";
-
-// import {
-//   action_addOrgs,
-//   action_selectOrg,
-//   action_selectAllOrgs,
-//   action_clearAllOrgs,
-// } from "../store/org";
-// import { action_orgLoadingSwitch } from "../store/uilayer";
 import { Radio } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -147,11 +137,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CountryMenu = () => {
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [iconstroke, setIconStroke] = useState("#333");
-
-  // const dispatch = useDispatch();
 
   const countryData = [
     { countryName: "Afghanistan", countryId: "1" },

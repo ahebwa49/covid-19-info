@@ -1,4 +1,5 @@
 import {
+  SELECT_CONTINENT,
   SET_AFRICA_COUNTRIES,
   SET_ASIA_COUNTRIES,
   SET_AUSTRALIA_COUNTRIES,
@@ -18,7 +19,7 @@ const continents = [
 
 const initialState = {
   continents,
-  selected: "2",
+  selected: "1",
 };
 
 const continentReducer = (state = initialState, action) => {
@@ -45,6 +46,10 @@ const continentReducer = (state = initialState, action) => {
       break;
     case SET_SOUTH_AMERICA_COUNTRIES:
       continents[5]["countries"] = [...action.countries];
+      return state;
+      break;
+    case SELECT_CONTINENT:
+      console.log("Continent has been selected");
       return state;
       break;
     default:

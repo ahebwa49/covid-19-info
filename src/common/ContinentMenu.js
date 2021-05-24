@@ -8,22 +8,11 @@ import Popper from "@material-ui/core/Popper";
 import { withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import ExpandMore from "@material-ui/icons/ExpandMore";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { useDispatch, useSelector } from "react-redux";
-// import { action_apiRunQery } from "../store/generalactions";
-// import allorgs from "../bigQuery/getAllOrgs";
+import { action_selectContinent } from "../redux/actions/continents";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import { DropdownIcon } from "../constants/svgicons";
-
-// import {
-//   action_addOrgs,
-//   action_selectOrg,
-//   action_selectAllOrgs,
-//   action_clearAllOrgs,
-// } from "../store/org";
-// import { action_orgLoadingSwitch } from "../store/uilayer";
 import { Radio } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -153,9 +142,8 @@ const ContinentMenu = () => {
 
   const continentData = useSelector((state) => state.continents);
 
-  // console.log(continentData)
+  console.log(continentData);
 
-  // const loadingState = useSelector((state) => state.UI.orgLoading);
   useEffect(() => {
     //call orgs here
   }, []);
@@ -170,28 +158,10 @@ const ContinentMenu = () => {
     setOpen(false);
   };
 
-  const orgselected = (e, org) => {
-    // dispatch(action_selectOrg({ orgid: org }));
+  const selectContinent = (e, id) => {
+    dispatch(action_selectContinent(id));
     setOpen(false);
   };
-
-  // const selectAllOrgs = () => {
-  //   dispatch(action_selectAllOrgs());
-  // };
-
-  // const clearAllOrgs = () => {
-  //   dispatch(action_clearAllOrgs());
-  // };
-
-  //   const getSelectedOrgName = () => {
-  //     if (orgData.selected.length < 1) {
-  //       return "Select Org";
-  //     } else {
-  //       let selectedOrgname = orgData.ById[orgData.selected[0]].orgName;
-  //       if (orgData.selected.length > 1) return selectedOrgname + " ...";
-  //       else return selectedOrgname;
-  //     }
-  //   };
 
   return (
     <ClickAwayListener onClickAway={handleClose}>
@@ -213,7 +183,10 @@ const ContinentMenu = () => {
             />
           }
         >
-          Continent
+          {continentData.selected
+            ? continentData.continents[parseInt(continentData.selected) - 1]
+                .continent
+            : "Select Continent"}
         </Button>
         <Popper
           className={classes.menu}
@@ -225,11 +198,6 @@ const ContinentMenu = () => {
           placement="bottom-end"
         >
           <div className={classes.formHeader}></div>
-          {/* {loadingState ? (
-            <div className={classes.progressblock}>
-              <CircularProgress className={classes.progress} />
-            </div>
-          ) : ( */}
           <List className={classes.listroot}>
             {continentData.continents
               .sort((a, b) =>
@@ -243,12 +211,12 @@ const ContinentMenu = () => {
                 <ListItem
                   key={continent.continent}
                   className={classes.menuItem}
-                  //   onClick={(event) => orgselected(event, continent.continentId)}
-                  //   className={
-                  //     continentData.selected.includes(continent.continentId)
-                  //       ? classes.menuItemSelected
-                  //       : classes.menuItem
-                  //   }
+                  onClick={(event) => selectContinent(event, continent.id)}
+                  className={
+                    continentData.selected.includes(continent.id)
+                      ? classes.menuItemSelected
+                      : classes.menuItem
+                  }
                   dense
                   button
                 >

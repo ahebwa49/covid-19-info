@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  setAfricaCountries,
-  setAsiaCountries,
-  setAustraliaCountries,
-  setEuropeCountries,
-  setNorthAmericaCountries,
-  setSouthAmericaCountries,
+  action_setAfricaCountries,
+  action_setAsiaCountries,
+  action_setAustraliaCountries,
+  action_setEuropeCountries,
+  action_setNorthAmericaCountries,
+  action_setSouthAmericaCountries,
 } from "./redux/actions/continents";
 import Loader from "./common/Loader.js";
 import WorldMap from "./common/WorldMap";
@@ -126,13 +126,12 @@ class App extends React.Component {
           } else {
           }
         }
-        console.log(africaCountries);
-        this.props.setAfricaCountries(africaCountries);
-        this.props.setAsiaCountries(asiaCountries);
-        this.props.setAustraliaCountries(australiaCountries);
-        this.props.setEuropeCountries(europeCountries);
-        this.props.setNorthAmericaCountries(northAmericaCountries);
-        this.props.setSouthAmericaCountries(southAmericaCountries);
+        this.props.action_setAfricaCountries(africaCountries);
+        this.props.action_setAsiaCountries(asiaCountries);
+        this.props.action_setAustraliaCountries(australiaCountries);
+        this.props.action_setEuropeCountries(europeCountries);
+        this.props.action_setNorthAmericaCountries(northAmericaCountries);
+        this.props.action_setSouthAmericaCountries(southAmericaCountries);
         this.setState({
           data: {
             geoData: geoData,
@@ -203,11 +202,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  setAfricaCountries,
-  setAsiaCountries,
-  setAustraliaCountries,
-  setEuropeCountries,
-  setNorthAmericaCountries,
-  setSouthAmericaCountries,
+  action_setAfricaCountries,
+  action_setAsiaCountries,
+  action_setAustraliaCountries,
+  action_setEuropeCountries,
+  action_setNorthAmericaCountries,
+  action_setSouthAmericaCountries,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);
