@@ -142,24 +142,12 @@ const CountryMenu = () => {
   const [open, setOpen] = useState(false);
   const [iconstroke, setIconStroke] = useState("#333");
 
-  const countryData = [
-    { countryName: "Afghanistan", countryId: "1" },
-    { countryName: "Albania	", countryId: "2" },
-    { countryName: "Algeria", countryId: "3" },
-    { countryName: "Andorra", countryId: "4" },
-    { countryName: "Angola", countryId: "5" },
-    { countryName: "Antigua and Barbuda", countryId: "6" },
-    { countryName: "Armenia", countryId: "8" },
-    { countryName: "Argentina", countryId: "7" },
-    { countryName: "Australia", countryId: "9" },
-    { countryName: "Austria", countryId: "10" },
-    { countryName: "Azerbaijan", countryId: "11" },
-    { countryName: "Bahamas	", countryId: "12" },
-    { countryName: "Bahrain", countryId: "13" },
-    { countryName: "Bangladesh", countryId: "14" },
-    { countryName: "Barbados", countryId: "15" },
-    { countryName: "Belarus", countryId: "16" },
-  ];
+  const continentData = useSelector((state) => state.continents);
+  console.log(continentData);
+
+  let countries =
+    continentData.continents[parseInt(continentData.selected) - 1].countries;
+
   // const loadingState = useSelector((state) => state.UI.orgLoading);
   useEffect(() => {
     //call orgs here
@@ -236,17 +224,11 @@ const CountryMenu = () => {
             </div>
           ) : ( */}
           <List className={classes.listroot}>
-            {countryData
-              .sort((a, b) =>
-                a.countryName === b.countryName
-                  ? 0
-                  : a.countryName > b.countryName
-                  ? 1
-                  : -1
-              )
-              .map((country) => (
+            {countries
+              .sort((a, b) => (a === b ? 0 : a > b ? 1 : -1))
+              .map((country, i) => (
                 <ListItem
-                  key={country.countryName}
+                  key={i}
                   className={classes.menuItem}
                   //   onClick={(event) => orgselected(event, country.countryId)}
                   //   className={
@@ -257,7 +239,7 @@ const CountryMenu = () => {
                   dense
                   button
                 >
-                  {country.countryName}
+                  {country}
                 </ListItem>
               ))}
           </List>

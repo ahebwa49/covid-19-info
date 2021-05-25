@@ -49,7 +49,7 @@ const continentReducer = (state = initialState, action) => {
       return state;
       break;
     case SELECT_CONTINENT:
-      console.log("Continent has been selected");
+      Object.assign(initialState, { selected: action.id });
       return state;
       break;
     default:
