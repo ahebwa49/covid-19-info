@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "none",
   },
   btn: {
+    whiteSpace: "nowrap",
     fontSize: "16px",
     width: "100%",
     ["&:hover"]: {
@@ -59,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
   },
   menuItem: {
+    whiteSpace: "nowrap",
     fontSize: "16px",
     color: "rgba(51,51,51,0.8)",
     lineHeight: "21.79px",
@@ -69,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   menuItemSelected: {
+    whiteSpace: "nowrap",
     fontSize: "16px",
     fontWeight: 600,
     padding: "10px 24px",
@@ -224,7 +227,6 @@ const ContinentMenu = () => {
                 </ListItem>
               ))}
           </List>
-          {/* )} */}
         </Popper>
       </div>
     </ClickAwayListener>

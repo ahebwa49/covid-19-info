@@ -151,7 +151,8 @@ const CountryMenu = () => {
   // const loadingState = useSelector((state) => state.UI.orgLoading);
   useEffect(() => {
     //call orgs here
-  }, []);
+    console.log("Continent Data has changed");
+  }, [continentData]);
 
   const classes = useStyles();
 
@@ -167,24 +168,6 @@ const CountryMenu = () => {
     // dispatch(action_selectOrg({ orgid: org }));
     setOpen(false);
   };
-
-  // const selectAllOrgs = () => {
-  //   dispatch(action_selectAllOrgs());
-  // };
-
-  // const clearAllOrgs = () => {
-  //   dispatch(action_clearAllOrgs());
-  // };
-
-  //   const getSelectedOrgName = () => {
-  //     if (orgData.selected.length < 1) {
-  //       return "Select Org";
-  //     } else {
-  //       let selectedOrgname = orgData.ById[orgData.selected[0]].orgName;
-  //       if (orgData.selected.length > 1) return selectedOrgname + " ...";
-  //       else return selectedOrgname;
-  //     }
-  //   };
 
   return (
     <ClickAwayListener onClickAway={handleClose}>
@@ -206,7 +189,7 @@ const CountryMenu = () => {
             />
           }
         >
-          Country
+          {countries.countries[parseInt(countries.selected) - 1]}
         </Button>
         <Popper
           className={classes.menu}
@@ -218,13 +201,8 @@ const CountryMenu = () => {
           placement="bottom-end"
         >
           <div className={classes.formHeader}></div>
-          {/* {loadingState ? (
-            <div className={classes.progressblock}>
-              <CircularProgress className={classes.progress} />
-            </div>
-          ) : ( */}
           <List className={classes.listroot}>
-            {countries
+            {countries.countries
               .sort((a, b) => (a === b ? 0 : a > b ? 1 : -1))
               .map((country, i) => (
                 <ListItem
