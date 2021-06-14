@@ -1,4 +1,5 @@
 export const SELECT_CONTINENT = "selectContinent";
+export const SELECT_COUNTRY = "selectCountry";
 export const SET_AFRICA_COUNTRIES = "setAfricaCountries";
 export const SET_ASIA_COUNTRIES = "setAsiaCounties";
 export const SET_AUSTRALIA_COUNTRIES = "setAustraliaCountries";

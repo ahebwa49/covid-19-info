@@ -9,23 +9,23 @@ import {
 } from "../actions/types";
 
 const continents = [
-  { id: "1", continent: "Africa", countries: { countries: [], selected: "1" } },
-  { id: "2", continent: "Asia", countries: { countries: [], selected: "1" } },
+  { id: "1", continent: "Africa", countries: { countries: [], selected: 1 } },
+  { id: "2", continent: "Asia", countries: { countries: [], selected: 1 } },
   {
     id: "3",
     continent: "Australia",
-    countries: { countries: [], selected: "1" },
+    countries: { countries: [], selected: 1 },
   },
-  { id: "4", continent: "Europe", countries: { countries: [], selected: "1" } },
+  { id: "4", continent: "Europe", countries: { countries: [], selected: 1 } },
   {
     id: "5",
     continent: "North America",
-    countries: { countries: [], selected: "1" },
+    countries: { countries: [], selected: 1 },
   },
   {
     id: "6",
     continent: "South America",
-    countries: { countries: [], selected: "1" },
+    countries: { countries: [], selected: 1 },
   },
 ];
 
@@ -35,29 +35,48 @@ const initialState = {
 };
 
 const continentReducer = (state = initialState, action) => {
+  let countries;
   switch (action.type) {
     case SET_AFRICA_COUNTRIES:
-      continents[0]["countries"].countries = [...action.countries];
+      countries = action.countries.map((country, index) => {
+        return { name: country, id: index + 1 };
+      });
+      continents[0]["countries"].countries = [...countries];
       return state;
       break;
     case SET_ASIA_COUNTRIES:
-      continents[1]["countries"].countries = [...action.countries];
+      countries = action.countries.map((country, index) => {
+        return { name: country, id: index + 1 };
+      });
+      continents[1]["countries"].countries = [...countries];
       return state;
       break;
     case SET_AUSTRALIA_COUNTRIES:
-      continents[2]["countries"].countries = [...action.countries];
+      countries = action.countries.map((country, index) => {
+        return { name: country, id: index + 1 };
+      });
+      continents[2]["countries"].countries = [...countries];
       return state;
       break;
     case SET_EUROPE_COUNTRIES:
-      continents[3]["countries"].countries = [...action.countries];
+      countries = action.countries.map((country, index) => {
+        return { name: country, id: index + 1 };
+      });
+      continents[3]["countries"].countries = [...countries];
       return state;
       break;
     case SET_NORTH_AMERICA_COUNTRIES:
-      continents[4]["countries"].countries = [...action.countries];
+      countries = action.countries.map((country, index) => {
+        return { name: country, id: index + 1 };
+      });
+      continents[4]["countries"].countries = [...countries];
       return state;
       break;
     case SET_SOUTH_AMERICA_COUNTRIES:
-      continents[5]["countries"].countries = [...action.countries];
+      countries = action.countries.map((country, index) => {
+        return { name: country, id: index + 1 };
+      });
+      continents[5]["countries"].countries = [...countries];
       return state;
       break;
     case SELECT_CONTINENT:

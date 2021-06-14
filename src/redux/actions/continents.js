@@ -1,5 +1,6 @@
 import {
   SELECT_CONTINENT,
+  SELECT_COUNTRY,
   SET_AFRICA_COUNTRIES,
   SET_ASIA_COUNTRIES,
   SET_AUSTRALIA_COUNTRIES,
@@ -7,6 +8,14 @@ import {
   SET_NORTH_AMERICA_COUNTRIES,
   SET_SOUTH_AMERICA_COUNTRIES,
 } from "./types";
+
+export const action_selectCountry = (id) => {
+  console.log(id);
+  return {
+    type: SELECT_COUNTRY,
+    id,
+  };
+};
 
 export const action_selectContinent = (id) => {
   console.log(id);

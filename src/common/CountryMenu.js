@@ -14,6 +14,7 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { useDispatch, useSelector } from "react-redux";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import { DropdownIcon } from "../constants/svgicons";
+import { action_selectCountry } from "../redux/actions/continents";
 import { Radio } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -153,12 +154,14 @@ const CountryMenu = ({ country, countries, continentData }) => {
     setOpen(false);
   };
 
-  const orgselected = (e, org) => {
-    // dispatch(action_selectOrg({ orgid: org }));
+  const selectCountry = (e, id) => {
+    dispatch(action_selectCountry(id));
     setOpen(false);
   };
 
   console.log("Country Menu has rendered");
+
+  console.log(countries.countries);
 
   return (
     <ClickAwayListener onClickAway={handleClose}>
@@ -182,7 +185,7 @@ const CountryMenu = ({ country, countries, continentData }) => {
         >
           {
             continentData.continents[parseInt(continentData.selected) - 1]
-              .countries["countries"][0]
+              .countries["countries"][`${countries.selected}` - 1].name
           }
         </Button>
         <Popper
@@ -197,21 +200,23 @@ const CountryMenu = ({ country, countries, continentData }) => {
           <div className={classes.formHeader}></div>
           <List className={classes.listroot}>
             {countries.countries
-              .sort((a, b) => (a === b ? 0 : a > b ? 1 : -1))
+              .sort((a, b) =>
+                a.name === b.name ? 0 : a.name > b.name ? 1 : -1
+              )
               .map((country, i) => (
                 <ListItem
-                  key={i}
+                  key={country.id}
                   className={classes.menuItem}
-                  //   onClick={(event) => orgselected(event, country.countryId)}
-                  //   className={
-                  //     countryData.selected.includes(country.countryId)
-                  //       ? classes.menuItemSelected
-                  //       : classes.menuItem
-                  //   }
+                  // onClick={(event) => selectCountry(event, continent.id)}
+                  // className={
+                  //   continentData.selected.includes(continent.id)
+                  //     ? classes.menuItemSelected
+                  //     : classes.menuItem
+                  // }
                   dense
                   button
                 >
-                  {country}
+                  {country.name}
                 </ListItem>
               ))}
           </List>
