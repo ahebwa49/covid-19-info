@@ -2,6 +2,6 @@ import { combineReducers } from "redux";
 import continentsReducer from "./continents";
 
 const mainReducer = combineReducers({
-  continents: continentsReducer,
+  continentsData: continentsReducer,
 });
 export default mainReducer;

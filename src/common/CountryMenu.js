@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "none",
   },
   btn: {
+    whiteSpace: "nowrap",
     fontSize: "16px",
     width: "100%",
     ["&:hover"]: {
@@ -136,23 +137,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CountryMenu = () => {
+const CountryMenu = ({ country, countries, continentData }) => {
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [iconstroke, setIconStroke] = useState("#333");
-
-  const continentData = useSelector((state) => state.continents);
-  console.log(continentData);
-
-  let countries =
-    continentData.continents[parseInt(continentData.selected) - 1].countries;
-
-  // const loadingState = useSelector((state) => state.UI.orgLoading);
-  useEffect(() => {
-    //call orgs here
-    console.log("Continent Data has changed");
-  }, [continentData]);
 
   const classes = useStyles();
 
@@ -168,6 +157,8 @@ const CountryMenu = () => {
     // dispatch(action_selectOrg({ orgid: org }));
     setOpen(false);
   };
+
+  console.log("Country Menu has rendered");
 
   return (
     <ClickAwayListener onClickAway={handleClose}>
@@ -189,7 +180,10 @@ const CountryMenu = () => {
             />
           }
         >
-          {countries.countries[parseInt(countries.selected) - 1]}
+          {
+            continentData.continents[parseInt(continentData.selected) - 1]
+              .countries["countries"][0]
+          }
         </Button>
         <Popper
           className={classes.menu}
@@ -221,7 +215,6 @@ const CountryMenu = () => {
                 </ListItem>
               ))}
           </List>
-          {/* )} */}
         </Popper>
       </div>
     </ClickAwayListener>

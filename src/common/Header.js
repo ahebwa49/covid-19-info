@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ToggleOffIcon from "@material-ui/icons/ToggleOff";
 import ToggleOnIcon from "@material-ui/icons/ToggleOn";
 import { makeStyles } from "@material-ui/styles";
+import { useSelector } from "react-redux";
 import MenuButton from "./MenuButton";
 import MobileMenu from "./mobileMenu";
 import ContinentMenu from "./ContinentMenu";
@@ -17,6 +18,11 @@ const Header = () => {
   const [theme, setTheme] = useState("dark");
 
   const classes = useStyles();
+
+  const continentData = useSelector((state) => state.continentsData);
+
+  let countries =
+    continentData.continents[parseInt(continentData.selected) - 1].countries;
 
   const handleToggleOffClick = () => {
     setTheme("dark");
@@ -57,9 +63,9 @@ const Header = () => {
         </Link>
 
         <div className="header-options">
-          <ContinentMenu />
+          <ContinentMenu continentData={continentData} />
           <VerticalLineIcon className="bar" />
-          <CountryMenu />
+          <CountryMenu countries={countries} continentData={continentData} />
           <VerticalLineIcon className="bar" />
           <DateRange />
         </div>

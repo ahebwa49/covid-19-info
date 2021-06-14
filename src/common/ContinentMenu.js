@@ -136,20 +136,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ContinentMenu = () => {
+const ContinentMenu = ({ continentData }) => {
   const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [iconstroke, setIconStroke] = useState("#333");
-
-  const continentData = useSelector((state) => state.continents);
-
-  console.log(continentData);
-
-  useEffect(() => {
-    //call orgs here
-  }, []);
 
   const classes = useStyles();
 
