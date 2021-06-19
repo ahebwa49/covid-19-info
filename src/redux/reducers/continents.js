@@ -1,5 +1,6 @@
 import {
   SELECT_CONTINENT,
+  SELECT_COUNTRY,
   SET_AFRICA_COUNTRIES,
   SET_ASIA_COUNTRIES,
   SET_AUSTRALIA_COUNTRIES,
@@ -83,6 +84,11 @@ const continentReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         selected: action.id,
       });
+      break;
+    case SELECT_COUNTRY:
+      continents[parseInt(action.continentId) - 1]["countries"].selected =
+        action.countryId;
+      return state;
       break;
     default:
       return state;

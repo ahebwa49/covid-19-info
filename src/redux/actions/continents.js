@@ -9,11 +9,11 @@ import {
   SET_SOUTH_AMERICA_COUNTRIES,
 } from "./types";
 
-export const action_selectCountry = (id) => {
-  console.log(id);
+export const action_selectCountry = (countryId, continentId) => {
   return {
     type: SELECT_COUNTRY,
-    id,
+    countryId,
+    continentId,
   };
 };
 

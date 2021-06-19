@@ -155,7 +155,7 @@ const CountryMenu = ({ country, countries, continentData }) => {
   };
 
   const selectCountry = (e, id) => {
-    dispatch(action_selectCountry(id));
+    dispatch(action_selectCountry(id, continentData.selected));
     setOpen(false);
   };
 
@@ -207,12 +207,12 @@ const CountryMenu = ({ country, countries, continentData }) => {
                 <ListItem
                   key={country.id}
                   className={classes.menuItem}
-                  // onClick={(event) => selectCountry(event, continent.id)}
-                  // className={
-                  //   continentData.selected.includes(continent.id)
-                  //     ? classes.menuItemSelected
-                  //     : classes.menuItem
-                  // }
+                  onClick={(event) => selectCountry(event, country.id)}
+                  className={
+                    countries.selected === country.id
+                      ? classes.menuItemSelected
+                      : classes.menuItem
+                  }
                   dense
                   button
                 >
