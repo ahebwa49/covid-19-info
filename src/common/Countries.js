@@ -24,10 +24,6 @@ const margin = {
 class Countries extends React.Component {
   constructor(props) {
     super(props);
-    this.x_axis_confirmed = React.createRef();
-    this.y_axis_confirmed = React.createRef();
-    this.x_axis_deaths = React.createRef();
-    this.y_axis_deaths = React.createRef();
     this.state = {
       country: "Afghanistan",
       openDialog: false,
@@ -35,11 +31,6 @@ class Countries extends React.Component {
       reportname: "",
     };
   }
-
-  xAxisConfirmed = d3.axisBottom().ticks(5);
-  xAxisDeaths = d3.axisBottom().ticks(5);
-  yAxisConfirmed = d3.axisLeft().tickFormat(d3.format(".2s"));
-  yAxisDeaths = d3.axisLeft().tickFormat(d3.format(".2s"));
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const { country } = prevState;
@@ -60,87 +51,17 @@ class Countries extends React.Component {
 
     const fTimeSeries = timeSeries.flat();
 
-    // console.log(fTimeSeries);
-
-    const nested = d3
-      .nest()
-      .key((d) => d.date)
-      .rollup((leaves) => {
-        const totalConfirmed = d3.sum(leaves, (d) => d.confirmed);
-        const totalDeaths = d3.sum(leaves, (d) => d.deaths);
-        const totalRecovered = d3.sum(leaves, (d) => d.recovered);
-
-        return {
-          totalConfirmed: totalConfirmed,
-          totalDeaths: totalDeaths,
-          totalRecovered: totalRecovered,
-        };
-      })
-      .entries(fTimeSeries);
-
-    // console.log(nested);
-
-    // Confirmed --------------------------------------
-    const xExtentConfirmed = d3.extent(nested, (d) => new Date(d.key));
-    const xScaleConfirmed = d3
-      .scaleTime()
-      .domain(xExtentConfirmed)
-      .range([margin.left, width - margin.right]);
-
-    const maxConfirmed = d3.max(nested, (d) => d.value.totalConfirmed);
-    // console.log(maxConfirmed);
-
-    const yScaleConfirmed = d3
-      .scaleLinear()
-      .domain([0, maxConfirmed])
-      .range([height - margin.bottom, margin.top]);
-
-    // Deaths --------------------------------------
-    const xExtentDeaths = d3.extent(nested, (d) => new Date(d.key));
-    const xScaleDeaths = d3
-      .scaleTime()
-      .domain(xExtentDeaths)
-      .range([margin.left, width - margin.right]);
-
-    const maxDeaths = d3.max(nested, (d) => d.value.totalDeaths);
-
-    const yScaleDeaths = d3
-      .scaleLinear()
-      .domain([0, maxDeaths])
-      .range([height - margin.bottom, margin.top]);
+    console.log(fTimeSeries);
 
     return {
       countries,
-      nested,
-      yScaleConfirmed,
-      xScaleConfirmed,
-      xScaleDeaths,
-      yScaleDeaths,
       fTimeSeries,
     };
   }
 
-  componentDidUpdate() {
-    this.xAxisConfirmed.scale(this.state.xScaleConfirmed);
-    this.xAxisDeaths.scale(this.state.xScaleDeaths);
-    d3.select(this.x_axis_confirmed.current).call(this.xAxisConfirmed);
-    d3.select(this.x_axis_deaths.current).call(this.xAxisDeaths);
-    this.yAxisConfirmed.scale(this.state.yScaleConfirmed);
-    this.yAxisDeaths.scale(this.state.yScaleDeaths);
-    d3.select(this.y_axis_confirmed.current).call(this.yAxisConfirmed);
-    d3.select(this.y_axis_deaths.current).call(this.yAxisDeaths);
-  }
+  componentDidUpdate() {}
 
-  componentDidMount() {
-    this.xAxisConfirmed.scale(this.state.xScaleConfirmed);
-    this.xAxisDeaths.scale(this.state.xScaleDeaths);
-    d3.select(this.x_axis_confirmed.current).call(this.xAxisConfirmed);
-    d3.select(this.x_axis_deaths.current).call(this.xAxisDeaths);
-    this.yAxisConfirmed.scale(this.state.yScaleConfirmed);
-    this.yAxisDeaths.scale(this.state.yScaleDeaths);
-    d3.select(this.y_axis_confirmed.current).call(this.yAxisConfirmed);
-    d3.select(this.y_axis_deaths.current).call(this.yAxisDeaths);
-  }
+  componentDidMount() {}
 
   handleChange = (e) => {
     this.setState({ country: e.target.value });
@@ -167,15 +88,6 @@ class Countries extends React.Component {
 
   render() {
     const { country, countries } = this.state;
-    const lineConfirmed = d3
-      .line()
-      .x((d) => this.state.xScaleConfirmed(new Date(d.key)))
-      .y((d) => this.state.yScaleConfirmed(d.value.totalConfirmed));
-
-    const lineDeaths = d3
-      .line()
-      .x((d) => this.state.xScaleDeaths(new Date(d.key)))
-      .y((d) => this.state.yScaleDeaths(d.value.totalDeaths));
     return (
       <div className="country-visuals">
         <FullScreenDialog
