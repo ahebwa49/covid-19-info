@@ -89,7 +89,7 @@ class Countries extends React.Component {
   render() {
     const { country, countries } = this.state;
     return (
-      <div className="country-visuals">
+      <div className="country-visuals" style={{ border: "1px solid red" }}>
         <FullScreenDialog
           open={this.state.openDialog}
           handleClickOpen={this.handleClickOpen}
@@ -98,7 +98,7 @@ class Countries extends React.Component {
           title={this.state.title}
           line
         />
-        <div className="select-country">
+        {/* <div className="select-country">
           <div>
             <label htmlFor="countries">Choose a country:</label>
           </div>
@@ -117,7 +117,7 @@ class Countries extends React.Component {
               })}
             </select>
           </div>
-        </div>
+        </div> */}
         <div className="country-line-charts">
           <div className="country-line-chart">
             <p style={{ textAlign: "center" }}>{`${country} Cases`}</p>
