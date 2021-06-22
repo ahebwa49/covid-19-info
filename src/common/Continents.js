@@ -54,33 +54,21 @@ class Continents extends React.Component {
     const fTimeSeries = timeSeries.flat();
     // console.log(fTimeSeries);
 
-    console.log(data);
-    const bumpCountries = [];
+    // console.log(data);
+    let countryCases = [];
+
     for (let i = 0; i < data.length; i++) {
-      bumpCountries.push(data[i].country);
+      let timeseries = data[i].timeseries.flat();
+      countryCases.push({
+        country: data[i].country,
+        confirmed: data[i].timeseries[timeseries.length - 1].confirmed,
+      });
     }
-    console.log(bumpCountries);
 
-    bumpCountries.map((country) => {
-      let timeseries = [];
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].country === `${country}`)
-          timeseries.push(data[i].timeseries);
-      }
-    })
-
-    // const bumpNested = d3
-    //   .nest()
-    //   .key((d) => d.country)
-    //   .rollup((leaves) => {
-    //     const totalConfirmed = d3.sum(leaves, (d) => d.);
-
-    //     return {
-    //       totalConfirmed: totalConfirmed,
-
-    //     };
-    //   })
-    //   .entries(bumpTimeSeries);
+    let topCountryCases = countryCases.sort(
+      (a, b) => b.confirmed - a.confirmed
+    );
+    console.log(topCountryCases.slice(0, 10));
 
     const nested = d3
       .nest()
