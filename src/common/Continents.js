@@ -65,11 +65,18 @@ class Continents extends React.Component {
       });
     }
 
-    let topCountryCases = countryCases.sort(
-      (a, b) => b.confirmed - a.confirmed
-    );
-    console.log(topCountryCases.slice(0, 10));
+    let topCountryCases = countryCases
+      .sort((a, b) => b.confirmed - a.confirmed)
+      .slice(0, 10);
+    // console.log(topCountryCases);
 
+    let topCountryNames = topCountryCases.map((item) => item.country);
+
+    let topCountryTimeSeries = data.filter(
+      (item) => topCountryNames.indexOf(item.country) !== -1
+    );
+
+    // console.log(topCountryTimeSeries);
     const nested = d3
       .nest()
       .key((d) => d.date)
@@ -100,6 +107,7 @@ class Continents extends React.Component {
     // console.log(continentTimeSeries);
 
     return {
+      topCountryTimeSeries,
       continentTimeSeries,
       data,
     };
@@ -135,308 +143,28 @@ class Continents extends React.Component {
   };
 
   render() {
-    let bumpData = [
-      {
-        id: "Serie 1",
-        data: [
-          {
-            x: 2000,
-            y: 2,
-          },
-          {
-            x: 2001,
-            y: 4,
-          },
-          {
-            x: 2002,
-            y: 12,
-          },
-          {
-            x: 2003,
-            y: 9,
-          },
-          {
-            x: 2004,
-            y: 9,
-          },
-        ],
-      },
-      {
-        id: "Serie 2",
-        data: [
-          {
-            x: 2000,
-            y: 9,
-          },
-          {
-            x: 2001,
-            y: 12,
-          },
-          {
-            x: 2002,
-            y: 2,
-          },
-          {
-            x: 2003,
-            y: 10,
-          },
-          {
-            x: 2004,
-            y: 1,
-          },
-        ],
-      },
-      {
-        id: "Serie 3",
-        data: [
-          {
-            x: 2000,
-            y: 12,
-          },
-          {
-            x: 2001,
-            y: 3,
-          },
-          {
-            x: 2002,
-            y: 7,
-          },
-          {
-            x: 2003,
-            y: 2,
-          },
-          {
-            x: 2004,
-            y: 8,
-          },
-        ],
-      },
-      {
-        id: "Serie 4",
-        data: [
-          {
-            x: 2000,
-            y: 1,
-          },
-          {
-            x: 2001,
-            y: 2,
-          },
-          {
-            x: 2002,
-            y: 1,
-          },
-          {
-            x: 2003,
-            y: 11,
-          },
-          {
-            x: 2004,
-            y: 4,
-          },
-        ],
-      },
-      {
-        id: "Serie 5",
-        data: [
-          {
-            x: 2000,
-            y: 5,
-          },
-          {
-            x: 2001,
-            y: 6,
-          },
-          {
-            x: 2002,
-            y: 5,
-          },
-          {
-            x: 2003,
-            y: 8,
-          },
-          {
-            x: 2004,
-            y: 6,
-          },
-        ],
-      },
-      {
-        id: "Serie 6",
-        data: [
-          {
-            x: 2000,
-            y: 3,
-          },
-          {
-            x: 2001,
-            y: 11,
-          },
-          {
-            x: 2002,
-            y: 3,
-          },
-          {
-            x: 2003,
-            y: 7,
-          },
-          {
-            x: 2004,
-            y: 3,
-          },
-        ],
-      },
-      {
-        id: "Serie 7",
-        data: [
-          {
-            x: 2000,
-            y: 7,
-          },
-          {
-            x: 2001,
-            y: 7,
-          },
-          {
-            x: 2002,
-            y: 9,
-          },
-          {
-            x: 2003,
-            y: 4,
-          },
-          {
-            x: 2004,
-            y: 7,
-          },
-        ],
-      },
-      {
-        id: "Serie 8",
-        data: [
-          {
-            x: 2000,
-            y: 8,
-          },
-          {
-            x: 2001,
-            y: 1,
-          },
-          {
-            x: 2002,
-            y: 4,
-          },
-          {
-            x: 2003,
-            y: 1,
-          },
-          {
-            x: 2004,
-            y: 10,
-          },
-        ],
-      },
-      {
-        id: "Serie 9",
-        data: [
-          {
-            x: 2000,
-            y: 10,
-          },
-          {
-            x: 2001,
-            y: 5,
-          },
-          {
-            x: 2002,
-            y: 8,
-          },
-          {
-            x: 2003,
-            y: 12,
-          },
-          {
-            x: 2004,
-            y: 2,
-          },
-        ],
-      },
-      {
-        id: "Serie 10",
-        data: [
-          {
-            x: 2000,
-            y: 4,
-          },
-          {
-            x: 2001,
-            y: 10,
-          },
-          {
-            x: 2002,
-            y: 6,
-          },
-          {
-            x: 2003,
-            y: 3,
-          },
-          {
-            x: 2004,
-            y: 5,
-          },
-        ],
-      },
-      {
-        id: "Serie 11",
-        data: [
-          {
-            x: 2000,
-            y: 11,
-          },
-          {
-            x: 2001,
-            y: 9,
-          },
-          {
-            x: 2002,
-            y: 11,
-          },
-          {
-            x: 2003,
-            y: 6,
-          },
-          {
-            x: 2004,
-            y: 11,
-          },
-        ],
-      },
-      {
-        id: "Serie 12",
-        data: [
-          {
-            x: 2000,
-            y: 6,
-          },
-          {
-            x: 2001,
-            y: 8,
-          },
-          {
-            x: 2002,
-            y: 10,
-          },
-          {
-            x: 2003,
-            y: 5,
-          },
-          {
-            x: 2004,
-            y: 12,
-          },
-        ],
-      },
-    ];
+    let countryBumpData = this.state.topCountryTimeSeries.map((entry) => {
+      return {
+        id: entry.country,
+        data: entry.timeseries
+          .filter(
+            (item, index) =>
+              item.date == "2020-3-1" ||
+              item.date == "2020-6-1" ||
+              item.date == "2020-9-1" ||
+              item.date == "2020-12-1" ||
+              item.date == "2021-3-1" ||
+              item.date == "2021-3-1"
+          )
+          .map((item, index) => ({
+            x: item.date,
+            y: item.confirmed,
+          })),
+      };
+    });
+
+    console.log(countryBumpData);
+    let bumpData = countryBumpData;
     let continent =
       this.props.continentData.continents[
         parseInt(this.props.continentData.selected) - 1
