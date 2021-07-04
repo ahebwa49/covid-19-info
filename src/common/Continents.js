@@ -171,7 +171,7 @@ class Continents extends React.Component {
       ].continent;
     return (
       <>
-        <div className="country-visuals" style={{ border: "1px solid red" }}>
+        <div className="country-visuals">
           <FullScreenDialog
             open={this.state.openDialog}
             handleClickOpen={this.handleClickOpen}
