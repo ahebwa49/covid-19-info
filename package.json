@@ -27,6 +27,7 @@
   "scripts": {
     "dev": "PORT=3002 react-scripts start",
     "start": "serve -n build",
+    "deploy-production": "scp -r ./build/* /var/www/covidvisualizer.live/html",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

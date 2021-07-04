@@ -218,7 +218,6 @@ class Continents extends React.Component {
         </div>
         <div
           style={{
-            border: "1px solid red",
             width: "80%",
             marginLeft: "auto",
             marginRight: "auto",
