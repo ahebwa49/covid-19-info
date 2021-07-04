@@ -18,4 +18,4 @@ jobs:
           host: ${{ secrets.HOST_IP }}
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.KEY }}
-          script: cd covid-19-info/ && git pull && yarn build && yarn deploy-production
+          script: cd covid-19-info/ && git pull origin master && yarn build && yarn deploy-production
