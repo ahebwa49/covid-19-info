@@ -89,7 +89,7 @@ class Countries extends React.Component {
   render() {
     const { country, countries } = this.state;
     return (
-      <div className="country-visuals">
+      <div className="country-visuals" style={{ border: "1px solid blue" }}>
         <FullScreenDialog
           open={this.state.openDialog}
           handleClickOpen={this.handleClickOpen}
