@@ -156,12 +156,12 @@ const DateRange = () => {
   const dateData = [
     { dateName: "Last Week", dateId: "1" },
     { dateName: "Last 2 Weeks	", dateId: "2" },
-    { dateName: "Last Month", dateId: "3" },
-    { dateName: "This Month", dateId: "4" },
-    { dateName: "Last 13 Weeks", dateId: "5" },
-    { dateName: "This Quarter", dateId: "6" },
-    { dateName: "This Year", dateId: "8" },
-    { dateName: "Last Year", dateId: "9" },
+    { dateName: "This Month", dateId: "3" },
+    { dateName: "Last Month", dateId: "4" },
+    { dateName: "This Quarter", dateId: "5" },
+    { dateName: "Last Quarter", dateId: "6" },
+    { dateName: "This Year", dateId: "7" },
+    { dateName: "Last Year", dateId: "8" },
   ];
   // const loadingState = useSelector((state) => state.UI.orgLoading);
   useEffect(() => {
@@ -239,26 +239,22 @@ const DateRange = () => {
             </div>
           ) : ( */}
           <List className={classes.listroot}>
-            {dateData
-              .sort((a, b) =>
-                a.dateName === b.dateName ? 0 : a.dateName > b.dateName ? 1 : -1
-              )
-              .map((date) => (
-                <ListItem
-                  key={date.dateName}
-                  className={classes.menuItem}
-                  //   onClick={(event) => orgselected(event, date.dateId)}
-                  //   className={
-                  //     dateData.selected.includes(date.dateId)
-                  //       ? classes.menuItemSelected
-                  //       : classes.menuItem
-                  //   }
-                  dense
-                  button
-                >
-                  {date.dateName}
-                </ListItem>
-              ))}
+            {dateData.map((date) => (
+              <ListItem
+                key={date.dateName}
+                className={classes.menuItem}
+                //   onClick={(event) => orgselected(event, date.dateId)}
+                //   className={
+                //     dateData.selected.includes(date.dateId)
+                //       ? classes.menuItemSelected
+                //       : classes.menuItem
+                //   }
+                dense
+                button
+              >
+                {date.dateName}
+              </ListItem>
+            ))}
           </List>
           {/* )} */}
         </Popper>
