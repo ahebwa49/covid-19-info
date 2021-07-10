@@ -149,7 +149,7 @@ const useStyles = makeStyles((theme) => ({
 const DateRange = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
-  const [iconstroke, setIconStroke] = useState("#333");
+  const [iconstroke, setIconStroke] = useState("#C0C0C0");
 
   // const dispatch = useDispatch();
 
@@ -205,6 +205,7 @@ const DateRange = () => {
     <ClickAwayListener onClickAway={handleClose}>
       <div className={classes.root}>
         <Button
+          disabled
           aria-controls="simpRange"
           aria-haspopup="true"
           onClick={handleClick}
@@ -221,7 +222,7 @@ const DateRange = () => {
             />
           }
         >
-          Last Week
+          Select Date Range
         </Button>
         <Popper
           className={classes.menu}
