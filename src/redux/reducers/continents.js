@@ -32,7 +32,7 @@ const continents = [
 
 const initialState = {
   continents,
-  selected: "1",
+  selected: null,
 };
 
 const continentReducer = (state = initialState, action) => {

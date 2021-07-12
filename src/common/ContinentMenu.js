@@ -208,8 +208,10 @@ const ContinentMenu = ({ continentData }) => {
                   className={classes.menuItem}
                   onClick={(event) => selectContinent(event, continent.id)}
                   className={
-                    continentData.selected.includes(continent.id)
-                      ? classes.menuItemSelected
+                    continentData.selected
+                      ? continentData.selected.includes(continent.id)
+                        ? classes.menuItemSelected
+                        : classes.menuItem
                       : classes.menuItem
                   }
                   dense

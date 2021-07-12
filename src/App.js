@@ -184,12 +184,12 @@ class App extends React.Component {
               worldData={data.plainCovidData}
             />
           </div>
-          <div className="heading">
+          {/* <div className="heading">
             <p>COVID-19 VISUALIZATIONS BY COUNTRY</p>
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
             <Countries data={data.newTimeSeries} />
-          </div>
+          </div> */}
           <Footer />
         </div>
       </>

@@ -36,34 +36,55 @@ class Continents extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     const { data } = nextProps;
 
-    let continent =
-      nextProps.continentData.continents[
-        parseInt(nextProps.continentData.selected) - 1
-      ].continent;
+    let continent = nextProps.continentData.selected
+      ? nextProps.continentData.continents[
+          parseInt(nextProps.continentData.selected) - 1
+        ].continent
+      : "world";
 
     console.log(continent);
 
     if (!data) return {};
 
     const timeSeries = [];
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].continent === `${continent}`)
+
+    if (continent === "world") {
+      for (let i = 0; i < data.length; i++) {
         timeSeries.push(data[i].timeseries);
+      }
+    } else {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].continent === `${continent}`)
+          timeSeries.push(data[i].timeseries);
+      }
     }
 
     const fTimeSeries = timeSeries.flat();
-    // console.log(fTimeSeries);
 
-    // console.log(data);
+    console.log(fTimeSeries);
+
     let countryCases = [];
 
-    for (let i = 0; i < data.length; i++) {
-      let timeseries = data[i].timeseries.flat();
-      countryCases.push({
-        country: data[i].country,
-        confirmed: data[i].timeseries[timeseries.length - 1].confirmed,
-      });
+    if (continent === "world") {
+      for (let i = 0; i < data.length; i++) {
+        let timeseries = data[i].timeseries.flat();
+        countryCases.push({
+          country: data[i].country,
+          confirmed: data[i].timeseries[timeseries.length - 1].confirmed,
+        });
+      }
+    } else {
+      for (let i = 0; i < data.length; i++) {
+        let timeseries = data[i].timeseries.flat();
+        if (data[i].continent === `${continent}`)
+          countryCases.push({
+            country: data[i].country,
+            confirmed: data[i].timeseries[timeseries.length - 1].confirmed,
+          });
+      }
     }
+
+    console.log(countryCases);
 
     let topCountryCases = countryCases
       .sort((a, b) => b.confirmed - a.confirmed)
@@ -154,7 +175,7 @@ class Continents extends React.Component {
               item.date == "2020-9-1" ||
               item.date == "2020-12-1" ||
               item.date == "2021-3-1" ||
-              item.date == "2021-3-1"
+              item.date == "2021-6-1"
           )
           .map((item, index) => ({
             x: item.date,
@@ -165,10 +186,11 @@ class Continents extends React.Component {
 
     console.log(countryBumpData);
     let bumpData = countryBumpData;
-    let continent =
-      this.props.continentData.continents[
-        parseInt(this.props.continentData.selected) - 1
-      ].continent;
+    let continent = this.props.continentData.selected
+      ? this.props.continentData.continents[
+          parseInt(this.props.continentData.selected) - 1
+        ].continent
+      : "Total";
     return (
       <>
         <div className="country-visuals">

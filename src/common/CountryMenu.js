@@ -144,6 +144,8 @@ const CountryMenu = ({ country, countries, continentData }) => {
   const [open, setOpen] = useState(false);
   const [iconstroke, setIconStroke] = useState("#333");
 
+  const disabledIconStroke = "#C0C0C0";
+
   const classes = useStyles();
 
   const handleClick = (event) => {
@@ -167,6 +169,7 @@ const CountryMenu = ({ country, countries, continentData }) => {
     <ClickAwayListener onClickAway={handleClose}>
       <div className={classes.root}>
         <Button
+          disabled={continentData.selected ? false : true}
           aria-controls="simple-menu"
           aria-haspopup="true"
           onClick={handleClick}
@@ -178,15 +181,15 @@ const CountryMenu = ({ country, countries, continentData }) => {
           endIcon={
             <DropdownIcon
               style={{ marginLeft: 4, marginTop: 10 }}
-              stroke={iconstroke}
+              stroke={continentData.selected ? iconstroke : disabledIconStroke}
               fill="none"
             />
           }
         >
-          {
-            continentData.continents[parseInt(continentData.selected) - 1]
-              .countries["countries"][`${countries.selected}` - 1].name
-          }
+          {continentData.selected
+            ? continentData.continents[parseInt(continentData.selected) - 1]
+                .countries["countries"][`${countries.selected}` - 1].name
+            : "Select Country"}
         </Button>
         <Popper
           className={classes.menu}
@@ -198,28 +201,30 @@ const CountryMenu = ({ country, countries, continentData }) => {
           placement="bottom-end"
         >
           <div className={classes.formHeader}></div>
-          <List className={classes.listroot}>
-            {countries.countries
-              .sort((a, b) =>
-                a.name === b.name ? 0 : a.name > b.name ? 1 : -1
-              )
-              .map((country, i) => (
-                <ListItem
-                  key={country.id}
-                  className={classes.menuItem}
-                  onClick={(event) => selectCountry(event, country.id)}
-                  className={
-                    countries.selected === country.id
-                      ? classes.menuItemSelected
-                      : classes.menuItem
-                  }
-                  dense
-                  button
-                >
-                  {country.name}
-                </ListItem>
-              ))}
-          </List>
+          {continentData.selected ? (
+            <List className={classes.listroot}>
+              {countries.countries
+                .sort((a, b) =>
+                  a.name === b.name ? 0 : a.name > b.name ? 1 : -1
+                )
+                .map((country, i) => (
+                  <ListItem
+                    key={country.id}
+                    className={classes.menuItem}
+                    onClick={(event) => selectCountry(event, country.id)}
+                    className={
+                      countries.selected === country.id
+                        ? classes.menuItemSelected
+                        : classes.menuItem
+                    }
+                    dense
+                    button
+                  >
+                    {country.name}
+                  </ListItem>
+                ))}
+            </List>
+          ) : null}
         </Popper>
       </div>
     </ClickAwayListener>

@@ -21,8 +21,9 @@ const Header = () => {
 
   const continentData = useSelector((state) => state.continentsData);
 
-  let countries =
-    continentData.continents[parseInt(continentData.selected) - 1].countries;
+  let countries = continentData.selected
+    ? continentData.continents[parseInt(continentData.selected) - 1].countries
+    : [];
 
   const handleToggleOffClick = () => {
     setTheme("dark");
