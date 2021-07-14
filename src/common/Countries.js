@@ -1,6 +1,5 @@
 import React from "react";
-import * as d3 from "d3";
-import Grid from "@material-ui/core/Grid";
+import { connect } from "react-redux";
 import LineCards from "./linecards";
 import FullScreenDialog from "./fullscreenpopup";
 
@@ -24,8 +23,8 @@ const margin = {
 class Countries extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      country: "Afghanistan",
       openDialog: false,
       popupdata: [],
       reportname: "",
@@ -33,33 +32,36 @@ class Countries extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { country } = prevState;
-    // console.log(country);
+    const { continentData } = nextProps;
+    let countries = continentData.selected
+      ? continentData.continents[parseInt(continentData.selected) - 1].countries
+      : [];
+
+    let country =
+      continentData.continents[parseInt(continentData.selected) - 1].countries[
+        "countries"
+      ][`${countries.selected}` - 1].name;
+
     const { data } = nextProps;
     if (!data) return {};
-
-    // console.log(data)
-
-    let countries = [];
 
     const timeSeries = [];
     for (let i = 0; i < data.length; i++) {
       if (data[i].country === `${country}`) timeSeries.push(data[i].timeseries);
-      countries.push({ name: data[i].country, id: id++ });
     }
-    // console.log(countries);
 
     const fTimeSeries = timeSeries.flat();
 
     console.log(fTimeSeries);
 
     return {
-      countries,
       fTimeSeries,
+      countries,
+      country,
     };
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate(prevProps, prevState) {}
 
   componentDidMount() {}
 
@@ -87,7 +89,19 @@ class Countries extends React.Component {
   };
 
   render() {
-    const { country, countries } = this.state;
+    const { continentData } = this.props;
+
+    let countries = continentData.selected
+      ? continentData.continents[parseInt(continentData.selected) - 1].countries
+      : [];
+
+    let country =
+      continentData.continents[parseInt(continentData.selected) - 1].countries[
+        "countries"
+      ][`${countries.selected}` - 1].name;
+
+    console.log(country);
+
     return (
       <div className="country-visuals">
         <FullScreenDialog
@@ -98,26 +112,7 @@ class Countries extends React.Component {
           title={this.state.title}
           line
         />
-        {/* <div className="select-country">
-          <div>
-            <label htmlFor="countries">Choose a country:</label>
-          </div>
-          <div>
-            <select
-              id="countries"
-              value={this.state.country}
-              onChange={this.handleChange}
-            >
-              {countries.map((country) => {
-                return (
-                  <option key={country.id} value={country.name}>
-                    {country.name}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-        </div> */}
+
         <div className="country-line-charts">
           <div className="country-line-chart">
             <p style={{ textAlign: "center" }}>{`${country} Cases`}</p>
@@ -157,4 +152,8 @@ class Countries extends React.Component {
   }
 }
 
-export default Countries;
+const mapStateToProps = (state) => ({
+  continentData: state.continentsData,
+});
+
+export default connect(mapStateToProps, null)(Countries);

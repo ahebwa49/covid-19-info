@@ -148,6 +148,7 @@ class App extends React.Component {
   render() {
     const { data } = this.state;
     console.log(this.props.continents);
+    const { continentData } = this.props;
 
     if (data.geoData === null) {
       return (
@@ -163,14 +164,27 @@ class App extends React.Component {
           <div className="heading">
             <p>COVID-19 CORONAVIRUS PANDEMIC VISUALIZATIONS</p>
           </div>
-          <div className="general">
-            <div className="sidebar">
-              <QuickFacts data={data.covidData} />
+          {continentData.selected ? (
+            <>
+              <div className="heading">
+                <p>COVID-19 VISUALIZATIONS BY COUNTRY</p>
+              </div>
+              <div>
+                <Countries data={data.newTimeSeries} />
+              </div>
+            </>
+          ) : null}
+
+          {continentData.selected ? null : (
+            <div className="general">
+              <div className="sidebar">
+                <QuickFacts data={data.covidData} />
+              </div>
+              <div className="main">
+                <WorldMap data={data.geoData} covid={data.covid} />
+              </div>
             </div>
-            <div className="main">
-              <WorldMap data={data.geoData} covid={data.covid} />
-            </div>
-          </div>
+          )}
 
           <div className="facts">
             <QuickFacts data={data.covidData} />
@@ -184,12 +198,7 @@ class App extends React.Component {
               worldData={data.plainCovidData}
             />
           </div>
-          {/* <div className="heading">
-            <p>COVID-19 VISUALIZATIONS BY COUNTRY</p>
-          </div>
-          <div>
-            <Countries data={data.newTimeSeries} />
-          </div> */}
+
           <Footer />
         </div>
       </>
@@ -199,6 +208,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => ({
   continents: state.continents,
+  continentData: state.continentsData,
 });
 
 const mapDispatchToProps = {

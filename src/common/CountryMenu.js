@@ -14,7 +14,10 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { useDispatch, useSelector } from "react-redux";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import { DropdownIcon } from "../constants/svgicons";
-import { action_selectCountry } from "../redux/actions/continents";
+import {
+  action_selectCountry,
+  action_selectContinent,
+} from "../redux/actions/continents";
 import { Radio } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -158,6 +161,7 @@ const CountryMenu = ({ country, countries, continentData }) => {
 
   const selectCountry = (e, id) => {
     dispatch(action_selectCountry(id, continentData.selected));
+    dispatch(action_selectContinent(continentData.selected));
     setOpen(false);
   };
 
@@ -230,15 +234,5 @@ const CountryMenu = ({ country, countries, continentData }) => {
     </ClickAwayListener>
   );
 };
-
-const BlueCheckbox = withStyles({
-  root: {
-    color: "#26BBED",
-    "&$checked": {
-      color: "#26BBED",
-    },
-  },
-  checked: {},
-})((props) => <Radio color="default" {...props} />);
 
 export default CountryMenu;
