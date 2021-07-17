@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Popper from "@material-ui/core/Popper";
-import { withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { useDispatch, useSelector } from "react-redux";
 import { action_selectContinent } from "../redux/actions/continents";
-import SvgIcon from "@material-ui/core/SvgIcon";
+import { action_setLoading } from "../redux/actions/uilayer";
 import { DropdownIcon } from "../constants/svgicons";
-import { Radio } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -155,6 +150,10 @@ const ContinentMenu = ({ continentData }) => {
 
   const selectContinent = (e, id) => {
     dispatch(action_selectContinent(id));
+    dispatch(action_setLoading(true));
+    setTimeout(() => {
+      dispatch(action_setLoading(false));
+    }, 1000);
     setOpen(false);
   };
 
@@ -181,7 +180,7 @@ const ContinentMenu = ({ continentData }) => {
           {continentData.selected
             ? continentData.continents[parseInt(continentData.selected) - 1]
                 .continent
-            : "Select Continent"}
+            : "World"}
         </Button>
         <Popper
           className={classes.menu}
@@ -226,15 +225,5 @@ const ContinentMenu = ({ continentData }) => {
     </ClickAwayListener>
   );
 };
-
-const BlueCheckbox = withStyles({
-  root: {
-    color: "#26BBED",
-    "&$checked": {
-      color: "#26BBED",
-    },
-  },
-  checked: {},
-})((props) => <Radio color="default" {...props} />);
 
 export default ContinentMenu;

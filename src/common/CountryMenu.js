@@ -14,6 +14,7 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { useDispatch, useSelector } from "react-redux";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import { DropdownIcon } from "../constants/svgicons";
+import { action_setLoading } from "../redux/actions/uilayer";
 import {
   action_selectCountry,
   action_selectContinent,
@@ -162,6 +163,10 @@ const CountryMenu = ({ country, countries, continentData }) => {
   const selectCountry = (e, id) => {
     dispatch(action_selectCountry(id, continentData.selected));
     dispatch(action_selectContinent(continentData.selected));
+    dispatch(action_setLoading(true));
+    setTimeout(() => {
+      dispatch(action_setLoading(false));
+    }, 1000);
     setOpen(false);
   };
 

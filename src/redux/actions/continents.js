@@ -18,7 +18,6 @@ export const action_selectCountry = (countryId, continentId) => {
 };
 
 export const action_selectContinent = (id) => {
-  console.log(id);
   return {
     type: SELECT_CONTINENT,
     id,

@@ -147,12 +147,11 @@ class App extends React.Component {
   }
   render() {
     const { data } = this.state;
-    console.log(this.props.continents);
-    const { continentData } = this.props;
+    const { continentData, loading } = this.props;
 
     if (data.geoData === null) {
       return (
-        <div className="loader-wrapper">
+        <div className="primary-loader-wrapper">
           <Loader />
         </div>
       );
@@ -160,54 +159,62 @@ class App extends React.Component {
     return (
       <>
         <Header />
-        <div className="app">
-          <div className="heading">
-            <p>COVID-19 CORONAVIRUS PANDEMIC VISUALIZATIONS</p>
+        {loading ? (
+          <div className="secondary-loader-wrapper">
+            <Loader />
           </div>
-          {continentData.selected ? (
-            <>
-              <div className="heading">
-                <p>COVID-19 VISUALIZATIONS BY COUNTRY</p>
-              </div>
-              <div>
-                <Countries data={data.newTimeSeries} />
-              </div>
-            </>
-          ) : null}
+        ) : (
+          <div className="app">
+            {continentData.selected ? (
+              <>
+                <div className="heading">
+                  <p>COVID-19 VISUALIZATIONS BY COUNTRY</p>
+                </div>
+                <div>
+                  <Countries data={data.newTimeSeries} />
+                </div>
+              </>
+            ) : null}
 
-          {continentData.selected ? null : (
-            <div className="general">
-              <div className="sidebar">
-                <QuickFacts data={data.covidData} />
-              </div>
-              <div className="main">
-                <WorldMap data={data.geoData} covid={data.covid} />
-              </div>
+            {continentData.selected ? null : (
+              <>
+                <div className="heading">
+                  <p>WORLD COVID-19 PANDEMIC VISUALIZATIONS</p>
+                </div>
+                <div className="general">
+                  <div className="sidebar">
+                    <QuickFacts data={data.covidData} />
+                  </div>
+                  <div className="main">
+                    <WorldMap data={data.geoData} covid={data.covid} />
+                  </div>
+                </div>
+              </>
+            )}
+
+            <div className="facts">
+              <QuickFacts data={data.covidData} />
             </div>
-          )}
+            <div className="heading" style={{ marginTop: "1rem" }}>
+              <p>COVID-19 VISUALIZATIONS BY CONTINENT</p>
+            </div>
+            <div>
+              <Continents
+                data={data.newTimeSeries}
+                worldData={data.plainCovidData}
+              />
+            </div>
 
-          <div className="facts">
-            <QuickFacts data={data.covidData} />
+            <Footer />
           </div>
-          <div className="heading">
-            <p>COVID-19 VISUALIZATIONS BY CONTINENT</p>
-          </div>
-          <div>
-            <Continents
-              data={data.newTimeSeries}
-              worldData={data.plainCovidData}
-            />
-          </div>
-
-          <Footer />
-        </div>
+        )}
       </>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  continents: state.continents,
+  loading: state.loading.loading,
   continentData: state.continentsData,
 });
 

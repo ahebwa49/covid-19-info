@@ -236,11 +236,19 @@ code {
   display: none;
 }
 
-.loader-wrapper {
+.primary-loader-wrapper {
   display: flex;
   align-items: center;
   width: 100vw;
   height: 100vh;
+}
+
+.secondary-loader-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  height: calc(100vh - 100px);
+  /* border: 1px solid red; */
 }
 
 .loader {
@@ -327,7 +335,6 @@ code {
   display: flex;
   margin-top: 1rem;
   justify-content: center;
-  /* border: 1px solid blue; */
 }
 
 .country-line-charts {
