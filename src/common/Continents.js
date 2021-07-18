@@ -243,8 +243,12 @@ class Continents extends React.Component {
             width: "80%",
             marginLeft: "auto",
             marginRight: "auto",
+            marginTop: "3rem",
           }}
         >
+          <div className="heading">
+            <p>Coronavirus Visualisations By Continent - Rank Over Time </p>
+          </div>
           <BumpCard data={bumpData} />
         </div>
       </>

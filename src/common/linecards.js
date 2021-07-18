@@ -445,10 +445,6 @@ const LineCards = (props) => {
             alignItems: "flex-start",
           }}
         >
-          {/* <DrillDown
-            style={{ display: "inline", marginTop: 2, marginRight: 24 }}
-            stroke={drilldownColor}
-          /> */}
           <div
             onClick={(e) =>
               props.handleClickOpenDialog(

@@ -198,7 +198,7 @@ const CountryMenu = ({ country, countries, continentData }) => {
           {continentData.selected
             ? continentData.continents[parseInt(continentData.selected) - 1]
                 .countries["countries"][`${countries.selected}` - 1].name
-            : "Select Country"}
+            : "Country"}
         </Button>
         <Popper
           className={classes.menu}

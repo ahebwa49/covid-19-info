@@ -222,7 +222,7 @@ const DateRange = () => {
             />
           }
         >
-          Select Date Range
+          Date Range
         </Button>
         <Popper
           className={classes.menu}

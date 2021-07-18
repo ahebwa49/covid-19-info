@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 4,
   },
   menuItem: {
+    cursor: "pointer",
     whiteSpace: "nowrap",
     fontSize: "16px",
     color: "rgba(51,51,51,0.8)",
@@ -66,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   menuItemSelected: {
+    cursor: "pointer",
     whiteSpace: "nowrap",
     fontSize: "16px",
     fontWeight: 600,
@@ -219,6 +221,16 @@ const ContinentMenu = ({ continentData }) => {
                   {continent.continent}
                 </ListItem>
               ))}
+            <ListItem
+              onClick={(event) => selectContinent(event, null)}
+              className={
+                continentData.selected
+                  ? classes.menuItem
+                  : classes.menuItemSelected
+              }
+            >
+              World
+            </ListItem>
           </List>
         </Popper>
       </div>

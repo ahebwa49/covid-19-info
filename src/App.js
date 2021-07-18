@@ -168,7 +168,7 @@ class App extends React.Component {
             {continentData.selected ? (
               <>
                 <div className="heading">
-                  <p>COVID-19 VISUALIZATIONS BY COUNTRY</p>
+                  <p>Coronavirus Visualisation By Country - Linear Scale</p>
                 </div>
                 <div>
                   <Countries data={data.newTimeSeries} />
@@ -179,7 +179,7 @@ class App extends React.Component {
             {continentData.selected ? null : (
               <>
                 <div className="heading">
-                  <p>WORLD COVID-19 PANDEMIC VISUALIZATIONS</p>
+                  <p>World Coronavirus Visualisation - 3D Rotating Globe</p>
                 </div>
                 <div className="general">
                   <div className="sidebar">
@@ -195,8 +195,12 @@ class App extends React.Component {
             <div className="facts">
               <QuickFacts data={data.covidData} />
             </div>
-            <div className="heading" style={{ marginTop: "1rem" }}>
-              <p>COVID-19 VISUALIZATIONS BY CONTINENT</p>
+            <div className="heading" style={{ marginTop: "2rem" }}>
+              {continentData.selected ? (
+                <p>Coronavirus Visualisation By Continent - Linear Scale</p>
+              ) : (
+                <p>World Coronavirus Visualisation - Linear Scale</p>
+              )}
             </div>
             <div>
               <Continents
@@ -204,7 +208,6 @@ class App extends React.Component {
                 worldData={data.plainCovidData}
               />
             </div>
-
             <Footer />
           </div>
         )}
