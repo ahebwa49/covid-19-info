@@ -19,6 +19,8 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     backgroundColor: "#fff",
     border: "1px solid #eee",
+    // border: "1px solid red",
+    height: 65,
   },
   title: {
     marginLeft: theme.spacing(2),
@@ -28,11 +30,14 @@ const useStyles = makeStyles((theme) => ({
   },
   closeicon: {
     color: "#333",
-
     minWidth: 40,
     fontSize: "2.4rem",
   },
-  container: { width: "100%", height: "90%" },
+  container: {
+    width: "100%",
+    height: "calc(100% - 70px)",
+    // border: "1px solid blue",
+  },
   barcontainer: { width: "100%", height: "auto" },
 }));
 
@@ -45,6 +50,7 @@ const FullScreenItem = (props) => {
         y={props.title === "Confirmed" ? "confirmed" : "deaths"}
         color={props.title === "Confirmed" ? "green" : "red"}
         noDecimalLeft
+        axisLeftType={"number"}
       />
     );
   }

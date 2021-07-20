@@ -164,6 +164,7 @@ class Continents extends React.Component {
   };
 
   render() {
+    let { continentData } = this.props;
     let countryBumpData = this.state.topCountryTimeSeries.map((entry) => {
       return {
         id: entry.country,
@@ -246,9 +247,18 @@ class Continents extends React.Component {
             marginTop: "3rem",
           }}
         >
-          <div className="heading">
-            <p>Coronavirus Visualisations By Continent - Rank Over Time </p>
-          </div>
+          {continentData.selected ? (
+            <div className="heading">
+              <p>Coronavirus Visualisation By Continent - Rank Over Time </p>
+            </div>
+          ) : (
+            <div className="heading">
+              <p>
+                World Coronavirus Visualisation By Country - Rank Over Time{" "}
+              </p>
+            </div>
+          )}
+
           <BumpCard data={bumpData} />
         </div>
       </>

@@ -68,29 +68,6 @@ const useStyles = makeStyles({
 
 const FullScreenLine = (props) => {
   const classes = useStyles();
-  // const dispatch = useDispatch();
-
-  const oncardClicked = () => {
-    //dispatch actions here and after action dispatched callback change route
-    // dispatch(
-    //   action_selectDateRange({
-    //     range: props.rangeindex,
-    //     callback: onrouteChangeCallback,
-    //   })
-    // );
-  };
-
-  const onrouteChangeCallback = () => {
-    props.history.push(props.onclickroute);
-  };
-
-  const getTotal = (data, y) => {
-    if (typeof data === "undefined") return 0;
-    return data.reduce((total, obj) => {
-      if (typeof obj[y] === "string") obj[y] = parseInt(obj[y]);
-      return total + obj[y];
-    }, 0);
-  };
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -128,6 +105,7 @@ const FullScreenLine = (props) => {
     switch (type) {
       case "number":
         return formatNumbers(value);
+        break;
       default:
         return value;
     }
@@ -224,7 +202,7 @@ const FullScreenLine = (props) => {
           </div>
         );
       }}
-      margin={{ top: 50, right: 40, bottom: 50, left: 55 }}
+      margin={{ top: 50, right: 120, bottom: 50, left: 55 }}
       xScale={{
         type: "time",
         format: "%Y-%m-%d",
