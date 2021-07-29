@@ -334,6 +334,13 @@ code {
   /* margin-right: 50px; */
 }
 
+.continental-bumpcard {
+  margin-top: 3rem;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .country-visuals {
   display: flex;
   justify-content: center;
@@ -766,7 +773,7 @@ code {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
   }
 
   .country-line-chart {
@@ -976,6 +983,10 @@ code {
   .line-container-tabs {
     display: flex;
     width: 100%;
+  }
+
+  .continental-bumpcard {
+    display: none;
   }
 
   .line-container-children {

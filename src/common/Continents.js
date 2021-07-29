@@ -213,7 +213,7 @@ class Continents extends React.Component {
                 title="Confirmed"
                 x="date"
                 y="confirmed"
-                duration="Last Year"
+                duration="Date Range"
                 color="green"
                 onclickroute={``}
                 rangeindex="2"
@@ -229,7 +229,7 @@ class Continents extends React.Component {
                 title="Deaths"
                 x="date"
                 y="deaths"
-                duration="Last Year"
+                duration="Date Range"
                 color="red"
                 onclickroute={``}
                 rangeindex="2"
@@ -239,14 +239,7 @@ class Continents extends React.Component {
             </div>
           </div>
         </div>
-        <div
-          style={{
-            width: "80%",
-            marginLeft: "auto",
-            marginRight: "auto",
-            marginTop: "3rem",
-          }}
-        >
+        <div className="continental-bumpcard">
           {continentData.selected ? (
             <div className="heading">
               <p>Coronavirus Visualisation By Continent - Rank Over Time </p>

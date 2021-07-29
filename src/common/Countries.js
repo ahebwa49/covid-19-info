@@ -122,7 +122,7 @@ class Countries extends React.Component {
               title="Confirmed"
               x="date"
               y="confirmed"
-              duration="Last Year"
+              duration="Date Range"
               color="green"
               onclickroute={``}
               rangeindex="2"
@@ -138,7 +138,7 @@ class Countries extends React.Component {
               title="Deaths"
               x="date"
               y="deaths"
-              duration="Last Year"
+              duration="Date Range"
               color="red"
               onclickroute={``}
               rangeindex="2"
