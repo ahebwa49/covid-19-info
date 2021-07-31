@@ -336,9 +336,10 @@ code {
 
 .continental-bumpcard {
   margin-top: 3rem;
-  width: 80%;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
+  /* border: 1px solid red; */
 }
 
 .country-visuals {
@@ -351,8 +352,13 @@ code {
   display: flex;
   justify-content: space-evenly;
   /* border: 1px solid red; */
-  width: 80%;
+  width: 100%;
   flex-shrink: 2;
+}
+
+.country-line-chart {
+  width: 40%;
+  /* border: 1px solid green; */
 }
 
 .select-country {
@@ -379,11 +385,6 @@ code {
   border-radius: 3px;
   padding: 5px;
   /* height: 15px; */
-  /* border: 1px solid green; */
-}
-
-.country-line-chart {
-  /* width: 100%; */
   /* border: 1px solid green; */
 }
 
@@ -778,6 +779,7 @@ code {
 
   .country-line-chart {
     margin-right: 0rem;
+    width: 100%;
     /* border: 1px solid red !important; */
   }
 
@@ -1008,5 +1010,13 @@ code {
   .about {
     margin: 1rem;
     padding: 1rem;
+  }
+
+  .country-line-chart {
+    /* border: 1px solid red; */
+    width: 100%;
+  }
+  .country-visuals {
+    /* border: 1px solid blue; */
   }
 }

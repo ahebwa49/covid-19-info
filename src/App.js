@@ -191,10 +191,11 @@ class App extends React.Component {
                 </div>
               </>
             )}
-
-            <div className="facts">
-              <QuickFacts data={data.covidData} />
-            </div>
+            {continentData.selected ? null : (
+              <div className="facts">
+                <QuickFacts data={data.covidData} />
+              </div>
+            )}
             <div className="heading" style={{ marginTop: "2rem" }}>
               {continentData.selected ? (
                 <p>Coronavirus Visualisation By Continent - Linear Scale</p>
@@ -202,6 +203,7 @@ class App extends React.Component {
                 <p>World Coronavirus Visualisation - Linear Scale</p>
               )}
             </div>
+
             <div>
               <Continents
                 data={data.newTimeSeries}

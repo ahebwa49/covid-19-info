@@ -7,11 +7,10 @@ import { ResponsiveLine, Line } from "@nivo/line";
 import Paper from "@material-ui/core/Paper";
 import { withRouter } from "react-router-dom";
 // import { action_selectDateRange } from "../store/daterange";
-import { Calender, FullScreen, DrillDown } from "../constants/svgicons";
+import { Calender, FullScreen } from "../constants/svgicons";
 import { generateAxisValues } from "../helpers/axis";
 import { transformLinedata, getLineTotal } from "../transforms/line";
-
-import Tooltip from "@material-ui/core/Tooltip";
+import { MicNone } from "@material-ui/icons";
 
 const theme = {
   tooltip: {
@@ -54,8 +53,27 @@ const theme = {
 
 const useStyles = makeStyles({
   root: {
+    // width: "100%",
     height: "440px",
     padding: 24,
+    ["&:hover"]: {
+      cursor: "pointer",
+      boxShadow: "0px 6px 30px rgba(51, 51, 51, 0.08)",
+
+      "& $details": {
+        ["& $nexticon"]: {
+          color: "#26BBED",
+        },
+      },
+    },
+    borderRadius: 4,
+    position: "relative",
+    border: "1px solid #DADADA",
+  },
+  mobileRoot: {
+    height: "440px",
+    paddingTop: 24,
+    marginBottom: "3rem",
     ["&:hover"]: {
       cursor: "pointer",
       boxShadow: "0px 6px 30px rgba(51, 51, 51, 0.08)",
@@ -74,6 +92,13 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "space-between",
     paddingBottom: 0,
+    // border: "1px solid blue",
+  },
+  mobileDetails: {
+    display: "flex",
+    justifyContent: "space-between",
+    paddingBottom: 0,
+    paddingLeft: "1rem",
   },
   toolTipContainer: {
     display: "flex",
@@ -109,9 +134,14 @@ const useStyles = makeStyles({
       cursor: "pointer",
     },
   },
+  mobilefullscreenicon: {
+    display: "none",
+  },
   lineblock: {
-    width: "100%",
+    display: "flex",
+    justifyContent: "center",
     height: "90%",
+    // border: "1px solid blue",
   },
   title: {
     fontSize: 20,
@@ -164,41 +194,15 @@ export const useContainerDimensions = (myRef) => {
   return dimensions;
 };
 
-const HtmlTooltip = withStyles(() => ({
-  tooltip: {
-    background: "#FFFFFF",
-    border: "1px solid #DADADA",
-    boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.06)",
-    borderRadius: 12,
-    padding: 12,
-    width: 250,
-  },
-}))(Tooltip);
-
 const LineCards = (props) => {
   const componentRef = useRef();
   const { width: deviceWidth, height } = useContainerDimensions(componentRef);
-
+  const [lineWidth, setLineWidth] = useState(undefined);
   const classes = useStyles();
-  // const dispatch = useDispatch();
   const [drilldownColor, setDrillDown] = useState("#333");
   let [width, setWidth] = useState(deviceWidth);
   let [timer, setTimer] = useState(null);
   let [timer2, setTimer2] = useState(null);
-
-  const oncardClicked = () => {
-    //dispatch actions here and after action dispatched callback change route
-    // dispatch(
-    //   action_selectDateRange({
-    //     range: props.rangeindex,
-    //     callback: onrouteChangeCallback,
-    //   })
-    // );
-  };
-
-  const onrouteChangeCallback = () => {
-    props.history.push(props.onclickroute);
-  };
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -232,73 +236,6 @@ const LineCards = (props) => {
     return value + "";
   }
 
-  const gettext = (title) => {
-    if (title === "New Leads") {
-      return (
-        <span>
-          No. of <strong>prospects</strong> that were <strong>created</strong>{" "}
-          in the selected time range.
-        </span>
-      );
-    }
-    if (title === "Tours" || title === "1st Tours") {
-      return (
-        <span>
-          No. of <strong>prospects</strong> that completed their{" "}
-          <strong>first tours</strong> in the selected time range.
-        </span>
-      );
-    }
-    if (title === "Applications" || title === "1st Applications") {
-      return (
-        <span>
-          No. of <strong>prospects</strong> that completed their{" "}
-          <strong>first applications</strong> in the selected time range.
-        </span>
-      );
-    }
-    if (title === "Schedules" || title === "Scheduled") {
-      return (
-        <span>
-          No. of <strong>tours</strong> that were <strong>scheduled</strong> in
-          the selected time range.
-        </span>
-      );
-    }
-    if (title === "Tours" || title === "Completed") {
-      return (
-        <span>
-          No. of <strong>tours</strong> that were <strong>completed</strong> in
-          the selected time range.
-        </span>
-      );
-    }
-    if (title === "Cancels" || title === "Cancelled") {
-      return (
-        <span>
-          No. of <strong>tours</strong> that were <strong>cancelled</strong> in
-          the selected time range.
-        </span>
-      );
-    }
-    if (title === "Reschedules" || title === "Rescheduled") {
-      return (
-        <span>
-          No. of <strong>tours</strong> that were <strong>rescheduled</strong>{" "}
-          in the selected time range.
-        </span>
-      );
-    }
-    if (title === "No Shows" || title === "No Show") {
-      return (
-        <span>
-          No. of <strong>tours</strong> where the prospect did not{" "}
-          <strong>show up</strong> in the selected date range.
-        </span>
-      );
-    }
-  };
-
   function formatAxis(value, type) {
     switch (type) {
       case "number":
@@ -307,6 +244,10 @@ const LineCards = (props) => {
         return value;
     }
   }
+
+  useEffect(() => {
+    setLineWidth(window.innerWidth);
+  }, [window.innerWidth]);
 
   useEffect(() => {
     if (width == deviceWidth) return;
@@ -325,15 +266,6 @@ const LineCards = (props) => {
       }, 1500)
     );
   }, [props.data, props.title, props.x, props.y, deviceWidth, height]);
-
-  window.addEventListener("Drawer_open_close", (e) => {
-    if (!componentRef.current) return;
-    let { width: deviceWidth, height } = getDimensions(componentRef);
-
-    // if (width == deviceWidth) return;
-
-    setWidth(deviceWidth);
-  });
 
   let lineData = transformLinedata(props.data, props.title, props.x, props.y);
 
@@ -395,8 +327,7 @@ const LineCards = (props) => {
   return (
     <Paper
       elevation={0}
-      className={classes.root}
-      onClick={oncardClicked}
+      className={lineWidth < 700 ? classes.mobileRoot : classes.root}
       onMouseEnter={() => {
         setDrillDown("#26BBED");
       }}
@@ -404,27 +335,12 @@ const LineCards = (props) => {
         setDrillDown("#333");
       }}
     >
-      <div className={classes.details}>
+      <div
+        className={lineWidth > 768 ? classes.details : classes.mobileDetails}
+      >
         <div style={{ display: "flex", flexDirection: "column" }}>
           <Typography className={classes.title} variant="h2">
-            {props.title !== "Sends" &&
-            props.title !== "Opens" &&
-            props.title !== "Clicks" ? (
-              <HtmlTooltip
-                placement="bottom-start"
-                title={
-                  <React.Fragment>
-                    <Typography className={classes.tooltiptext}>
-                      {gettext(props.title)}
-                    </Typography>
-                  </React.Fragment>
-                }
-              >
-                <span>{props.title}:</span>
-              </HtmlTooltip>
-            ) : (
-              <span>{props.title}:</span>
-            )}
+            <span>{props.title}:</span>
 
             <span className={classes.total}>
               {numberWithCommas(props.data[props.data.length - 1][props.y])}
@@ -455,7 +371,11 @@ const LineCards = (props) => {
                 true
               )
             }
-            className={classes.fullscreenicon}
+            className={
+              lineWidth >= 1000
+                ? classes.fullscreenicon
+                : classes.mobilefullscreenicon
+            }
           >
             <FullScreen
               style={{ display: "inline" }}
@@ -491,9 +411,15 @@ const LineCards = (props) => {
               </div>
             );
           }}
-          onClick={oncardClicked}
           data={lineData}
-          width={400}
+          height={380}
+          width={
+            lineWidth === 768
+              ? lineWidth - 90
+              : lineWidth > 768
+              ? 0.4 * lineWidth - 90
+              : lineWidth - 45
+          }
           margin={{ top: 50, right: 40, bottom: 50, left: 50 }}
           xScale={{
             type: "time",
