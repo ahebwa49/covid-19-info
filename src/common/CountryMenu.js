@@ -170,9 +170,9 @@ const CountryMenu = ({ country, countries, continentData }) => {
     setOpen(false);
   };
 
-  console.log("Country Menu has rendered");
+  // console.log("Country Menu has rendered");
 
-  console.log(countries.countries);
+  // console.log(countries.countries);
 
   return (
     <ClickAwayListener onClickAway={handleClose}>

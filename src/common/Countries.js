@@ -52,7 +52,7 @@ class Countries extends React.Component {
 
     const fTimeSeries = timeSeries.flat();
 
-    console.log(fTimeSeries);
+    // console.log(fTimeSeries);
 
     return {
       fTimeSeries,
@@ -100,7 +100,7 @@ class Countries extends React.Component {
         "countries"
       ][`${countries.selected}` - 1].name;
 
-    console.log(country);
+    // console.log(country);
 
     return (
       <div className="country-visuals">

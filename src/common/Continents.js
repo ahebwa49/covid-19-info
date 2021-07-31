@@ -42,7 +42,7 @@ class Continents extends React.Component {
         ].continent
       : "world";
 
-    console.log(continent);
+    // console.log(continent);
 
     if (!data) return {};
 
@@ -61,7 +61,7 @@ class Continents extends React.Component {
 
     const fTimeSeries = timeSeries.flat();
 
-    console.log(fTimeSeries);
+    // console.log(fTimeSeries);
 
     let countryCases = [];
 
@@ -84,7 +84,7 @@ class Continents extends React.Component {
       }
     }
 
-    console.log(countryCases);
+    // console.log(countryCases);
 
     let topCountryCases = countryCases
       .sort((a, b) => b.confirmed - a.confirmed)
@@ -185,7 +185,7 @@ class Continents extends React.Component {
       };
     });
 
-    console.log(countryBumpData);
+    // console.log(countryBumpData);
     let bumpData = countryBumpData;
     let continent = this.props.continentData.selected
       ? this.props.continentData.continents[
