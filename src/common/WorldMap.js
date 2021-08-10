@@ -15,7 +15,7 @@ class WorldMap extends React.Component {
     super(props);
     this.state = {
       width: width > 900 ? width * 0.7 : width,
-      height: width > 900 ? width / 2 : width
+      height: width > 900 ? width / 2 : width,
     };
   }
 
@@ -54,10 +54,7 @@ class WorldMap extends React.Component {
       .translate(translation)
       .clipAngle(90);
 
-    var bufferPath = d3
-      .geoPath()
-      .projection(projection)
-      .context(bufferContext);
+    var bufferPath = d3.geoPath().projection(projection).context(bufferContext);
 
     var hiddenProjection = d3
       .geoEquirectangular()
@@ -71,7 +68,7 @@ class WorldMap extends React.Component {
 
     function drawHiddenCanvas(data) {
       var countries = data.features;
-      countries.forEach(function(el, i) {
+      countries.forEach(function (el, i) {
         hiddenContext.beginPath();
         hiddenPath(el);
         hiddenContext.fillStyle = "rgb(" + i + ",0,0)";
@@ -87,8 +84,8 @@ class WorldMap extends React.Component {
       insertCovidDataLinear(); // ~ 5 ms
 
       function insertCovidDataLinear() {
-        covid.forEach(function(el) {
-          data.features.forEach(function(elem) {
+        covid.forEach(function (el) {
+          data.features.forEach(function (elem) {
             if (el.country === elem.properties.name) {
               elem.properties.confirmed = +el.confirmed;
               elem.properties.deaths = +el.deaths;
@@ -103,7 +100,7 @@ class WorldMap extends React.Component {
 
       // Draw the world
 
-      requestAnimationFrame(function() {
+      requestAnimationFrame(function () {
         renderScene(data);
         drawHiddenCanvas(data);
       });
@@ -114,7 +111,7 @@ class WorldMap extends React.Component {
 
     // The deltaMove module offers a fallback for calculating delta x and y as Safari and IE
     // don't expose d3.event.sourceEvent.movementX and .y which we need for the globe rotation
-    let deltaMove = (function() {
+    let deltaMove = (function () {
       let prevX = 0;
       let prevY = 0;
 
@@ -129,7 +126,7 @@ class WorldMap extends React.Component {
 
         return {
           x: movementX,
-          y: movementY
+          y: movementY,
         };
       }
 
@@ -140,7 +137,7 @@ class WorldMap extends React.Component {
 
       return {
         coords: getDeltas,
-        reset: resetDeltas
+        reset: resetDeltas,
       };
     })();
 
@@ -216,7 +213,7 @@ class WorldMap extends React.Component {
       }
 
       // Rerender the globe
-      requestAnimationFrame(function() {
+      requestAnimationFrame(function () {
         renderScene(data, selected);
       });
 
@@ -239,7 +236,7 @@ class WorldMap extends React.Component {
       // console.log(countries);
 
       const colorExtent = d3
-        .extent(countries.features, d =>
+        .extent(countries.features, (d) =>
           Math.sqrt(Math.cbrt(d.properties.confirmed))
         )
         .reverse();
@@ -264,7 +261,7 @@ class WorldMap extends React.Component {
       bufferContext.stroke();
 
       // Country fill - individual
-      countries.features.forEach(function(el) {
+      countries.features.forEach(function (el) {
         bufferContext.beginPath();
         bufferPath(el);
         bufferContext.fillStyle = colorScale(
@@ -313,7 +310,7 @@ class WorldMap extends React.Component {
       selected = inGlobe && pickedColor[3] === 255 ? pickedColor[0] : false; // checking for inGlobe (above) and antialiasing
       // console.log(selected);
 
-      requestAnimationFrame(function() {
+      requestAnimationFrame(function () {
         renderScene(data, selected);
       });
       var country = data.features[selected];
@@ -381,10 +378,7 @@ class WorldMap extends React.Component {
     function hideTooltip() {
       countryQueue.unshift(undefined);
       countryQueue.pop();
-      d3.select("#tooltip")
-        .transition()
-        .duration(100)
-        .style("opacity", 0);
+      d3.select("#tooltip").transition().duration(100).style("opacity", 0);
     }
   };
 
@@ -397,7 +391,7 @@ class WorldMap extends React.Component {
     let newWindowWidth = window.innerWidth - 32;
     this.setState({
       width: newWindowWidth > 900 ? newWindowWidth * 0.7 : newWindowWidth,
-      height: newWindowWidth > 900 ? newWindowWidth / 2 : newWindowWidth
+      height: newWindowWidth > 900 ? newWindowWidth / 2 : newWindowWidth,
     });
   };
 
@@ -429,10 +423,11 @@ class WorldMap extends React.Component {
               <span id="deaths-label">Deaths:</span>
               <span id="deaths" />
             </div>
-            <div id="tooltip-body-entry">
+
+            {/* <div id="tooltip-body-entry">
               <span id="recovered-label">Recovered:</span>
               <span id="recovered" />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
