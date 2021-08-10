@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Popper from "@material-ui/core/Popper";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import ExpandMore from "@material-ui/icons/ExpandMore";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { useDispatch, useSelector } from "react-redux";
 import { action_selectContinent } from "../redux/actions/continents";
@@ -27,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
     },
     textTransform: "none",
   },
+  mobileBtn: {
+    display: "flex",
+    alignItems: "center",
+    padding: 8,
+  },
   btnallorg: {
     fontSize: "1.6rem",
     color: "#555",
@@ -49,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fff",
     boxShadow: "0px 6px 30px rgba(51, 51, 51, 0.08)",
     width: 200,
-    zIndex: 5,
+    zIndex: 1000,
     border: "1px solid #DADADA",
     marginTop: 5,
     borderRadius: 4,
@@ -139,8 +145,18 @@ const ContinentMenu = ({ continentData }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [iconstroke, setIconStroke] = useState("#333");
+  const [width, setWidth] = useState(undefined);
 
   const classes = useStyles();
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    // console.log(width);
+  }, []);
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+  }, [window.innerWidth]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -162,28 +178,47 @@ const ContinentMenu = ({ continentData }) => {
   return (
     <ClickAwayListener onClickAway={handleClose}>
       <div className={classes.root}>
-        <Button
-          aria-controls="simple-menu"
-          aria-haspopup="true"
-          onClick={handleClick}
-          disableRipple={true}
-          disableFocusRipple={true}
-          className={classes.btn}
-          onMouseEnter={() => setIconStroke("#26BBED")}
-          onMouseLeave={() => setIconStroke("#333")}
-          endIcon={
-            <DropdownIcon
-              style={{ marginLeft: 4, marginTop: 10 }}
-              stroke={iconstroke}
+        {width < 700 ? (
+          <span
+            className={classes.mobileBtn}
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            {continentData.selected
+              ? continentData.continents[parseInt(continentData.selected) - 1]
+                  .continent
+              : "World"}
+            <ExpandMore
+              className={classes.dropdownicon}
               fill="none"
+              onClick={handleClick}
             />
-          }
-        >
-          {continentData.selected
-            ? continentData.continents[parseInt(continentData.selected) - 1]
-                .continent
-            : "World"}
-        </Button>
+          </span>
+        ) : (
+          <Button
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+            disableRipple={true}
+            disableFocusRipple={true}
+            className={classes.btn}
+            onMouseEnter={() => setIconStroke("#26BBED")}
+            onMouseLeave={() => setIconStroke("#333")}
+            endIcon={
+              <DropdownIcon
+                style={{ marginLeft: 4, marginTop: 10 }}
+                stroke={iconstroke}
+                fill="none"
+              />
+            }
+          >
+            {continentData.selected
+              ? continentData.continents[parseInt(continentData.selected) - 1]
+                  .continent
+              : "World"}
+          </Button>
+        )}
         <Popper
           className={classes.menu}
           id="simple-menu"

@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Popper from "@material-ui/core/Popper";
-import { withStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import ExpandMore from "@material-ui/icons/ExpandMore";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import { useDispatch, useSelector } from "react-redux";
-import SvgIcon from "@material-ui/core/SvgIcon";
+import { useDispatch } from "react-redux";
+import ExpandMore from "@material-ui/icons/ExpandMore";
 import { DropdownIcon } from "../constants/svgicons";
 import { action_setLoading } from "../redux/actions/uilayer";
 import {
@@ -38,6 +32,17 @@ const useStyles = makeStyles((theme) => ({
     },
     textTransform: "none",
   },
+  mobileBtn: {
+    display: "flex",
+    alignItems: "center",
+    padding: 8,
+  },
+  inactiveMobileBtn: {
+    display: "flex",
+    alignItems: "center",
+    opacity: 0.2,
+    padding: 8,
+  },
   btnallorg: {
     fontSize: "1.6rem",
     color: "#555",
@@ -60,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fff",
     boxShadow: "0px 6px 30px rgba(51, 51, 51, 0.08)",
     width: 250,
-    zIndex: 5,
+    zIndex: 1000,
     border: "1px solid #DADADA",
     marginTop: 5,
     borderRadius: 4,
@@ -147,10 +152,19 @@ const CountryMenu = ({ country, countries, continentData }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [iconstroke, setIconStroke] = useState("#333");
+  const [width, setWidth] = useState(undefined);
 
   const disabledIconStroke = "#C0C0C0";
 
   const classes = useStyles();
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+  }, []);
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+  }, [window.innerWidth]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -177,29 +191,54 @@ const CountryMenu = ({ country, countries, continentData }) => {
   return (
     <ClickAwayListener onClickAway={handleClose}>
       <div className={classes.root}>
-        <Button
-          disabled={continentData.selected ? false : true}
-          aria-controls="simple-menu"
-          aria-haspopup="true"
-          onClick={handleClick}
-          disableRipple={true}
-          disableFocusRipple={true}
-          className={classes.btn}
-          onMouseEnter={() => setIconStroke("#26BBED")}
-          onMouseLeave={() => setIconStroke("#333")}
-          endIcon={
-            <DropdownIcon
-              style={{ marginLeft: 4, marginTop: 10 }}
-              stroke={continentData.selected ? iconstroke : disabledIconStroke}
+        {width < 700 ? (
+          <span
+            className={
+              continentData.selected
+                ? classes.mobileBtn
+                : classes.inactiveMobileBtn
+            }
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={continentData.selected ? handleClick : null}
+          >
+            {continentData.selected
+              ? continentData.continents[parseInt(continentData.selected) - 1]
+                  .countries["countries"][`${countries.selected}` - 1].name
+              : "Country"}
+            <ExpandMore
+              className={classes.dropdownicon}
               fill="none"
+              onClick={handleClick}
             />
-          }
-        >
-          {continentData.selected
-            ? continentData.continents[parseInt(continentData.selected) - 1]
-                .countries["countries"][`${countries.selected}` - 1].name
-            : "Country"}
-        </Button>
+          </span>
+        ) : (
+          <Button
+            disabled={continentData.selected ? false : true}
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+            disableRipple={true}
+            disableFocusRipple={true}
+            className={classes.btn}
+            onMouseEnter={() => setIconStroke("#26BBED")}
+            onMouseLeave={() => setIconStroke("#333")}
+            endIcon={
+              <DropdownIcon
+                style={{ marginLeft: 4, marginTop: 10 }}
+                stroke={
+                  continentData.selected ? iconstroke : disabledIconStroke
+                }
+                fill="none"
+              />
+            }
+          >
+            {continentData.selected
+              ? continentData.continents[parseInt(continentData.selected) - 1]
+                  .countries["countries"][`${countries.selected}` - 1].name
+              : "Country"}
+          </Button>
+        )}
         <Popper
           className={classes.menu}
           id="simple-menu"

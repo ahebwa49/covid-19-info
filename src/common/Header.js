@@ -68,7 +68,7 @@ const Header = () => {
           <VerticalLineIcon className="bar" />
           <CountryMenu countries={countries} continentData={continentData} />
           <VerticalLineIcon className="bar" />
-          <DateRange />
+          <DateRange countries={countries} continentData={continentData} />
         </div>
 
         <div className="header-buttons">

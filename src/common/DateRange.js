@@ -44,6 +44,12 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "nowrap",
     // border: "1px solid red",
   },
+  inactiveMobileBtn: {
+    padding: 8,
+    display: "flex",
+    alignItems: "center",
+    opacity: 0.2,
+  },
   btnallorg: {
     fontSize: "1.6rem",
     color: "#555",
@@ -66,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#fff",
     boxShadow: "0px 6px 30px rgba(51, 51, 51, 0.08)",
     width: 200,
-    zIndex: 5,
+    zIndex: 1000,
     border: "1px solid #DADADA",
     marginTop: 5,
     borderRadius: 4,
@@ -146,12 +152,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DateRange = () => {
+const DateRange = ({ countries, continentData }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [iconstroke, setIconStroke] = useState("#C0C0C0");
-
-  // const dispatch = useDispatch();
+  const [width, setWidth] = useState(undefined);
 
   const dateData = [
     { dateName: "Last Week", dateId: "1" },
@@ -163,10 +168,10 @@ const DateRange = () => {
     { dateName: "This Year", dateId: "7" },
     { dateName: "Last Year", dateId: "8" },
   ];
-  // const loadingState = useSelector((state) => state.UI.orgLoading);
+
   useEffect(() => {
-    //call orgs here
-  }, []);
+    setWidth(window.innerWidth);
+  }, [window.innerWidth]);
 
   const classes = useStyles();
 
@@ -182,48 +187,40 @@ const DateRange = () => {
     // dispatch(action_selectOrg({ orgid: org }));
     setOpen(false);
   };
-
-  // const selectAllOrgs = () => {
-  //   dispatch(action_selectAllOrgs());
-  // };
-
-  // const clearAllOrgs = () => {
-  //   dispatch(action_clearAllOrgs());
-  // };
-
-  //   const getSelectedOrgName = () => {
-  //     if (orgData.selected.length < 1) {
-  //       return "Select Org";
-  //     } else {
-  //       let selectedOrgname = orgData.ById[orgData.selected[0]].orgName;
-  //       if (orgData.selected.length > 1) return selectedOrgname + " ...";
-  //       else return selectedOrgname;
-  //     }
-  //   };
-
   return (
     <ClickAwayListener onClickAway={handleClose}>
       <div className={classes.root}>
-        <Button
-          disabled
-          aria-controls="simpRange"
-          aria-haspopup="true"
-          onClick={handleClick}
-          disableRipple={true}
-          disableFocusRipple={true}
-          className={classes.btn}
-          onMouseEnter={() => setIconStroke("#26BBED")}
-          onMouseLeave={() => setIconStroke("#333")}
-          endIcon={
-            <DropdownIcon
-              style={{ marginLeft: 4, marginTop: 10 }}
-              stroke={iconstroke}
+        {width < 700 ? (
+          <span className={classes.inactiveMobileBtn}>
+            Date Range
+            <ExpandMore
+              className={classes.dropdownicon}
               fill="none"
+              onClick={handleClick}
             />
-          }
-        >
-          Date Range
-        </Button>
+          </span>
+        ) : (
+          <Button
+            disabled
+            aria-controls="simpRange"
+            aria-haspopup="true"
+            onClick={handleClick}
+            disableRipple={true}
+            disableFocusRipple={true}
+            className={classes.btn}
+            onMouseEnter={() => setIconStroke("#26BBED")}
+            onMouseLeave={() => setIconStroke("#333")}
+            endIcon={
+              <DropdownIcon
+                style={{ marginLeft: 4, marginTop: 10 }}
+                stroke={iconstroke}
+                fill="none"
+              />
+            }
+          >
+            Date Range
+          </Button>
+        )}
         <Popper
           className={classes.menu}
           id="simple-menu"
