@@ -15,7 +15,7 @@ const useStyles = makeStyles({});
 
 const Header = () => {
   const [mobileMenu, setShowMobileMenu] = useState(false);
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
 
   const classes = useStyles();
 

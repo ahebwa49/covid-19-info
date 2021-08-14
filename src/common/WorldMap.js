@@ -415,12 +415,40 @@ class WorldMap extends React.Component {
             <p />
           </div>
           <div id="tooltip-body">
-            <div id="tooltip-body-entry">
-              <span id="confirmed-label">Confirmed:</span>
+            <div
+              id="tooltip-body-entry"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <span
+                style={{
+                  display: "inline-flex",
+                  width: "8px",
+                  height: "8px",
+                  backgroundColor: "#696969",
+                  marginRight: "0.5rem",
+                }}
+              ></span>
+              <span id="confirmed-label" style={{ marginRight: "0.2rem" }}>
+                Confirmed:
+              </span>
               <span id="confirmed" />
             </div>
-            <div id="tooltip-body-entry">
-              <span id="deaths-label">Deaths:</span>
+            <div
+              id="tooltip-body-entry"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <span
+                style={{
+                  display: "inline-flex",
+                  width: "8px",
+                  height: "8px",
+                  backgroundColor: "red",
+                  marginRight: "0.5rem",
+                }}
+              ></span>
+              <span id="deaths-label" style={{ marginRight: "0.2rem" }}>
+                Deaths:
+              </span>
               <span id="deaths" />
             </div>
 

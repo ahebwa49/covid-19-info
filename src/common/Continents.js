@@ -2,9 +2,11 @@ import React from "react";
 import * as d3 from "d3";
 import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
+import moment from "moment";
 import LineCards from "./linecards";
 import BumpCard from "./bumpcard";
 import FullScreenDialog from "./fullscreenpopup";
+import { numberWithCommas } from "../helpers/index";
 
 let id = 0;
 let width;
@@ -165,6 +167,7 @@ class Continents extends React.Component {
 
   render() {
     let { continentData } = this.props;
+
     let countryBumpData = this.state.topCountryTimeSeries.map((entry) => {
       return {
         id: entry.country,
@@ -176,7 +179,8 @@ class Continents extends React.Component {
               item.date == "2020-9-1" ||
               item.date == "2020-12-1" ||
               item.date == "2021-3-1" ||
-              item.date == "2021-6-1"
+              item.date == "2021-6-1" ||
+              index === entry.timeseries.length - 1
           )
           .map((item, index) => ({
             x: item.date,
@@ -185,7 +189,6 @@ class Continents extends React.Component {
       };
     });
 
-    // console.log(countryBumpData);
     let bumpData = countryBumpData;
     let continent = this.props.continentData.selected
       ? this.props.continentData.continents[
@@ -214,7 +217,7 @@ class Continents extends React.Component {
                 x="date"
                 y="confirmed"
                 duration="Date Range"
-                color="green"
+                color="#696969"
                 onclickroute={``}
                 rangeindex="2"
                 axisLeftType="number"
@@ -252,7 +255,37 @@ class Continents extends React.Component {
             </div>
           )}
 
-          <BumpCard data={bumpData} />
+          <BumpCard
+            data={bumpData}
+            tooltip={(e, i) => {
+              return (
+                <div
+                  style={{
+                    background: "white ",
+                    padding: "9px 12px",
+                    border: "1px solid #ccc",
+                  }}
+                >
+                  <strong style={{ fontSize: 14, marginBottom: 10 }}>
+                    {e.serie.id}
+                  </strong>
+                  Hello
+                  {/* {e.serie.data.map((point) => (
+                    <div
+                      key={point.x}
+                      style={{
+                        padding: "3px 0",
+                        fontSize: 12,
+                      }}
+                    >
+                      <strong>{point.x}: </strong>
+                      {`${numberWithCommas(point.y)}`}
+                    </div>
+                  ))} */}
+                </div>
+              );
+            }}
+          />
         </div>
       </>
     );

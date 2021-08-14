@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
   btn: {
     fontSize: "16px",
+    whiteSpace: "nowrap",
     width: "fit-content",
     ["&:hover"]: {
       backgroundColor: "#fff",

@@ -123,7 +123,7 @@ class Countries extends React.Component {
               x="date"
               y="confirmed"
               duration="Date Range"
-              color="green"
+              color="#696969"
               onclickroute={``}
               rangeindex="2"
               axisLeftType="number"
