@@ -48,7 +48,7 @@ const FullScreenItem = (props) => {
         data={props.data}
         x="date"
         y={props.title === "Confirmed" ? "confirmed" : "deaths"}
-        color={props.title === "Confirmed" ? "green" : "red"}
+        color={props.title === "Confirmed" ? "#696969" : "red"}
         noDecimalLeft
         axisLeftType={"number"}
       />
