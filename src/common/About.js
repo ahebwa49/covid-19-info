@@ -7,7 +7,7 @@ const About = () => {
     <>
       <div className="about">
         <p>
-          Hi, my name is Livingstone and I love visualizing data. On this
+          Hi, my name is Livingston and I love visualizing data. On this
           2019nCoV visualizer, I'm taking information (data) since December 2019
           when the pandemic started in wuhan, China and placing it into a visual
           context, such as a 3D map or line graph. This kind of data
