@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 import {
   action_setAfricaCountries,
   action_setAsiaCountries,
@@ -7,14 +7,14 @@ import {
   action_setEuropeCountries,
   action_setNorthAmericaCountries,
   action_setSouthAmericaCountries,
-} from "./redux/actions/continents";
-import Loader from "./common/Loader.js";
-import WorldMap from "./common/WorldMap";
-import QuickFacts from "./common/QuickFacts";
-import Countries from "./common/Countries";
-import Footer from "./common/Footer";
-import Continents from "./common/Continents";
-import Header from "./common/Header";
+} from './redux/actions/continents';
+import Loader from './common/Loader.js';
+import WorldMap from './common/WorldMap';
+import QuickFacts from './common/QuickFacts';
+import Countries from './common/Countries';
+import Footer from './common/Footer';
+import Continents from './common/Continents';
+import Header from './common/Header';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -33,13 +33,13 @@ class App extends React.Component {
   componentDidMount() {
     Promise.all([
       fetch(
-        "https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/world_countries.json"
+        'https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/world_countries.json'
       ),
       fetch(
-        "https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/data.json"
+        'https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/data.json'
       ),
       fetch(
-        "https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/country-capitals.json"
+        'https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/country-capitals.json'
       ),
     ])
       .then((responses) => Promise.all(responses.map((resp) => resp.json())))
@@ -64,6 +64,7 @@ class App extends React.Component {
             })
           );
         }
+        console.log(cleanCovidData);
 
         // Country data with last time entry and location
         let realCovidData = [];
@@ -111,17 +112,17 @@ class App extends React.Component {
         let data = newTimeSeries;
 
         for (let i = 0; i < data.length; i++) {
-          if (data[i].continent === "Africa") {
+          if (data[i].continent === 'Africa') {
             africaCountries.push(data[i].country);
-          } else if (data[i].continent === "Asia") {
+          } else if (data[i].continent === 'Asia') {
             asiaCountries.push(data[i].country);
-          } else if (data[i].continent === "Australia") {
+          } else if (data[i].continent === 'Australia') {
             australiaCountries.push(data[i].country);
-          } else if (data[i].continent === "Europe") {
+          } else if (data[i].continent === 'Europe') {
             europeCountries.push(data[i].country);
-          } else if (data[i].continent === "North America") {
+          } else if (data[i].continent === 'North America') {
             northAmericaCountries.push(data[i].country);
-          } else if (data[i].continent === "South America") {
+          } else if (data[i].continent === 'South America') {
             southAmericaCountries.push(data[i].country);
           } else {
           }
@@ -196,7 +197,7 @@ class App extends React.Component {
                 <QuickFacts data={data.covidData} />
               </div>
             )}
-            <div className="heading" style={{ marginTop: "2rem" }}>
+            <div className="heading" style={{ marginTop: '2rem' }}>
               {continentData.selected ? (
                 <p>Coronavirus Visualisation By Continent - Linear Scale</p>
               ) : (
