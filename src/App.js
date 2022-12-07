@@ -35,15 +35,14 @@ class App extends React.Component {
       fetch(
         'https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/world_countries.json'
       ),
-      fetch(
-        'https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/data.json'
-      ),
+      fetch('https://pomber.github.io/covid19/timeseries.json'),
       fetch(
         'https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/country-capitals.json'
       ),
     ])
       .then((responses) => Promise.all(responses.map((resp) => resp.json())))
       .then(([geoData, covidData, capitalData]) => {
+        console.log(covidData);
         // Countries with locaation data
         let capitalCountries = [];
         for (let i = 0; i < capitalData.length; i++) {
@@ -53,11 +52,9 @@ class App extends React.Component {
         // Country data with last time entry
 
         let cleanCovidData = [];
-        for (let country in covidData.timeseries) {
+        for (let country in covidData) {
           const lastTimeEntry =
-            covidData.timeseries[country][
-              covidData.timeseries[country].length - 1
-            ];
+            covidData[country][covidData[country].length - 1];
           cleanCovidData.push(
             Object.assign({}, lastTimeEntry, {
               country: country,
@@ -85,14 +82,14 @@ class App extends React.Component {
 
         let newTimeSeries = [];
 
-        for (let country in covidData.timeseries) {
+        for (let country in covidData) {
           const index = capitalCountries.indexOf(country);
           if (index >= 0) {
             newTimeSeries.push(
               Object.assign(
                 {},
                 {
-                  timeseries: covidData.timeseries[country],
+                  timeseries: covidData[country],
                   country: country,
                   continent: capitalData[index].ContinentName,
                 }
