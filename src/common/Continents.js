@@ -175,11 +175,11 @@ class Continents extends React.Component {
           .filter(
             (item, index) =>
               item.date == "2020-3-1" ||
-              item.date == "2020-6-1" ||
               item.date == "2020-9-1" ||
-              item.date == "2020-12-1" ||
               item.date == "2021-3-1" ||
-              item.date == "2021-6-1" ||
+              item.date == "2021-9-1" ||
+              item.date == "2022-3-1" ||
+              item.date == "2022-9-1" ||
               index === entry.timeseries.length - 1
           )
           .map((item, index) => ({
