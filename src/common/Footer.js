@@ -7,7 +7,7 @@ import MailIcon from "@material-ui/icons/Mail";
 const FooterNote = () => {
   return (
     <div className="footer-note">
-      <div>&#169;2022 Livingstone Asabahebwa</div>
+      <div>&#169;2023 Livingstone Asabahebwa</div>
     </div>
   );
 };

@@ -15,6 +15,7 @@ import Countries from './common/Countries';
 import Footer from './common/Footer';
 import Continents from './common/Continents';
 import Header from './common/Header';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -27,10 +28,13 @@ class App extends React.Component {
         capitalData: null,
         newTimeSeries: null,
       },
+      // chartResize: false,
     };
   }
 
   componentDidMount() {
+    // window.addEventListener('resize', this.handleResize);
+
     Promise.all([
       fetch(
         'https://raw.githubusercontent.com/ahebwa49/covid-info-api/master/public/world_countries.json'
@@ -61,7 +65,6 @@ class App extends React.Component {
             })
           );
         }
-        console.log(cleanCovidData);
 
         // Country data with last time entry and location
         let realCovidData = [];
@@ -143,8 +146,23 @@ class App extends React.Component {
       })
       .catch((error) => console.log(error));
   }
+
+  // handleResize = () => {
+  //   const { chartResize } = this.state;
+  //   if (chartResize === false) {
+  //     this.setState({ chartResize: true });
+  //   } else {
+  //     setTimeout(() => {
+  //       this.setState({ chartResize: false });
+  //     }, '1000');
+  //   }
+  // };
+
+  // componentWillUnmount() {
+  //   document.removeEventListener('resize', this.handleResize);
+  // }
   render() {
-    const { data } = this.state;
+    const { data, chartResize } = this.state;
     const { continentData, loading } = this.props;
 
     if (data.geoData === null) {
@@ -154,6 +172,14 @@ class App extends React.Component {
         </div>
       );
     }
+
+    // if (chartResize === true) {
+    //   return (
+    //     <div className="primary-loader-wrapper">
+    //       <Loader />
+    //     </div>
+    //   );
+    // }
     return (
       <>
         <Header />
@@ -176,8 +202,10 @@ class App extends React.Component {
 
             {continentData.selected ? null : (
               <>
-                <div className="heading">
-                  <p>World Coronavirus Visualisation - 3D Rotating Globe</p>
+                <div className="globe_heading">
+                  <p className="globe_heading_p">
+                    World Coronavirus Visualisation - 3D Rotating Globe
+                  </p>
                 </div>
                 <div className="general">
                   <div className="sidebar">

@@ -3,15 +3,15 @@ body {
   margin-top: 0px;
   /* font-weight: 300; */
   background-color: white;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
@@ -163,7 +163,7 @@ code {
 .header-option:after {
   background: none repeat scroll 0 0 transparent;
   bottom: 0;
-  content: "";
+  content: '';
   display: block;
   height: 3px;
   left: 50%;
@@ -198,6 +198,23 @@ code {
   margin-top: 1rem;
 }
 
+.globe_heading {
+  /* border: 1px solid red; */
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  /* justify-self: flex-end; */
+  justify-content: flex-end;
+  width: 85%;
+}
+
+.globe_heading_p {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  /* border: 1px solid red; */
+}
+
 .heading p {
   font-size: 20px;
   /* margin: 0px; */
@@ -205,15 +222,18 @@ code {
 
 .general {
   display: flex;
-  width: 100%;
+  width: 85%;
   margin: 1rem 0rem 0rem 0rem;
+  margin-left: auto;
+  margin-right: auto;
   /* border: 1px solid peru; */
 }
 
 .sidebar {
   display: flex;
   justify-content: center;
-  width: 30%;
+  width: 40%;
+  margin-right: 1rem;
   /* box-shadow: 3px 5px 3px #888888; */
   box-shadow: 0 0px 2px rgba(23, 173, 232, 0.2),
     0 7px 22px rgba(23, 173, 232, 0.3);
@@ -228,11 +248,14 @@ code {
 
 .main {
   display: flex;
+  justify-content: center;
+  width: 60%;
   flex-shrink: 1;
   /* border: 1px solid green; */
-  background-color: #5bcdd5;
-  border-radius: 5px;
-  margin-left: 20px;
+  /* background-color: #5bcdd5; */
+  /* border-radius: 5px; */
+  margin-left: 1rem;
+  /* margin-right: auto; */
 }
 
 .facts {
@@ -474,7 +497,7 @@ code {
 
 #tooltip {
   /* border: 1px solid red; */
-  width: 160px;
+  /* width: 170px; */
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -486,6 +509,7 @@ code {
   pointer-events: none;
   line-height: 200%;
   max-width: 250px;
+  min-width: 180px;
   padding: 0px 8px;
   border-radius: 4px;
 }
@@ -576,9 +600,9 @@ code {
   display: flex;
   color: white;
   font-size: 18px;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol";
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol';
   margin-left: 1rem;
   margin-top: 5rem;
   line-height: 1.625;
@@ -605,7 +629,29 @@ code {
   justify-content: flex-end;
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1099px) {
+  .globe_heading {
+    justify-content: center;
+  }
+  .general {
+    display: flex;
+    width: 100%;
+    margin: 1rem 0rem 0rem 0rem;
+    /* border: 1px solid peru; */
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .main {
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .quick-facts {
     color: #110a57;
     display: flex;
@@ -665,48 +711,7 @@ code {
   }
 }
 
-@media only screen and (max-width: 1000px) {
-  .quick-facts-heading {
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-
-  .quick-facts-confirmed {
-    font-size: 30px;
-    color: #696969;
-  }
-
-  .quick-facts-deaths {
-    font-size: 30px;
-    color: red;
-  }
-
-  .quick-facts-recovered {
-    font-size: 30px;
-    color: rgb(101, 221, 155);
-  }
-
-  .line-container-tabs {
-    width: 15%;
-  }
-
-  .line-container-children {
-    width: 85%;
-    flex-shrink: 3;
-    /* border: 1px solid green; */
-  }
-
-  .line-container-tabs-list {
-    padding: 0;
-    /* border: 1px solid greenyellow; */
-  }
-
-  .select-country {
-    width: 15%;
-    margin-right: auto;
-    /* margin-left: auto; */
-  }
-}
+/*  */
 
 @media only screen and (max-width: 900px) {
   .logo-word {
