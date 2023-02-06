@@ -46,7 +46,7 @@ class App extends React.Component {
     ])
       .then((responses) => Promise.all(responses.map((resp) => resp.json())))
       .then(([geoData, covidData, capitalData]) => {
-        console.log(covidData);
+        // console.log(covidData);
         // Countries with locaation data
         let capitalCountries = [];
         for (let i = 0; i < capitalData.length; i++) {

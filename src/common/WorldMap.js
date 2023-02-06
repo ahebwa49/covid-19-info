@@ -407,7 +407,7 @@ class WorldMap extends React.Component {
       d3.select('#tooltip').transition().duration(100).style('opacity', 0);
     }
 
-    console.log('world map has been drawn');
+    // console.log('world map has been drawn');
   };
 
   componentDidMount() {
@@ -438,11 +438,11 @@ class WorldMap extends React.Component {
     // document.getElementById("canvas-container").appendChild(node)
 
     this.drawWorldMap();
-    console.log('world map has been re-drawn');
+    // console.log('world map has been re-drawn');
   }
 
   render() {
-    console.log('component has rendered');
+    // console.log('component has rendered');
     return (
       <div id="canvas-container">
         <div id="tooltip" style={{ display: 'none', position: 'absolute' }}>
