@@ -632,6 +632,11 @@ code {
 @media only screen and (max-width: 1099px) {
   .globe_heading {
     justify-content: center;
+    width: 90%;
+  }
+
+  .globe_heading_p{
+    width: 100%;
   }
   .general {
     display: flex;
